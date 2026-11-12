@@ -19,30 +19,28 @@
     {{ 'pp-pond.css' | asset_url | stylesheet_tag }}
     {{ content_for_header }}
   </head>
-  <body>
+  <body data-page="{{ page.handle }}">
     <canvas id="pond" aria-hidden="true"></canvas>
     <div class="pp-veil" aria-hidden="true"></div>
     <header class="pp-top">
-      <a class="pp-brand" href="{{ routes.root_url }}" data-stitch="pink plume" data-size="54" aria-label="Pink Plume home">pink plume</a>
-      <nav class="pp-nav" aria-label="Menu">
-        <a href="{{ routes.root_url }}">home</a>
-        <a href="{{ routes.root_url }}#shop">shop</a>
-        <a href="{{ pages.about.url | default: '/pages/about' }}"{% if page.handle == 'about' %} aria-current="page"{% endif %}>about</a>
-        <a href="{{ pages.faq.url | default: '/pages/faq' }}"{% if page.handle == 'faq' %} aria-current="page"{% endif %}>faq</a>
-        <a href="{{ pages.contact.url | default: '/pages/contact' }}"{% if page.handle == 'contact' %} aria-current="page"{% endif %}>contact</a>
-      </nav>
+      <a class="pp-logo" href="{{ routes.root_url }}" aria-label="Pink Plume home"><img class="td" src="{{ 'pp-logo-day.png' | asset_url }}" alt=""><img class="ts" src="{{ 'pp-logo-sunset.png' | asset_url }}" alt=""></a>
+      <div class="pp-btns">
+        <button class="icon-btn" id="ppTheme" type="button" aria-label="Time of day"><img class="td" src="{{ 'pp-theme-day.png' | asset_url }}" alt=""><img class="ts" src="{{ 'pp-theme-sunset.png' | asset_url }}" alt=""></button>
+        <button class="icon-btn" id="ppMenu" type="button" aria-label="Open menu"><img class="td" src="{{ 'pp-menu-day.png' | asset_url }}" alt=""><img class="ts" src="{{ 'pp-menu-sunset.png' | asset_url }}" alt=""></button>
+      </div>
     </header>
     <main class="pp-wrap" id="MainContent">
       {{ content_for_layout }}
     </main>
     <footer class="pp-foot">
-      <nav aria-label="Social media">
-        <a href="https://www.instagram.com/pinkplumestudio/" target="_blank" rel="noopener">instagram</a>
-        <a href="https://www.youtube.com/@PinkPlumeStudio" target="_blank" rel="noopener">youtube</a>
-        <a href="https://www.tiktok.com/@pinkplumestudio" target="_blank" rel="noopener">tiktok</a>
-        <a href="https://ca.pinterest.com/pinkplumestudio/" target="_blank" rel="noopener">pinterest</a>
+      <a class="ft" href="{{ shop.terms_of_service.url | default: '/policies/terms-of-service' }}" aria-label="Terms and policies"><img class="td" src="{{ 'pp-f-terms-day.png' | asset_url }}" alt=""><img class="ts" src="{{ 'pp-f-terms-sunset.png' | asset_url }}" alt=""></a>
+      <nav class="social" aria-label="Social media">
+        <a href="https://www.instagram.com/pinkplumestudio/" target="_blank" rel="noopener" aria-label="Instagram"><img class="td" src="{{ 'pp-f-instagram-day.png' | asset_url }}" alt=""><img class="ts" src="{{ 'pp-f-instagram-sunset.png' | asset_url }}" alt=""></a>
+        <a href="https://www.youtube.com/@PinkPlumeStudio" target="_blank" rel="noopener" aria-label="YouTube"><img class="td" src="{{ 'pp-f-youtube-day.png' | asset_url }}" alt=""><img class="ts" src="{{ 'pp-f-youtube-sunset.png' | asset_url }}" alt=""></a>
+        <a href="https://www.tiktok.com/@pinkplumestudio" target="_blank" rel="noopener" aria-label="TikTok"><img class="td" src="{{ 'pp-f-tiktok-day.png' | asset_url }}" alt=""><img class="ts" src="{{ 'pp-f-tiktok-sunset.png' | asset_url }}" alt=""></a>
+        <a href="https://ca.pinterest.com/pinkplumestudio/" target="_blank" rel="noopener" aria-label="Pinterest"><img class="td" src="{{ 'pp-f-pinterest-day.png' | asset_url }}" alt=""><img class="ts" src="{{ 'pp-f-pinterest-sunset.png' | asset_url }}" alt=""></a>
       </nav>
-      <p>© {{ 'now' | date: '%Y' }} pink plume</p>
+      <p class="ft" aria-label="© {{ 'now' | date: '%Y' }} Pink Plume"><img class="td" src="{{ 'pp-f-copy-day.png' | asset_url }}" alt=""><img class="ts" src="{{ 'pp-f-copy-sunset.png' | asset_url }}" alt=""></p>
     </footer>
     <script src="{{ 'pp-pond.js' | asset_url }}" defer></script>
   </body>

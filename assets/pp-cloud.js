@@ -2241,16 +2241,30 @@ function floorInit(){if(document.getElementById('floor'))return;const f=document
   f.addEventListener('pointermove',e=>{if(p0&&Math.hypot(e.clientX-p0.x,e.clientY-p0.y)>10)FLOOR.moved=true;});
   f.addEventListener('pointerup',e=>{if(!p0)return;const dy=e.clientY-p0.y,dx=e.clientX-p0.x;p0=null;if(dy>50&&Math.abs(dy)>Math.abs(dx)*1.1)floorGo(false);});
   addEventListener('resize',floorLayout);floorLayout();}
-// about / faq / contact: fall into the lake you pressed; the page that follows is a top-down pond with koi
+// about / faq / contact: fall into the lake you pressed (the camera descends steadily, so the zoom is exponential); the page that follows is an aerial view of that lake
+const FL_WATER={day:'#192421',sunset:'#181712',night:'#090d12'};
+function floorZoom(box,ox,oy,dx,dy,from,to,dur,veil,vFrom,vTo,done){const t0=performance.now(),l0=Math.log(from),l1=Math.log(to),ease=u=>u<.5?4*u*u*u:1-Math.pow(-2*u+2,3)/2;box.style.transformOrigin=ox+'px '+oy+'px';
+  const step=()=>{const u=Math.min(1,(performance.now()-t0)/dur),e=ease(u),k=(l0+(l1-l0)*e-l0)/(l1-l0||1),sc=Math.exp(l0+(l1-l0)*e);
+    box.style.transform='translate(-50%,-50%) translate('+(dx*(from>to?1-k:k))+'px,'+(dy*(from>to?1-k:k))+'px) scale('+sc+')';
+    veil.style.opacity=vTo>vFrom?Math.min(1,Math.max(0,(u-.5)/.5)):1-Math.min(1,u/.55);
+    if(u<1)requestAnimationFrame(step);else done();};requestAnimationFrame(step);}
 function floorDive(a,url){if(FLOOR.anim)return;const box=document.querySelector('#floor .fimg'),W=innerWidth,H=innerHeight,r=a.getBoundingClientRect(),b=box.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2,tone=document.body.dataset.tone||'day',go=()=>{location.href=url;};
   try{sessionStorage.setItem('pp-zoom','1');}catch(e){}
   if(matchMedia('(prefers-reduced-motion: reduce)').matches){go();return;}
-  FLOOR.anim=1;const water={day:'#2f7f78',sunset:'#4a6a78',night:'#10243d'}[tone]||'#2f7f78',veil=document.createElement('div');
-  veil.style.cssText='position:fixed;inset:0;z-index:9;pointer-events:none;opacity:0;background:'+water+';transition:opacity .4s ease-in .7s';document.body.appendChild(veil);
-  box.style.transformOrigin=(cx-b.left)+'px '+(cy-b.top)+'px';box.style.transition='transform 1.1s cubic-bezier(.55,0,.75,.35)';
-  const nav=box.querySelector('.fnav');nav.style.transition='opacity .35s';
-  requestAnimationFrame(()=>{nav.style.opacity=0;box.style.transform='translate(-50%,-50%) translate('+(W/2-cx)+'px,'+(H/2-cy)+'px) scale(10)';veil.style.opacity=1;});
-  setTimeout(go,1250);}
+  FLOOR.anim=1;const veil=document.createElement('div');veil.style.cssText='position:fixed;inset:0;z-index:9;pointer-events:none;opacity:0;background:'+(FL_WATER[tone]||FL_WATER.day);document.body.appendChild(veil);
+  const nav=box.querySelector('.fnav');nav.style.transition='opacity .35s';nav.style.opacity=0;
+  floorZoom(box,cx-b.left,cy-b.top,W/2-cx,H/2-cy,1,12,1250,veil,0,1,go);}
+// coming back from a lake page: the camera rises out of the lake and the floor menu is there
+{let key=null;try{key=sessionStorage.getItem('pp-out');sessionStorage.removeItem('pp-out');}catch(e){}
+ if(key){const sky=(()=>{let s='auto',th='';try{s=localStorage.getItem('pp-sky')||'auto';th=localStorage.getItem('pp-theme')||'';}catch(e){}if(s==='auto'){const h=new Date().getHours();return(h>=22||h<4)?'night':(h<10||h>=16)?'sunset':'day';}return s==='sunset'?'sunset':th==='night'?'night':'day';})(),
+  veil=document.createElement('div');veil.style.cssText='position:fixed;inset:0;z-index:9;background:'+FL_WATER[sky]+';';document.body.appendChild(veil);let tries=0;
+  const iv=setInterval(()=>{tries++;if(tries>80){clearInterval(iv);veil.remove();return;}if(!document.body.dataset.tone||!document.getElementById('gal')||!document.getElementById('menuBtn'))return;clearInterval(iv);
+   floorInit();FLOOR.on=true;FLOOR.anim=1;FLOOR.a=90;document.body.classList.add('floor');const f=document.getElementById('floor'),mb=document.getElementById('menuBtn');f.setAttribute('aria-hidden','false');if(mb){mb.setAttribute('aria-expanded',true);mb.setAttribute('aria-label','Close menu');}
+   floorMarks();floorApply();FLOOR.last=0;FLOOR.nextBolt=performance.now()/1000+.5;requestAnimationFrame(floorFx);
+   const box=f.querySelector('.fimg'),a=f.querySelector('a[data-k="'+key+'"]')||f.querySelector('a[data-k=about]'),W=innerWidth,H=innerHeight;
+   requestAnimationFrame(()=>{const r=a.getBoundingClientRect(),b=box.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2,nav=box.querySelector('.fnav');nav.style.opacity=0;
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches){veil.remove();nav.style.opacity=1;FLOOR.anim=0;FLOOR.cool=performance.now();return;}
+    floorZoom(box,cx-b.left,cy-b.top,W/2-cx,H/2-cy,12,1,1300,veil,1,0,()=>{box.style.transform='';box.style.transformOrigin='';nav.style.transition='opacity .4s';nav.style.opacity=1;veil.remove();FLOOR.anim=0;FLOOR.cool=performance.now();});});},150);}}
 addEventListener('pageshow',e=>{if(e.persisted)location.reload();});
 function floorMarks(){document.querySelectorAll('#floor svg a').forEach(a=>{const k=a.dataset.k,cur=(k===''&&!ROOM.on)||(k==='shop'&&ROOM.on);if(cur)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');a.setAttribute('tabindex',FLOOR.on?0:-1);});}
 function floorLayout(){const f=document.getElementById('floor');if(!f)return;const W=innerWidth,H=innerHeight,tall=W<H*.82,A=tall?554/782:782/554,bw=Math.max(W,H*A),bh=bw/A,box=f.querySelector('.fimg'),img=box.querySelector('img'),cv=box.querySelector('canvas');
