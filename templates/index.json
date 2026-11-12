@@ -4,7 +4,10 @@
     "cloud": {
       "type": "pp-cloud",
       "settings": {
-        "tiktok_url": "https://www.tiktok.com/@pinkplumestudio"
+        "tiktok_url": "https://www.tiktok.com/@pinkplumestudio",
+        "instagram_url": "https://www.instagram.com/pinkplumestudio/",
+        "youtube_url": "https://www.youtube.com/@PinkPlumeStudio",
+        "pinterest_url": "https://ca.pinterest.com/pinkplumestudio/"
       }
     }
   },
