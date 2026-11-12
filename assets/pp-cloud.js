@@ -2242,7 +2242,7 @@ function floorInit(){if(document.getElementById('floor'))return;const f=document
   f.addEventListener('pointerup',e=>{if(!p0)return;const dy=e.clientY-p0.y,dx=e.clientX-p0.x;p0=null;if(dy>50&&Math.abs(dy)>Math.abs(dx)*1.1)floorGo(false);});
   addEventListener('resize',floorLayout);floorLayout();}
 // about / faq / contact: fall into the lake you pressed (the camera descends steadily, so the zoom is exponential); the page that follows is an aerial view of that lake
-const FL_WATER={day:'#192421',sunset:'#181712',night:'#090d12'};
+const FL_WATER={day:'#162126',sunset:'#17161a',night:'#090d12'};
 function floorZoom(box,ox,oy,dx,dy,from,to,dur,veil,vFrom,vTo,done){const t0=performance.now(),l0=Math.log(from),l1=Math.log(to),ease=u=>u<.5?4*u*u*u:1-Math.pow(-2*u+2,3)/2;box.style.transformOrigin=ox+'px '+oy+'px';
   const step=()=>{const u=Math.min(1,(performance.now()-t0)/dur),e=ease(u),k=(l0+(l1-l0)*e-l0)/(l1-l0||1),sc=Math.exp(l0+(l1-l0)*e);
     box.style.transform='translate(-50%,-50%) translate('+(dx*(from>to?1-k:k))+'px,'+(dy*(from>to?1-k:k))+'px) scale('+sc+')';

@@ -1,7 +1,7 @@
 /* lake pages: an aerial view of a big lake, the page's words on a lily pad */
-:root{--water:#192421;--ink:#41203c;--link:#b02e5e;--pad1:#e3f3cf;--pad2:#b4dba4;--padr:#6aa95f;--vein:rgba(60,110,60,.16)}
-html[data-tone=sunset]{--water:#181712;--ink:#4a1f2c;--link:#a8304a;--pad1:#f0f0c4;--pad2:#c4d99a;--padr:#8fb064}
-html[data-tone=night]{--water:#090d12;--ink:#ffe9f3;--link:#ff9cc4;--pad1:#356a52;--pad2:#234a3b;--padr:#4a8a68;--vein:rgba(190,255,220,.14)}
+:root{--water:#162126;--ink:#5a2048;--link:#b02e5e}
+html[data-tone=sunset]{--water:#17161a;--ink:#6a2438;--link:#a8304a}
+html[data-tone=night]{--water:#090d12;--ink:#fff2f8;--link:#ffb3d2}
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%;background:var(--water)}
 body{font:400 16px/1.7 'DM Sans',system-ui,sans-serif;color:var(--ink);overflow-x:hidden}
@@ -27,11 +27,11 @@ html[data-tone=sunset] .td{display:none}html[data-tone=sunset] .ts{display:block
 .pp-foot .ft img{height:40px;width:auto}.pp-foot .social img{width:30px;height:30px}
 .pp-wrap{position:relative;z-index:2;max-width:860px;margin:0 auto;padding:150px 22px 130px}
 /* the page's words sit on a lily pad */
-.pp-card{position:relative;isolation:isolate;padding:64px 70px 60px}
-.pp-pad{position:absolute;left:-16px;top:-16px;z-index:-1;overflow:visible;pointer-events:none;filter:drop-shadow(0 20px 22px rgba(0,10,12,.5))}
+.pp-card{position:relative;isolation:isolate;padding:70px 76px 66px}
+.pp-pad{position:absolute;z-index:-1;pointer-events:none;filter:drop-shadow(0 16px 20px rgba(0,8,20,.35))}
 .pp-rte p{margin:0 0 1em}.pp-rte a,.pp-card a{color:var(--link);text-underline-offset:3px}
 .pp-rte img{max-width:100%;height:auto}.pp-rte:after{content:"";display:block;clear:both}
-.pp-q{border-top:1.6px dashed rgba(70,120,70,.4);padding:6px 0}.pp-q:first-of-type{border-top:0}
+.pp-q{border-top:1.6px dashed rgba(190,90,140,.35);padding:6px 0}.pp-q:first-of-type{border-top:0}
 html[data-tone=night] .pp-q{border-color:rgba(200,255,225,.3)}
 .pp-q summary{cursor:pointer;list-style:none;font:400 32px/1.2 Sacramento,cursive;padding:8px 0;display:flex;justify-content:space-between;gap:14px;align-items:center}
 .pp-q summary::-webkit-details-marker{display:none}
@@ -39,7 +39,7 @@ html[data-tone=night] .pp-q{border-color:rgba(200,255,225,.3)}
 .pp-q[open] summary:after{transform:rotate(45deg)}
 .pp-q p{margin:0 0 12px;padding-right:30px}
 .pp-form label{display:block;margin:0 0 16px;font:400 26px/1 Sacramento,cursive}
-.pp-form input,.pp-form textarea{display:block;width:100%;margin-top:6px;padding:12px 16px;font:400 16px/1.5 'DM Sans',sans-serif;color:var(--ink);background:rgba(255,255,255,.5);border:1.6px dashed rgba(70,120,70,.5);border-radius:18px;outline:none}
+.pp-form input,.pp-form textarea{display:block;width:100%;margin-top:6px;padding:12px 16px;font:400 16px/1.5 'DM Sans',sans-serif;color:var(--ink);background:rgba(255,255,255,.5);border:1.6px dashed rgba(190,90,140,.45);border-radius:18px;outline:none}
 html[data-tone=night] .pp-form input,html[data-tone=night] .pp-form textarea{background:rgba(255,255,255,.08);border-color:rgba(200,255,225,.4)}
 .pp-form input:focus,.pp-form textarea:focus{border-style:solid;border-color:var(--link)}
 .pp-form button{font:400 34px/1 Sacramento,cursive;color:#fff;background:var(--link);border:0;border-radius:999px;padding:10px 34px 8px;cursor:pointer;transition:transform .2s}
