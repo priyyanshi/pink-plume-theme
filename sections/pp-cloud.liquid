@@ -1,0 +1,30 @@
+<script>
+  window.PP_DATA = {
+    products: [
+      {%- for p in collections.all.products limit: 50 -%}
+        {%- if p.gift_card? or p.featured_image == blank -%}{%- continue -%}{%- endif -%}
+        { title: {{ p.title | json }}, url: {{ p.url | json }},
+          price: {% if p.price_varies %}{{ p.price_min | money | prepend: 'from ' | json }}{% else %}{{ p.price | money | json }}{% endif %},
+          cents: {{ p.price_min | json }},
+          imgs: [{%- for im in p.images limit: 6 -%}{{ im | image_url: width: 600 | json }},{%- endfor -%}], tags: {{ p.tags | json }} },
+      {%- endfor -%}
+      null
+    ],
+    terms: {{ shop.privacy_policy.url | default: '/policies/terms-of-service' | json }},
+    social: { tiktok: {{ section.settings.tiktok_url | json }}, instagram: {{ section.settings.instagram_url | json }}, youtube: {{ section.settings.youtube_url | json }}, pinterest: {{ section.settings.pinterest_url | json }} }
+  };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+<script src="{{ 'pp-cloud.js' | asset_url }}" defer></script>
+{% schema %}
+{
+  "name": "Pink Plume cloud",
+  "settings": [
+    { "type": "url", "id": "tiktok_url", "label": "TikTok link" },
+    { "type": "url", "id": "instagram_url", "label": "Instagram link" },
+    { "type": "url", "id": "youtube_url", "label": "YouTube link" },
+    { "type": "url", "id": "pinterest_url", "label": "Pinterest link" }
+  ],
+  "presets": [{ "name": "Pink Plume cloud" }]
+}
+{% endschema %}

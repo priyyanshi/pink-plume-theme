@@ -1,0 +1,91 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "background_video": "",
+        "show_video_overlay": false,
+        "video_overlay_color": "#000000",
+        "video_overlay_opacity": 50,
+        "full_width": true,
+        "section_height": 100,
+        "content_direction": "column",
+        "gap": 32,
+        "color_scheme": "",
+        "padding-block-start": 40,
+        "padding-block-end": 80
+      }
+    },
+    "blocks_ThNMDm": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_c108d59_agNeW6": {
+          "type": "ai_gen_block_c108d59",
+          "settings": {
+            "heading": "Text block",
+            "text": "<p>Add your text content here. You can format it with bold, italic, and other styles.</p>",
+            "max_width": 800,
+            "text_alignment": "left",
+            "padding_top": 40,
+            "padding_bottom": 40,
+            "padding_horizontal": 20,
+            "heading_size": 32,
+            "heading_case": "uppercase",
+            "heading_spacing": 20,
+            "heading_color": "#000000",
+            "text_size": 16,
+            "line_height": 1.5,
+            "paragraph_spacing": 15,
+            "text_color": "#000000",
+            "background_color": "#ffffff"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_c108d59_agNeW6"
+      ],
+      "name": "Text block",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "blocks_ThNMDm"
+  ]
+}

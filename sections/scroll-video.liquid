@@ -1,0 +1,244 @@
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #000;
+  overflow-x: hidden;
+}
+
+.shopify-section {
+  height: 100vh;
+}
+
+/* Fixed video container */
+.scroll-video-container {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.scroll-video-container video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+
+/* Top loop content overlay */
+.top-content-overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  text-align: center;
+  color: #fff;
+  pointer-events: auto;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.top-content-overlay.visible {
+  opacity: 1;
+}
+
+.top-content-overlay h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 0 0 2rem 0;
+  text-shadow: 0 4px 12px rgba(0,0,0,0.8);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.shop-by-button {
+  display: inline-block;
+  padding: 1rem 3rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+  background: #22151230;
+  border: 2px solid #fff;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  pointer-events: auto;
+}
+
+.shop-by-button:hover {
+  background: rgba(139, 115, 85, 1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+@media (max-width: 768px) {
+  .top-content-overlay h1 {
+    font-size: 2rem;
+  }
+  
+  .shop-by-button {
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+  }
+}
+</style>
+
+<div class="scroll-video-container">
+  {% if section.settings.top_video %}
+  <video id="topLoop" autoplay muted loop playsinline preload="auto">
+    <source src="{{ section.settings.top_video.sources[0].url }}">
+  </video>
+  {% endif %}
+
+  {% if section.settings.transition_video %}
+  <video id="transitionVideo" muted playsinline preload="auto">
+    <source src="{{ section.settings.transition_video.sources[0].url }}">
+  </video>
+  {% endif %}
+</div>
+
+<!-- Top content overlay -->
+<div class="top-content-overlay" id="topContentOverlay">
+  <h1>{{ section.settings.heading_text | default: "Handmade Jewellery" }}</h1>
+  <a href="{{ section.settings.collections_page_url | default: '/collections' }}" class="shop-by-button" id="shopByButton">
+    {{ section.settings.button_text | default: "Shop Now" }}
+  </a>
+</div>
+
+<script>
+(function() {
+  // ===== SPEED CONTROL =====
+  const TRANSITION_SPEED = 4.0; // ADJUST THIS: 0.5 = half speed, 2.0 = double speed
+  // =========================
+
+  function init() {
+    const topLoop = document.getElementById("topLoop");
+    const transition = document.getElementById("transitionVideo");
+    const topContentOverlay = document.getElementById("topContentOverlay");
+    const shopByButton = document.getElementById("shopByButton");
+
+    console.log('Scroll Video Init:', { topLoop, transition, topContentOverlay, shopByButton });
+
+    if (!topLoop || !transition || !shopByButton) {
+      console.error('Missing required elements');
+      return;
+    }
+
+    let isTransitioning = false;
+
+    topLoop.style.display = "block";
+    
+    // Show top content on load
+    setTimeout(() => {
+      if (topContentOverlay) {
+        topContentOverlay.classList.add("visible");
+      }
+    }, 300);
+
+    // Handle shop by button click
+    function handleButtonClick(e) {
+      console.log('Button clicked!');
+      e.preventDefault();
+      e.stopPropagation();
+      
+      if (isTransitioning) {
+        console.log('Already transitioning');
+        return;
+      }
+      
+      isTransitioning = true;
+      
+      // Hide top content
+      if (topContentOverlay) {
+        topContentOverlay.classList.remove("visible");
+      }
+      
+      // Play transition
+      topLoop.style.display = "none";
+      transition.style.display = "block";
+      transition.currentTime = 0;
+      transition.playbackRate = TRANSITION_SPEED;
+      
+      console.log('Playing transition');
+      transition.play();
+
+      // Navigate to collections page when transition ends
+      transition.addEventListener("ended", () => {
+        console.log('Transition ended, navigating...');
+        const collectionsUrl = "{{ section.settings.collections_page_url | default: '/collections' }}";
+        window.location.href = collectionsUrl;
+      }, { once: true });
+    }
+
+    shopByButton.addEventListener("click", handleButtonClick);
+    
+    // Also try adding it directly as a fallback
+    shopByButton.onclick = handleButtonClick;
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
+
+{% schema %}
+{
+  "name": "Scroll Video",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Top Loop Content"
+    },
+    {
+      "type": "text",
+      "id": "heading_text",
+      "label": "Heading Text",
+      "default": "Handmade Jewellery"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "text",
+      "id": "collections_page_url",
+      "label": "Collections Page URL",
+      "default": "/collections",
+      "info": "The page to redirect to after transition (e.g., /collections or /pages/shop)"
+    },
+    {
+      "type": "header",
+      "content": "Videos"
+    },
+    { 
+      "type": "video", 
+      "id": "top_video", 
+      "label": "Top Loop Video" 
+    },
+    { 
+      "type": "video", 
+      "id": "transition_video", 
+      "label": "Transition Video (plays on button click)" 
+    }
+  ],
+  "presets": [
+    { 
+      "name": "Scroll Video" 
+    }
+  ]
+}
+{% endschema %}

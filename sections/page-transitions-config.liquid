@@ -1,0 +1,131 @@
+{% comment %}
+  This section doesn't render anything visible - it's just for configuring page transitions
+  Add this to your theme and configure transitions in the theme editor
+{% endcomment %}
+
+<script id="page-transitions-config" type="application/json">
+{
+  "transitions": [
+    {% for block in section.blocks %}
+      {% if block.settings.transition_video != blank or block.settings.transition_gif != blank %}
+        {
+          "from": "{{ block.settings.from_page }}",
+          "to": "{{ block.settings.to_page }}",
+          {% if block.settings.transition_video != blank %}
+            "video": "{{ block.settings.transition_video.sources[0].url }}",
+          {% endif %}
+          {% if block.settings.transition_gif != blank %}
+            "gif": "{{ block.settings.transition_gif | image_url }}",
+          {% endif %}
+          "speed": {{ block.settings.playback_speed }}
+        }{% unless forloop.last %},{% endunless %}
+      {% endif %}
+    {% endfor %}
+  ]
+}
+</script>
+
+{% schema %}
+{
+  "name": "Page Transitions Config",
+  "tag": "section",
+  "class": "page-transitions-config-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "⚙️ This section is hidden and only used to configure page transitions. Add blocks below for each transition."
+    },
+    {
+      "type": "paragraph",
+      "content": "💡 Upload both MP4 (for desktop) and GIF (for mobile) versions of each transition for best performance."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "transition",
+      "name": "Page Transition",
+      "settings": [
+        {
+          "type": "header",
+          "content": "🎯 Transition Route"
+        },
+        {
+          "type": "select",
+          "id": "from_page",
+          "label": "From Page",
+          "options": [
+            {"value": "homepage", "label": "Homepage"},
+            {"value": "collections", "label": "Collections"},
+            {"value": "catalogue", "label": "Catalogue"},
+            {"value": "contact", "label": "Contact"},
+            {"value": "about", "label": "About"},
+            {"value": "faq", "label": "FAQ"},
+            {"value": "product", "label": "Products"}
+
+          ],
+          "default": "homepage"
+        },
+        {
+          "type": "select",
+          "id": "to_page",
+          "label": "To Page",
+          "options": [
+            {"value": "homepage", "label": "Homepage"},
+            {"value": "collections", "label": "Collections"},
+            {"value": "catalogue", "label": "Catalogue"},
+            {"value": "contact", "label": "Contact"},
+            {"value": "about", "label": "About"},
+            {"value": "faq", "label": "FAQ"},
+            {"value": "product", "label": "Products"}
+          ],
+          "default": "collections"
+        },
+        {
+          "type": "header",
+          "content": "🎬 Desktop Transition (MP4)"
+        },
+        {
+          "type": "video",
+          "id": "transition_video",
+          "label": "Transition Video (Desktop)",
+          "info": "MP4 video for desktop browsers - best quality"
+        },
+        {
+          "type": "header",
+          "content": "📱 Mobile Transition (GIF)"
+        },
+        {
+          "type": "image_picker",
+          "id": "transition_gif",
+          "label": "Transition GIF (Mobile)",
+          "info": "Animated GIF for mobile devices - works without autoplay restrictions"
+        },
+        {
+          "type": "header",
+          "content": "⚡ Playback Settings"
+        },
+        {
+          "type": "range",
+          "id": "playback_speed",
+          "min": 0.1,
+          "max": 10,
+          "step": 0.1,
+          "unit": "x",
+          "label": "Playback Speed",
+          "default": 1.0,
+          "info": "1.0 = normal speed, 2.0 = double speed, 0.5 = half speed (applies to video only)"
+        },
+        {
+          "type": "paragraph",
+          "content": "💡 Tip: Upload the same animation as both MP4 and GIF for consistent transitions across all devices."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Page Transitions Config"
+    }
+  ]
+}
+{% endschema %}

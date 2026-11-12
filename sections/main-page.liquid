@@ -1,0 +1,249 @@
+{% assign section_id = section.id | replace: '_', '' | downcase %}
+
+<style>
+  .section-{{ section_id }} {
+    position: relative;
+    min-height: {{ section.settings.section_height }}vh;
+  }
+
+  .section-background-{{ section_id }} {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 0;
+    transform: translateZ(0);
+  }
+
+  .section-background-video-{{ section_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  .section-background-video-overlay-{{ section_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: {{ section.settings.video_overlay_color }};
+    opacity: {{ section.settings.video_overlay_opacity | divided_by: 100.0 }};
+    z-index: 1;
+  }
+
+  .section-background-fallback-{{ section_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .section-background-fallback-{{ section_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .section-content-{{ section_id }} {
+    position: relative;
+    z-index: 2;
+    a
+  }
+</style>
+
+<div class="section-wrapper section-{{ section_id }}">
+  <!-- Background Layer -->
+  <div class="section-background-{{ section_id }} color-{{ section.settings.color_scheme }}">
+    <video
+      class="section-background-video-{{ section_id }}"
+      autoplay
+      loop
+      muted
+      playsinline
+      width="1920"
+      height="1080"
+    >
+      <source src="https://cdn.shopify.com/videos/c/o/v/973a356564cd49a49aea4a2c9027f494.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <!-- Content Layer -->
+  <div class="section {% if section.settings.full_width %}page-full-width{% else %}page-width-content{% endif %} color-{{ section.settings.color_scheme }} section-content-{{ section_id }}">
+    <div
+      class="
+        spacing-style
+        layout-panel-flex
+        layout-panel-flex--column
+        section-content-wrapper
+        mobile-column
+      "
+      style="
+        {% render 'layout-panel-style', settings: section.settings %}
+        {% render 'spacing-style', settings: section.settings %}
+      "
+    >
+      {% content_for 'blocks' %}
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    const video = document.querySelector('.section-background-video-{{ section_id }}');
+    const fallback = document.querySelector('.section-background-fallback-{{ section_id }}');
+
+    if (video && fallback) {
+      video.addEventListener('error', function() {
+        video.style.display = 'none';
+        fallback.style.display = 'block';
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "t:names.page",
+  "class": "section-wrapper",
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    },
+    {
+      "type": "_divider"
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "🎬 Background Video"
+    },
+    {
+      "type": "text",
+      "id": "background_video",
+      "label": "Background video URL",
+      "info": "Upload your MP4 to Shopify Admin > Content > Files, then paste the CDN URL here"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_video_fallback",
+      "label": "Fallback image",
+      "info": "Shown if video fails to load"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_video_overlay",
+      "label": "Show video overlay",
+      "default": true,
+      "info": "Darkens video for better text readability"
+    },
+    {
+      "type": "color",
+      "id": "video_overlay_color",
+      "label": "Overlay color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "video_overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Overlay opacity",
+      "default": 50,
+      "info": "Higher values = darker overlay"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width section",
+      "default": true,
+      "info": "Enable for full screen, disable to contain content width"
+    },
+    {
+      "type": "range",
+      "id": "section_height",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "label": "Minimum section height",
+      "default": 100,
+      "info": "0 = auto height (based on content). 100vh = full screen height"
+    },
+    {
+      "type": "select",
+      "id": "content_direction",
+      "label": "t:settings.direction",
+      "options": [
+        {
+          "value": "column",
+          "label": "t:options.vertical"
+        }
+      ],
+      "default": "column",
+      "visible_if": "{{ section.settings.gap < 0 }}"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "t:settings.gap",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ]
+}
+{% endschema %}
