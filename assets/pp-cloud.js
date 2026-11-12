@@ -2139,7 +2139,7 @@ function galPicks(p,k){if(!p._lum)return [p.imgs[0]];const o=p.imgs.map((u,i)=>[
   return [o[k==='d'?0:k==='n'?o.length-1:Math.floor((o.length-1)/2)][0]];}
 function galShow(f,u){if(f.cur===u)return;f.cur=u;const a=f.im[f.top],b=f.im[1-f.top];b.onload=()=>{if(f.cur!==u)return;b.classList.add('on');a.classList.remove('on');f.top=1-f.top;};b.onerror=()=>{};b.src=u;if(b.complete&&b.naturalWidth)b.onload();}
 function galTheme(k){if(GAL.thr!==THREAD.c){if(GAL.thr)galResew();GAL.thr=THREAD.c;}const ch=k!==GAL.key;GAL.key=k;if(ch&&GAL.built)galBuild();}
-function galStart(){return GAL.lim>0?-GAL.lim:0;}
+function galStart(){return GAL.start||0;}
 // everything written in the room is sewn in the same running stitch as the logo and footer
 const GQ=[];let gqT=0;function galQ(fn){GQ.push(fn);if(!gqT)gqT=setTimeout(function run(){const t0=performance.now();while(GQ.length&&performance.now()-t0<10)GQ.shift()();gqT=GQ.length?setTimeout(run,16):0;},0);}
 function galSew(cv,text,k){cv.dataset.t=text;cv.dataset.k=k;cv.style.height=Math.round(48*1.45*k)+'px';cv.setAttribute('aria-hidden','true');galQ(()=>{if(cv.isConnected||cv.dataset.keep)stitchText(cv,text,48,k,4.1,[7,3.4]);});}
@@ -2180,14 +2180,14 @@ function galBuild(){galBar();const ring=document.getElementById('galRing'),gal=d
       a.addEventListener('pointerleave',e=>{if(e.pointerType!=='mouse')return;GAL.hover=Math.max(0,GAL.hover-1);f.hov=false;clearInterval(f.tm);galShow(f,f.front);});
       col.appendChild(a);});
     ring.appendChild(col);GAL.cols.push({el:col,x0:x,w,dy:((c*37)%5-2)*5});x+=w+gap;c++;}
-  const total=x-gap;GAL.cols.forEach(C=>{C.a=(C.x0+C.w/2-total/2)/P;C.el.style.transform='translate(-50%,-50%) translateY('+(cy+C.dy)+'px) rotateY('+(-C.a)+'rad) translateZ('+(-P)+'px)';});
-  GAL.lim=Math.max(0,(total-(W*.8-2*(W<=760?10:50)))/2/P);ROOM.base=Math.max(-GAL.lim,Math.min(GAL.lim,ROOM.base));galPlace();}
+  const total=x-gap;GAL.cols.forEach(C=>{C.a=(C.x0+C.w/2-total/2)/P;C.ty=cy+C.dy;C.v=null;});GAL.L=Math.max(total+gap,3.2*P)/P;GAL.start=GAL.cols[0].a+Math.max(0,W*.3-GAL.cols[0].w/2)/P;
+  GAL.lim=1e9;   /* the wall is a full circle: keep turning either way and it comes back round */galPlace();}
 function galTick(){const now=performance.now(),calm=matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(!ROOM.drag){ROOM.base+=GAL.v;GAL.v*=.93;if(Math.abs(GAL.v)<1e-5)GAL.v=0;GAL.dp*=.9;if(GAL.mIn&&GAL.mouse){const u=GAL.mx/innerWidth*2-1,e=Math.max(0,(Math.abs(u)-.78)/.22);if(e>0){ROOM.base+=Math.sign(u)*e*e*17/GAL.P;GAL.idle=now;}}   // cursor at either edge turns the room
     if(!calm&&!GAL.hover&&now-GAL.idle>2600&&GAL.lim>0){ROOM.base+=GAL.dir*.7/GAL.P;if(ROOM.base>=GAL.lim)GAL.dir=-1;else if(ROOM.base<=-GAL.lim)GAL.dir=1;}}   // left alone, the room turns slowly by itself, end to end
   ROOM.base=Math.max(-GAL.lim,Math.min(GAL.lim,ROOM.base));}
-function galPlace(){const ring=document.getElementById('galRing');ring.style.transform='translateZ('+GAL.P+'px) rotateX('+(ROOM.pit/GAL.K)+'rad) rotateY('+ROOM.yaw+'rad)';
-  GAL.cols.forEach(C=>{const v=Math.abs(C.a-ROOM.yaw)<1.5;if(v!==C.v){C.v=v;C.el.style.visibility=v?'visible':'hidden';}});
+function galPlace(){const ring=document.getElementById('galRing');ring.style.transform='translateZ('+GAL.P+'px) rotateX('+(ROOM.pit/GAL.K)+'rad)';const Lr=GAL.L||7;
+  GAL.cols.forEach(C=>{let a=C.a-ROOM.yaw;a=((a+Lr/2)%Lr+Lr)%Lr-Lr/2;const v=Math.abs(a)<1.5;if(v)C.el.style.transform='translate(-50%,-50%) translateY('+C.ty+'px) rotateY('+(-a)+'rad) translateZ('+(-GAL.P)+'px)';if(v!==C.v){C.v=v;C.el.style.visibility=v?'visible':'hidden';}});
   document.body.classList.toggle('galon',ROOM.on&&!ROOM.tOut&&performance.now()/1000-ROOM.tIn>.45);}
 addEventListener('pointermove',e=>{GAL.mx=e.clientX;GAL.my=e.clientY;GAL.mIn=true;GAL.mouse=e.pointerType==='mouse';});document.documentElement.addEventListener('pointerleave',()=>{GAL.mIn=false;});
 addEventListener('wheel',e=>{if(!ROOM.on)return;const d=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY;ROOM.base+=d/GAL.P*.9;GAL.idle=performance.now();},{passive:true});
