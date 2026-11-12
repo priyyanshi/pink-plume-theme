@@ -11,7 +11,7 @@
       null
     ],
     terms: {{ shop.privacy_policy.url | default: '/policies/terms-of-service' | json }},
-    social: { tiktok: {{ section.settings.tiktok_url | json }}, instagram: {{ section.settings.instagram_url | json }}, youtube: {{ section.settings.youtube_url | json }}, pinterest: {{ section.settings.pinterest_url | json }} }
+    social: { tiktok: {{ section.settings.tiktok_url | default: 'https://www.tiktok.com/@pinkplumestudio' | json }}, instagram: {{ section.settings.instagram_url | default: 'https://www.instagram.com/pinkplumestudio/' | json }}, youtube: {{ section.settings.youtube_url | default: 'https://www.youtube.com/@PinkPlumeStudio' | json }}, pinterest: {{ section.settings.pinterest_url | default: 'https://ca.pinterest.com/pinkplumestudio/' | json }} }
   };
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
