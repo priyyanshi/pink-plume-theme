@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="google-site-verification" content="m6xDqYvIIXt8gOWpsgDxRx-idg-DqqrTiyjvyy1Mf8E">
+    <title>{{ page_title }}{% unless page_title contains shop.name %} – {{ shop.name }}{% endunless %}</title>
+    {%- if page_description -%}<meta name="description" content="{{ page_description | escape }}">{%- endif -%}
+    <link rel="canonical" href="{{ canonical_url }}">
+    {%- if settings.favicon != blank -%}<link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">{%- endif -%}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Sacramento&display=swap" rel="stylesheet">
+    <script>
+      /* same light as the home page: night 10pm-4am, sunset 4-10 (am and pm), otherwise day, unless a sky was chosen there */
+      (function(){var d=document.documentElement,t='day',sky='auto',th='';try{sky=localStorage.getItem('pp-sky')||'auto';th=localStorage.getItem('pp-theme')||'';}catch(e){}
+        if(sky==='auto'){var h=new Date().getHours();t=(h>=22||h<4)?'night':(h<10||h>=16)?'sunset':'day';}else if(sky==='sunset')t='sunset';else if(th==='night')t='night';
+        d.dataset.tone=t;try{if(sessionStorage.getItem('pp-zoom')){d.classList.add('zin');sessionStorage.removeItem('pp-zoom');}}catch(e){}})();
+    </script>
+    {{ 'pp-pond.css' | asset_url | stylesheet_tag }}
+    {{ content_for_header }}
+  </head>
+  <body>
+    <canvas id="pond" aria-hidden="true"></canvas>
+    <div class="pp-veil" aria-hidden="true"></div>
+    <header class="pp-top">
+      <a class="pp-brand" href="{{ routes.root_url }}" data-stitch="pink plume" data-size="54" aria-label="Pink Plume home">pink plume</a>
+      <nav class="pp-nav" aria-label="Menu">
+        <a href="{{ routes.root_url }}">home</a>
+        <a href="{{ routes.root_url }}#shop">shop</a>
+        <a href="{{ pages.about.url | default: '/pages/about' }}"{% if page.handle == 'about' %} aria-current="page"{% endif %}>about</a>
+        <a href="{{ pages.faq.url | default: '/pages/faq' }}"{% if page.handle == 'faq' %} aria-current="page"{% endif %}>faq</a>
+        <a href="{{ pages.contact.url | default: '/pages/contact' }}"{% if page.handle == 'contact' %} aria-current="page"{% endif %}>contact</a>
+      </nav>
+    </header>
+    <main class="pp-wrap" id="MainContent">
+      {{ content_for_layout }}
+    </main>
+    <footer class="pp-foot">
+      <nav aria-label="Social media">
+        <a href="https://www.instagram.com/pinkplumestudio/" target="_blank" rel="noopener">instagram</a>
+        <a href="https://www.youtube.com/@PinkPlumeStudio" target="_blank" rel="noopener">youtube</a>
+        <a href="https://www.tiktok.com/@pinkplumestudio" target="_blank" rel="noopener">tiktok</a>
+        <a href="https://ca.pinterest.com/pinkplumestudio/" target="_blank" rel="noopener">pinterest</a>
+      </nav>
+      <p>© {{ 'now' | date: '%Y' }} pink plume</p>
+    </footer>
+    <script src="{{ 'pp-pond.js' | asset_url }}" defer></script>
+  </body>
+</html>

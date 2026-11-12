@@ -1,0 +1,49 @@
+/* pond pages: a top-down pond with koi, and the page's words on top */
+:root{--water:#2f7f78;--ink:#7a2250;--thr:#ffd9e8;--card:rgba(255,246,250,.8);--cardb:rgba(255,200,222,.7);--link:#b02e5e}
+html[data-tone=sunset]{--water:#4a6a78;--ink:#7a2438;--card:rgba(255,240,236,.8);--link:#a8304a}
+html[data-tone=night]{--water:#10243d;--ink:#ffe3ee;--thr:#ffc6df;--card:rgba(30,14,44,.66);--cardb:rgba(255,160,200,.45);--link:#ff9cc4}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--water)}
+body{font:400 16px/1.7 'DM Sans',system-ui,sans-serif;color:var(--ink);overflow-x:hidden}
+#pond{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block}
+.pp-veil{position:fixed;inset:0;z-index:20;background:var(--water);opacity:0;pointer-events:none}
+.pp-top{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:12px 24px;padding:18px 32px;flex-wrap:wrap}
+.pp-brand{display:block;text-decoration:none;color:var(--thr);font:400 54px/1 Sacramento,cursive}
+.pp-nav{display:flex;gap:6px 26px;flex-wrap:wrap}
+.pp-nav a,.pp-foot a{font:400 34px/1 Sacramento,cursive;color:#fff2f7;text-decoration:none;paint-order:stroke;-webkit-text-stroke:.6px rgba(8,16,24,.4);text-shadow:0 0 8px rgba(255,190,220,.55),0 1px 3px rgba(8,16,24,.45);transition:transform .2s}
+.pp-nav a:hover,.pp-foot a:hover{transform:translateY(-2px);text-shadow:0 0 12px rgba(255,215,235,.95),0 1px 3px rgba(8,16,24,.45)}
+.pp-nav a[aria-current=page]{text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:2px}
+.pp-nav a:focus-visible,.pp-foot a:focus-visible,.pp-brand:focus-visible{outline:2px dashed #fff;outline-offset:4px;border-radius:6px}
+.pp-wrap{position:relative;z-index:2;max-width:860px;margin:0 auto;padding:6px 22px 110px}
+.pp-title{margin:10px 0 18px;text-align:center;font:400 96px/1 Sacramento,cursive;color:var(--thr);text-shadow:0 0 14px rgba(255,170,205,.45)}
+.pp-title svg,.pp-brand svg{display:block;margin:0 auto;max-width:100%;height:auto;overflow:visible;filter:drop-shadow(0 2px 4px rgba(6,20,30,.55))}
+.pp-card{padding:40px 44px;border-radius:44px;background:var(--card);-webkit-backdrop-filter:blur(10px) saturate(1.2);backdrop-filter:blur(10px) saturate(1.2);box-shadow:0 0 0 8px rgba(255,236,244,.18),0 0 0 1.6px var(--cardb) inset,0 24px 60px rgba(4,18,30,.35)}
+.pp-rte p{margin:0 0 1em}.pp-rte a,.pp-card a{color:var(--link);text-underline-offset:3px}
+.pp-rte img{max-width:100%;height:auto}
+.pp-rte:after{content:"";display:block;clear:both}
+.pp-q{border-top:1.6px dashed var(--cardb);padding:6px 0}.pp-q:first-of-type{border-top:0}
+.pp-q summary{cursor:pointer;list-style:none;font:400 32px/1.2 Sacramento,cursive;padding:8px 0;display:flex;justify-content:space-between;gap:14px;align-items:center}
+.pp-q summary::-webkit-details-marker{display:none}
+.pp-q summary:after{content:"+";font:400 26px/1 'DM Sans',sans-serif;opacity:.7;transition:transform .25s}
+.pp-q[open] summary:after{transform:rotate(45deg)}
+.pp-q p{margin:0 0 12px;padding-right:30px}
+.pp-form label{display:block;margin:0 0 16px;font:400 26px/1 Sacramento,cursive}
+.pp-form input,.pp-form textarea{display:block;width:100%;margin-top:6px;padding:12px 16px;font:400 16px/1.5 'DM Sans',sans-serif;color:var(--ink);background:rgba(255,255,255,.55);border:1.6px dashed var(--cardb);border-radius:18px;outline:none}
+html[data-tone=night] .pp-form input,html[data-tone=night] .pp-form textarea{background:rgba(255,255,255,.08)}
+.pp-form input:focus,.pp-form textarea:focus{border-style:solid;border-color:var(--link)}
+.pp-form button{font:400 34px/1 Sacramento,cursive;color:#fff;background:var(--link);border:0;border-radius:999px;padding:10px 34px 8px;cursor:pointer;transition:transform .2s}
+.pp-form button:hover{transform:translateY(-2px)}
+.pp-lead{margin:0 0 20px}.pp-ok{font:400 30px/1.3 Sacramento,cursive;margin:0}.pp-err{color:#c1304f}
+.pp-foot{position:relative;z-index:2;text-align:center;padding:0 20px 28px;margin-top:-70px}
+.pp-foot nav{display:flex;gap:4px 26px;justify-content:center;flex-wrap:wrap}.pp-foot a{font-size:28px}
+.pp-foot p{margin:4px 0 0;font:400 22px/1 Sacramento,cursive;color:#fff2f7;opacity:.85;text-shadow:0 1px 3px rgba(8,16,24,.5)}
+/* arriving from the lake: the water rushes up from close range, then the words rise out of it */
+html.zin #pond{animation:ppZoom 1.4s cubic-bezier(.16,.7,.2,1) both}
+html.zin .pp-veil{animation:ppVeil 1s ease-out both}
+html.zin .pp-top,html.zin .pp-wrap,html.zin .pp-foot{animation:ppRise .9s .6s ease-out both}
+@keyframes ppZoom{from{transform:scale(3.2);filter:blur(10px)}to{transform:none;filter:none}}
+@keyframes ppVeil{from{opacity:1}to{opacity:0}}
+@keyframes ppRise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){html.zin #pond,html.zin .pp-veil,html.zin .pp-top,html.zin .pp-wrap,html.zin .pp-foot{animation:none}}
+@media (max-width:700px){.pp-top{padding:12px 16px;justify-content:center}.pp-brand{font-size:44px}.pp-nav{justify-content:center;gap:4px 18px}.pp-nav a{font-size:30px}
+  .pp-title{font-size:72px}.pp-card{padding:28px 24px;border-radius:34px}.pp-wrap{padding:0 14px 100px}.pp-q summary{font-size:28px}}

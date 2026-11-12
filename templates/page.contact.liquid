@@ -1,0 +1,17 @@
+{% layout 'pond' %}
+<h1 class="pp-title" data-stitch="{{ page.title | downcase | escape }}" data-size="96">{{ page.title }}</h1>
+<article class="pp-card pp-rte">
+  {{ page.content }}
+  {%- form 'contact', class: 'pp-form' -%}
+    {%- if form.posted_successfully? -%}
+      <p class="pp-ok" role="status">Thank you! Your message is on its way to the pond. I'll write back soon.</p>
+    {%- else -%}
+      {%- if form.errors -%}<p class="pp-err" role="alert">{{ form.errors | default_errors }}</p>{%- endif -%}
+      <p class="pp-lead">Questions, commissions, or just a vibe? Send me a note, or write to <a href="mailto:studiopinkplume@gmail.com">studiopinkplume@gmail.com</a>.</p>
+      <label>Name<input type="text" name="contact[name]" autocomplete="name" value="{{ form.name }}"></label>
+      <label>Email<input type="email" name="contact[email]" autocomplete="email" required value="{{ form.email }}"></label>
+      <label>Message<textarea name="contact[body]" rows="6" required>{{ form.body }}</textarea></label>
+      <button type="submit">send</button>
+    {%- endif -%}
+  {%- endform -%}
+</article>
