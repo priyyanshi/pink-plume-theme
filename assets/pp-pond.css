@@ -1,3 +1,4 @@
+/* lake pages */
 /* lake pages: an aerial view of a big lake, the page's words on a lily pad */
 :root{--water:#162126;--ink:#5a2048;--link:#b02e5e}
 html[data-tone=sunset]{--water:#17161a;--ink:#6a2438;--link:#a8304a}
@@ -7,7 +8,6 @@ html,body{margin:0;min-height:100%;background:var(--water)}
 body{font:400 16px/1.7 'DM Sans',system-ui,sans-serif;color:var(--ink);overflow-x:hidden}
 #pond{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block}
 .pp-veil{position:fixed;inset:0;z-index:20;background:var(--water);opacity:0;pointer-events:none}
-.pp-vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 /* the same header and footer as the home page */
 .td{display:block}.ts{display:none}
 html[data-tone=sunset] .td{display:none}html[data-tone=sunset] .ts{display:block}
@@ -25,26 +25,6 @@ html[data-tone=sunset] .td{display:none}html[data-tone=sunset] .ts{display:block
 .pp-foot .social{display:flex;gap:16px;align-items:center}
 .pp-foot a{display:block;transition:transform .2s}.pp-foot a:hover{transform:translateY(-2px) rotate(-1.5deg)}
 .pp-foot .ft img{height:40px;width:auto}.pp-foot .social img{width:30px;height:30px}
-.pp-wrap{position:relative;z-index:2;max-width:860px;margin:0 auto;padding:150px 22px 130px}
-/* the page's words sit on a lily pad */
-.pp-card{position:relative;isolation:isolate;padding:70px 76px 66px}
-.pp-pad{position:absolute;z-index:-1;pointer-events:none;filter:drop-shadow(0 16px 20px rgba(0,8,20,.35))}
-.pp-rte p{margin:0 0 1em}.pp-rte a,.pp-card a{color:var(--link);text-underline-offset:3px}
-.pp-rte img{max-width:100%;height:auto}.pp-rte:after{content:"";display:block;clear:both}
-.pp-q{border-top:1.6px dashed rgba(190,90,140,.35);padding:6px 0}.pp-q:first-of-type{border-top:0}
-html[data-tone=night] .pp-q{border-color:rgba(200,255,225,.3)}
-.pp-q summary{cursor:pointer;list-style:none;font:400 32px/1.2 Sacramento,cursive;padding:8px 0;display:flex;justify-content:space-between;gap:14px;align-items:center}
-.pp-q summary::-webkit-details-marker{display:none}
-.pp-q summary:after{content:"+";font:400 26px/1 'DM Sans',sans-serif;opacity:.7;transition:transform .25s}
-.pp-q[open] summary:after{transform:rotate(45deg)}
-.pp-q p{margin:0 0 12px;padding-right:30px}
-.pp-form label{display:block;margin:0 0 16px;font:400 26px/1 Sacramento,cursive}
-.pp-form input,.pp-form textarea{display:block;width:100%;margin-top:6px;padding:12px 16px;font:400 16px/1.5 'DM Sans',sans-serif;color:var(--ink);background:rgba(255,255,255,.5);border:1.6px dashed rgba(190,90,140,.45);border-radius:18px;outline:none}
-html[data-tone=night] .pp-form input,html[data-tone=night] .pp-form textarea{background:rgba(255,255,255,.08);border-color:rgba(200,255,225,.4)}
-.pp-form input:focus,.pp-form textarea:focus{border-style:solid;border-color:var(--link)}
-.pp-form button{font:400 34px/1 Sacramento,cursive;color:#fff;background:var(--link);border:0;border-radius:999px;padding:10px 34px 8px;cursor:pointer;transition:transform .2s}
-.pp-form button:hover{transform:translateY(-2px)}
-.pp-lead{margin:0 0 20px}.pp-ok{font:400 30px/1.3 Sacramento,cursive;margin:0}.pp-err{color:#c1304f}
 /* arriving from the floor: the lake comes up out of the blur */
 html.zin #pond{animation:ppBlur 1.3s ease-out both}
 html.zin .pp-top,html.zin .pp-wrap,html.zin .pp-foot{animation:ppRise .9s .7s ease-out both}
@@ -52,6 +32,30 @@ html.pp-leaving .pp-top,html.pp-leaving .pp-wrap,html.pp-leaving .pp-foot{opacit
 @keyframes ppBlur{from{filter:blur(9px)}to{filter:none}}
 @keyframes ppRise{from{opacity:0}to{opacity:1}}
 @media (prefers-reduced-motion:reduce){html.zin #pond,html.zin .pp-top,html.zin .pp-wrap,html.zin .pp-foot{animation:none}}
-@media (max-width:760px){.pp-wrap{padding:112px 16px 110px}.pp-card{padding:54px 36px 50px}.pp-q summary{font-size:28px}}
 @media (max-width:600px){.pp-top{padding:12px 14px}.pp-logo{width:203px}.icon-btn{width:40px;height:40px}.icon-btn img{width:41px;height:41px}
   .pp-foot{flex-wrap:nowrap;justify-content:space-between;gap:0 6px;padding:0 10px 10px}.pp-foot .social{gap:7px}.pp-foot .ft img{height:auto;max-width:100%}.pp-foot .ft{min-width:0;flex:0 1 auto}.pp-foot .social img{width:26px;height:26px}}
+/* the lake pages' content: words on a fluffy cloud (shared by the home page's in-place lake and the standalone pages) */
+.pp-wrap{--ink:#5a2048;--link:#b02e5e;position:relative;z-index:2;max-width:860px;margin:0 auto;padding:150px 22px 130px;color:var(--ink);font:400 16px/1.7 'DM Sans',system-ui,sans-serif;text-align:left}
+.pp-wrap[data-t=sunset]{--ink:#6a2438;--link:#a8304a}
+.pp-wrap[data-t=night]{--ink:#fff2f8;--link:#ffb3d2}
+.pp-wrap *{box-sizing:border-box}
+.pp-vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.pp-card{position:relative;isolation:isolate;padding:80px 84px 76px}
+.pp-pad{position:absolute;z-index:-1;pointer-events:none;filter:drop-shadow(0 14px 20px rgba(0,8,20,.28))}
+.pp-rte p{margin:0 0 1em}.pp-rte a,.pp-card a{color:var(--link);text-underline-offset:3px}
+.pp-rte img{max-width:100%;height:auto}.pp-rte:after{content:"";display:block;clear:both}
+.pp-q{border-top:1.6px dashed rgba(190,90,140,.35);padding:6px 0}.pp-q:first-of-type{border-top:0}
+.pp-wrap[data-t=night] .pp-q{border-color:rgba(255,220,240,.3)}
+.pp-q summary{cursor:pointer;list-style:none;font:400 32px/1.2 Sacramento,cursive;padding:8px 0;display:flex;justify-content:space-between;gap:14px;align-items:center}
+.pp-q summary::-webkit-details-marker{display:none}
+.pp-q summary:after{content:"+";font:400 26px/1 'DM Sans',sans-serif;opacity:.7;transition:transform .25s}
+.pp-q[open] summary:after{transform:rotate(45deg)}
+.pp-q p{margin:0 0 12px;padding-right:30px}
+.pp-form label{display:block;margin:0 0 16px;font:400 26px/1 Sacramento,cursive}
+.pp-form input,.pp-form textarea{display:block;width:100%;margin-top:6px;padding:12px 16px;font:400 16px/1.5 'DM Sans',sans-serif;color:var(--ink);background:rgba(255,255,255,.5);border:1.6px dashed rgba(190,90,140,.45);border-radius:18px;outline:none}
+.pp-wrap[data-t=night] .pp-form input,.pp-wrap[data-t=night] .pp-form textarea{background:rgba(255,255,255,.1);border-color:rgba(255,220,240,.4)}
+.pp-form input:focus,.pp-form textarea:focus{border-style:solid;border-color:var(--link)}
+.pp-form button{font:400 34px/1 Sacramento,cursive;color:#fff;background:var(--link);border:0;border-radius:999px;padding:10px 34px 8px;cursor:pointer;transition:transform .2s}
+.pp-form button:hover{transform:translateY(-2px)}
+.pp-lead{margin:0 0 20px}.pp-ok{font:400 30px/1.3 Sacramento,cursive;margin:0}.pp-err{color:#c1304f}
+@media (max-width:760px){.pp-wrap{padding:112px 16px 110px}.pp-card{padding:54px 36px 50px}.pp-q summary{font-size:28px}}
