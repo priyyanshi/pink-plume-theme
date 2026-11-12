@@ -2156,8 +2156,10 @@ function galStitch(cv,text,k){const fs=96,w=7.4,dash=[],d=Math.max(2,DPR()),x=cv
   const m=document.createElement('canvas').getContext('2d');m.font=font;const tw=Math.ceil(m.measureText(text).width);
   const SW=tw+Math.round(fs*.3),SH=Math.round(fs*1.45),paths=galJoin(skeletonPaths(text,font,SW,SH,Math.round(fs*.13),Math.round(fs*.87)),fs*.085),W=SW*k,H=SH*k;
   cv.width=W*d;cv.height=H*d;cv.style.width=W+'px';cv.style.height=H+'px';x.setTransform(d*k,0,0,d*k,0,0);x.clearRect(0,0,SW,SH);
-  paths.forEach(p=>{if(p.length<3){const q=p[0];threadStroke(x,()=>{x.beginPath();x.moveTo(q[0],q[1]);x.lineTo(q[0]+.01,q[1]);},w,[]);return;}
-    threadStroke(x,()=>{x.beginPath();p.forEach((q,i)=>i?x.lineTo(q[0],q[1]):x.moveTo(q[0],q[1]));},w,dash);});}
+  // one flat colour: the thread's own pink with its soft shadow, and no lighter sheen down the middle
+  const line=fn=>{x.save();x.lineCap='round';x.lineJoin='round';x.setLineDash([]);x.strokeStyle='rgba(50,12,32,.4)';x.lineWidth=w;x.filter='blur(1px)';x.translate(.8,1.3);fn();x.stroke();x.filter='none';x.translate(-.8,-1.3);x.strokeStyle=THREAD.c;fn();x.stroke();x.restore();};
+  paths.forEach(p=>{if(p.length<3){const q=p[0];line(()=>{x.beginPath();x.moveTo(q[0],q[1]);x.lineTo(q[0]+.01,q[1]);});return;}
+    line(()=>{x.beginPath();p.forEach((q,i)=>i?x.lineTo(q[0],q[1]):x.moveTo(q[0],q[1]));});});}
 function galSew(cv,text,k){cv.dataset.t=text;cv.dataset.k=k;cv.style.height=Math.round(96*1.45*k)+'px';cv.setAttribute('aria-hidden','true');galQ(()=>{if(cv.isConnected)galStitch(cv,text,k);});}
 function galLines(text,k,maxW){const m=galLines.m||(galLines.m=document.createElement('canvas').getContext('2d'));m.font='48px Sacramento, cursive';const out=[];let cur='';
   text.split(/\s+/).forEach(w=>{const t=cur?cur+' '+w:w;if(cur&&m.measureText(t).width*k>maxW){out.push(cur);cur=w;}else cur=t;});if(cur)out.push(cur);return out;}
