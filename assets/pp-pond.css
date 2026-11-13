@@ -1,8 +1,8 @@
 /* lake pages */
 /* lake pages: an aerial view of a big lake, the page's words on a lily pad */
-:root{--water:#162126;--ink:#5a2048;--link:#b02e5e}
-html[data-tone=sunset]{--water:#17161a;--ink:#6a2438;--link:#a8304a}
-html[data-tone=night]{--water:#090d12;--ink:#fff2f8;--link:#ffb3d2}
+:root{--water:#162126;--ink:#3b1f3a;--link:#5e7f4a}
+html[data-tone=sunset]{--water:#17161a;--ink:#f5e6c8;--link:#c5c892}
+html[data-tone=night]{--water:#090d12;--ink:#f4b6cb;--link:#8da56a}
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%;background:var(--water)}
 body{font:400 16px/1.7 'DM Sans',system-ui,sans-serif;color:var(--ink);overflow-x:hidden}
@@ -35,9 +35,9 @@ html.pp-leaving .pp-top,html.pp-leaving .pp-wrap,html.pp-leaving .pp-foot{opacit
 @media (max-width:600px){.pp-top{padding:12px 14px}.pp-logo{width:203px}.icon-btn{width:40px;height:40px}.icon-btn img{width:41px;height:41px}
   .pp-foot{flex-wrap:nowrap;justify-content:space-between;gap:0 6px;padding:0 10px 10px}.pp-foot .social{gap:7px}.pp-foot .ft img{height:auto;max-width:100%}.pp-foot .ft{min-width:0;flex:0 1 auto}.pp-foot .social img{width:26px;height:26px}}
 /* the lake pages' content: words on a fluffy cloud (shared by the home page's in-place lake and the standalone pages) */
-.pp-wrap{--ink:#5a2048;--link:#b02e5e;position:relative;z-index:2;max-width:860px;margin:0 auto;padding:150px 22px 130px;color:var(--ink);font:400 16px/1.7 'DM Sans',system-ui,sans-serif;text-align:left}
-.pp-wrap[data-t=sunset]{--ink:#6a2438;--link:#a8304a}
-.pp-wrap[data-t=night]{--ink:#fff2f8;--link:#ffb3d2}
+.pp-wrap{--ink:#3b1f3a;--link:#5e7f4a;position:relative;z-index:2;max-width:860px;margin:0 auto;padding:150px 22px 130px;color:var(--ink);font:400 16px/1.7 'DM Sans',system-ui,sans-serif;text-align:left}
+.pp-wrap[data-t=sunset]{--ink:#f5e6c8;--link:#c5c892}
+.pp-wrap[data-t=night]{--ink:#f4b6cb;--link:#8da56a}
 .pp-wrap *{box-sizing:border-box}
 .pp-vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .pp-card{position:relative;isolation:isolate;padding:80px 84px 76px}
