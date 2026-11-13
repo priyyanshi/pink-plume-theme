@@ -84,7 +84,7 @@ function drawJump(j){var u=(now-j.t)/j.dur;if(u<0||u>1)return;var h=Math.sin(u*M
 function drawShadows(t){shad.forEach(function(s,i){var an=t*.05*s.v+s.ph,px=W*(.5+.42*Math.sin(an)*Math.cos(s.k)),py=H*(.5+.38*Math.cos(an*.9+s.k)),hd=Math.atan2(Math.cos(an*.9+s.k)*-.9*.38*H,Math.cos(an)*.42*W*Math.cos(s.k));
   x.save();x.translate(px,py);x.rotate(hd);x.globalAlpha=T.ga>.1?.16:.1;x.fillStyle='#010a10';x.beginPath();x.ellipse(0,0,s.l*.5,s.l*.17,0,0,6.2832);x.fill();x.beginPath();x.moveTo(-s.l*.46,0);x.lineTo(-s.l*.72,-s.l*.16*Math.sin(t*3+i)-s.l*.1);x.lineTo(-s.l*.72,s.l*.16*Math.sin(t*3+i)+s.l*.1);x.fill();x.restore();});}
 function setup(){D=Math.min(2,devicePixelRatio||1);W=innerWidth;H=innerHeight;small=W<700;cv.width=Math.round(W*D);cv.height=Math.round(H*D);
-  isl=[[.09,.3,.9],[.9,.22,1.05],[.8,.8,1.1],[.16,.82,.8],[.52,.93,.55],[.6,.08,.5],[.96,.55,.55]].slice(0,small?5:7).map(function(a,i){return mkIsland(i,a[0],a[1],a[2]);});
+  isl=[];
   glint=[];for(var q=0;q<(small?150:300);q++)glint.push({x:rnd(q+500)*W,y:rnd(q+900)*H,l:5+rnd(q+1300)*15,ph:rnd(q+1700)*60,sp:.8+rnd(q+2100)*2.2});
   shad=[];for(var i=0;i<(small?3:4);i++)shad.push({ph:rnd(i+1)*9,v:.5+rnd(i+2)*.6,k:rnd(i+3)*1.2,l:(small?90:130)+rnd(i+4)*60});}
 /* ---- drawing ---- */

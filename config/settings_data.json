@@ -1,1 +1,1141 @@
-{"current":{"logo":"shopify:\/\/shop_images\/Untitled_Artwork_28.png","logo_height":67,"logo_height_mobile":90,"favicon":"shopify:\/\/shop_images\/IMG_9096.png","type_body_font":"mono","type_subheading_font":"mono","type_heading_font":"mono","type_accent_font":"mono","type_size_paragraph":"14","type_line_height_paragraph":"body-normal","type_size_h1":"72","type_line_height_h1":"display-normal","type_case_h1":"uppercase","type_size_h2":"120","type_line_height_h2":"display-tight","type_case_h2":"uppercase","type_case_h3":"uppercase","type_case_h4":"uppercase","type_case_h5":"uppercase","type_case_h6":"uppercase","page_width":"narrow","page_transition_enabled":false,"transition_to_main_product":false,"card_hover_effect":"subtle-zoom","button_border_radius_primary":0,"type_font_button_primary":"accent","button_text_case_primary":"uppercase","secondary_button_border_width":0,"button_border_radius_secondary":0,"cart_type":"drawer","auto_open_cart_drawer":true,"show_cart_note":true,"cart_note_open_by_default":true,"show_installments":false,"show_accelerated_checkout_buttons":false,"cart_thumbnail_border_radius":0,"drawer_color_scheme":"scheme-5","drawer_drop_shadow":true,"inputs_border_radius":0,"popover_color_scheme":"scheme-5","popover_border_radius":0,"popover_border":"none","quick_add_color_scheme":"scheme-5","variant_swatch_radius":0,"variant_button_radius":0,"variant_button_width":"equal-width-buttons","sections":{"page-transitions-config":{"type":"page-transitions-config","blocks":{"transition_P7WJfk":{"type":"transition","settings":{"from_page":"contact","to_page":"product","transition_video":"shopify:\/\/files\/videos\/contact_catalogue.mp4","playback_speed":1}},"transition_UDyHDe":{"type":"transition","settings":{"from_page":"product","to_page":"contact","transition_video":"shopify:\/\/files\/videos\/catalogue_contact.mp4","playback_speed":1}},"transition_6fTCwT":{"type":"transition","settings":{"from_page":"faq","to_page":"product","transition_video":"shopify:\/\/files\/videos\/contact_catalogue.mp4","playback_speed":1}},"transition_N9hdRp":{"type":"transition","settings":{"from_page":"product","to_page":"faq","transition_video":"shopify:\/\/files\/videos\/catalogue_contact.mp4","playback_speed":1}},"transition_xJKXEd":{"type":"transition","settings":{"from_page":"about","to_page":"product","transition_video":"shopify:\/\/files\/videos\/contact_catalogue.mp4","playback_speed":1}},"transition_m6fEKn":{"type":"transition","settings":{"from_page":"product","to_page":"about","transition_video":"shopify:\/\/files\/videos\/catalogue_contact.mp4","playback_speed":1}},"transition_TwqGXE":{"type":"transition","settings":{"from_page":"product","to_page":"collections","transition_video":"shopify:\/\/files\/videos\/catalogue_collections.mp4","playback_speed":1}},"transition_3B7EVy":{"type":"transition","settings":{"from_page":"collections","to_page":"product","transition_video":"shopify:\/\/files\/videos\/collections_catalogue.mp4","playback_speed":1}},"transition_g9dxi4":{"type":"transition","settings":{"from_page":"product","to_page":"homepage","transition_video":"shopify:\/\/files\/videos\/catalogue_homepage.mp4","playback_speed":1}},"transition_CWhxyi":{"type":"transition","settings":{"from_page":"homepage","to_page":"product","transition_video":"shopify:\/\/files\/videos\/homepage_catalogue.mp4","playback_speed":1}},"transition_hkH7Ew":{"type":"transition","settings":{"from_page":"faq","to_page":"catalogue","transition_video":"shopify:\/\/files\/videos\/contact_catalogue.mp4","playback_speed":1.5}},"transition_bkmrtj":{"type":"transition","settings":{"from_page":"catalogue","to_page":"faq","transition_video":"shopify:\/\/files\/videos\/catalogue_contact.mp4","playback_speed":1.5}},"transition_GwT9MQ":{"type":"transition","settings":{"from_page":"about","to_page":"catalogue","transition_video":"shopify:\/\/files\/videos\/contact_catalogue.mp4","playback_speed":1.5}},"transition_z7QfPF":{"type":"transition","settings":{"from_page":"catalogue","to_page":"about","transition_video":"shopify:\/\/files\/videos\/catalogue_contact.mp4","playback_speed":1.5}},"transition_nrzFHX":{"type":"transition","settings":{"from_page":"contact","to_page":"catalogue","transition_video":"shopify:\/\/files\/videos\/contact_catalogue.mp4","playback_speed":1.5}},"transition_nmN48X":{"type":"transition","settings":{"from_page":"catalogue","to_page":"contact","transition_video":"shopify:\/\/files\/videos\/catalogue_contact.mp4","playback_speed":1.5}},"transition_pitDMe":{"type":"transition","settings":{"from_page":"faq","to_page":"collections","transition_video":"shopify:\/\/files\/videos\/contact_collections.mp4","playback_speed":2}},"transition_ceWdq8":{"type":"transition","settings":{"from_page":"collections","to_page":"faq","transition_video":"shopify:\/\/files\/videos\/collections_contact.mp4","playback_speed":2}},"transition_hDXCLA":{"type":"transition","settings":{"from_page":"about","to_page":"collections","transition_video":"shopify:\/\/files\/videos\/contact_collections.mp4","playback_speed":2}},"transition_ebBFxj":{"type":"transition","settings":{"from_page":"collections","to_page":"about","transition_video":"shopify:\/\/files\/videos\/collections_contact.mp4","playback_speed":2}},"transition_cdkrDm":{"type":"transition","settings":{"from_page":"collections","to_page":"contact","transition_video":"shopify:\/\/files\/videos\/collections_contact.mp4","playback_speed":2}},"transition_EEqCRp":{"type":"transition","settings":{"from_page":"contact","to_page":"collections","transition_video":"shopify:\/\/files\/videos\/contact_collections.mp4","playback_speed":2}},"transition_Nheq3W":{"type":"transition","settings":{"from_page":"catalogue","to_page":"collections","transition_video":"shopify:\/\/files\/videos\/catalogue_collections.mp4","playback_speed":1}},"transition_KJRMxC":{"type":"transition","settings":{"from_page":"collections","to_page":"catalogue","transition_video":"shopify:\/\/files\/videos\/collections_catalogue.mp4","playback_speed":1}},"transition_34mTfr":{"type":"transition","settings":{"from_page":"faq","to_page":"homepage","transition_video":"shopify:\/\/files\/videos\/contact_homepage.mp4","playback_speed":3}},"transition_4LTjir":{"type":"transition","settings":{"from_page":"homepage","to_page":"faq","transition_video":"shopify:\/\/files\/videos\/homepage_contact.mp4","playback_speed":3}},"transition_6Wj6bm":{"type":"transition","settings":{"from_page":"about","to_page":"homepage","transition_video":"shopify:\/\/files\/videos\/contact_homepage.mp4","playback_speed":3}},"transition_aBPiyr":{"type":"transition","settings":{"from_page":"homepage","to_page":"about","transition_video":"shopify:\/\/files\/videos\/homepage_contact.mp4","playback_speed":3}},"transition_mMnLYM":{"type":"transition","settings":{"from_page":"contact","to_page":"homepage","transition_video":"shopify:\/\/files\/videos\/contact_homepage.mp4","playback_speed":3}},"transition_yUa37E":{"type":"transition","settings":{"from_page":"homepage","to_page":"contact","transition_video":"shopify:\/\/files\/videos\/homepage_contact.mp4","playback_speed":3}},"transition_Q6Rd4G":{"type":"transition","settings":{"from_page":"catalogue","to_page":"homepage","transition_video":"shopify:\/\/files\/videos\/catalogue_homepage.mp4","playback_speed":3}},"transition_m9ikdM":{"type":"transition","settings":{"from_page":"homepage","to_page":"catalogue","transition_video":"shopify:\/\/files\/videos\/homepage_catalogue.mp4","playback_speed":3}},"transition_xnVdWw":{"type":"transition","settings":{"from_page":"collections","to_page":"homepage","transition_video":"shopify:\/\/files\/videos\/collections_homepage.mp4","playback_speed":3}},"transition_FdeEjA":{"type":"transition","settings":{"from_page":"homepage","to_page":"collections","transition_video":"shopify:\/\/files\/videos\/homepage_collections.mp4","playback_speed":3}}},"block_order":["transition_P7WJfk","transition_UDyHDe","transition_6fTCwT","transition_N9hdRp","transition_xJKXEd","transition_m6fEKn","transition_TwqGXE","transition_3B7EVy","transition_g9dxi4","transition_CWhxyi","transition_hkH7Ew","transition_bkmrtj","transition_GwT9MQ","transition_z7QfPF","transition_nrzFHX","transition_nmN48X","transition_pitDMe","transition_ceWdq8","transition_hDXCLA","transition_ebBFxj","transition_cdkrDm","transition_EEqCRp","transition_Nheq3W","transition_KJRMxC","transition_34mTfr","transition_4LTjir","transition_6Wj6bm","transition_aBPiyr","transition_mMnLYM","transition_yUa37E","transition_Q6Rd4G","transition_m9ikdM","transition_xnVdWw","transition_FdeEjA"],"settings":{}},"custom-font":{"type":"custom-font","blocks":{"image_cdgJ4a":{"type":"image","settings":{"name":"customfont","custom_font_weight":"bold","custom_font_url":"https:\/\/cdn.shopify.com\/s\/files\/1\/0737\/3081\/8227\/files\/Sinistre-Regular.otf?v=1774145975","apply_h1":true,"apply_h2":true,"apply_h3":true,"apply_h4":true,"apply_h5":true,"apply_h6":true,"apply_span":true,"apply_p":true,"apply_a":true,"apply_input":true,"apply_label":true,"apply_legend":true,"apply_button":true,"apply_summary":true,"apply_select":true,"apply_option":true,"apply_small":true,"apply_custom":""}},"image_dwxPDa":{"type":"image","disabled":true,"settings":{"name":"customfont","custom_font_weight":"none","custom_font_url":"https:\/\/cdn.shopify.com\/s\/files\/1\/0737\/3081\/8227\/files\/CsAmapolaRegularDemo-0v0Dv.otf?v=1773713471","apply_h1":true,"apply_h2":true,"apply_h3":true,"apply_h4":true,"apply_h5":true,"apply_h6":true,"apply_span":true,"apply_p":true,"apply_a":true,"apply_input":true,"apply_label":true,"apply_legend":true,"apply_button":true,"apply_summary":true,"apply_select":true,"apply_option":true,"apply_small":true,"apply_custom":""}},"image_CHbPm8":{"type":"image","disabled":true,"settings":{"name":"customfont","custom_font_weight":"none","custom_font_url":"https:\/\/cdn.shopify.com\/s\/files\/1\/0737\/3081\/8227\/files\/CSAmapolaStitched-Regular_demo-BF69b0f568a888f.otf?v=1773710336","apply_h1":true,"apply_h2":true,"apply_h3":true,"apply_h4":true,"apply_h5":true,"apply_h6":true,"apply_span":true,"apply_p":true,"apply_a":true,"apply_input":true,"apply_label":true,"apply_legend":true,"apply_button":true,"apply_summary":true,"apply_select":true,"apply_option":true,"apply_small":true,"apply_custom":""}},"image_BFYCLX":{"type":"image","disabled":true,"settings":{"name":"customfont","custom_font_weight":"none","custom_font_url":"https:\/\/cdn.shopify.com\/s\/files\/1\/0737\/3081\/8227\/files\/OlytheaRegular-e9dG6.ttf?v=1773709885","apply_h1":true,"apply_h2":true,"apply_h3":true,"apply_h4":true,"apply_h5":true,"apply_h6":true,"apply_span":true,"apply_p":true,"apply_a":true,"apply_input":true,"apply_label":true,"apply_legend":true,"apply_button":true,"apply_summary":true,"apply_select":true,"apply_option":true,"apply_small":true,"apply_custom":""}},"image_RANJ4e":{"type":"image","disabled":true,"settings":{"name":"customfont","custom_font_weight":"none","custom_font_url":"https:\/\/cdn.shopify.com\/s\/files\/1\/0737\/3081\/8227\/files\/Telma-Regular.woff2?v=1770001385","apply_h1":true,"apply_h2":true,"apply_h3":true,"apply_h4":true,"apply_h5":true,"apply_h6":true,"apply_span":true,"apply_p":false,"apply_a":true,"apply_input":true,"apply_label":true,"apply_legend":true,"apply_button":true,"apply_summary":true,"apply_select":true,"apply_option":true,"apply_small":true,"apply_custom":""}}},"block_order":["image_cdgJ4a","image_dwxPDa","image_CHbPm8","image_BFYCLX","image_RANJ4e"],"settings":{"enable":true}},"password-footer":{"type":"password-footer","settings":{"color_scheme":"scheme-5"}}},"content_for_index":[],"blocks":{"8764476057892802672":{"type":"shopify:\/\/apps\/stoq\/blocks\/main\/4bb73be2-b7c2-4870-949f-c528145452a3","disabled":false,"settings":{}},"15683396631634586217":{"type":"shopify:\/\/apps\/inbox\/blocks\/chat\/841fc607-4181-4ad1-842d-e24d7f8bad6b","disabled":false,"settings":{"greeting_message":"Hi, message me with any questions. I am happy to help!","background_color":"#E8D6C8","font_color":"#28090A","button_color":"#28090a","secondary_color":"#e8d6c8","ternary_color":"#828872","button_icon":"chat_bubble","button_text":"no_text","button_horizontal_position":"bottom_right","button_vertical_position":"lowest","agent_inherit_fonts":true,"agent_font":"system_ui_n4","agent_border_radius":16}}},"color_schemes":{"scheme-1":{"settings":{"background":"#ffffff","foreground_heading":"#a42325","foreground":"#000000","primary":"#a42325","primary_hover":"#000000","border":"#e6e6e6","shadow":"#000000","primary_button_background":"#a42325","primary_button_text":"#ffffff","primary_button_border":"#a42325","primary_button_hover_background":"#780406e8","primary_button_hover_text":"#ffffff","primary_button_hover_border":"#000000","secondary_button_background":"#0000000f","secondary_button_text":"#000000","secondary_button_border":"#a42325","secondary_button_hover_background":"#dedede","secondary_button_hover_text":"#000000","secondary_button_hover_border":"#000000","input_background":"#ffffff","input_text_color":"#000000","input_border_color":"#e6e6e6","input_hover_background":"#f5f5f5","variant_background_color":"#ffffff","variant_text_color":"#000000","variant_border_color":"#e6e6e6","variant_hover_background_color":"#f5f5f5","variant_hover_text_color":"#000000","variant_hover_border_color":"#e6e6e6","selected_variant_background_color":"#000000","selected_variant_text_color":"#ffffff","selected_variant_border_color":"#000000","selected_variant_hover_background_color":"#1a1a1a","selected_variant_hover_text_color":"#ffffff","selected_variant_hover_border_color":"#1a1a1a"}},"scheme-2":{"settings":{"background":"#f1f1f1","foreground_heading":"#000000","foreground":"#000000","primary":"#000000","primary_hover":"#000000","border":"#e6e6e6","shadow":"#000000","primary_button_background":"#a42325","primary_button_text":"#f2f2f2","primary_button_border":"#a42325","primary_button_hover_background":"#a42325","primary_button_hover_text":"#f2f2f2","primary_button_hover_border":"#a42325","secondary_button_background":"#ffffff","secondary_button_text":"#000000","secondary_button_border":"#000000","secondary_button_hover_background":"#ffffff","secondary_button_hover_text":"#a42325","secondary_button_hover_border":"#a42325","input_background":"#f2f2f2","input_text_color":"#000000","input_border_color":"#000000","input_hover_background":"#e4e4e4","variant_background_color":"#ffffff","variant_text_color":"#000000","variant_border_color":"#e6e6e6","variant_hover_background_color":"#f5f5f5","variant_hover_text_color":"#000000","variant_hover_border_color":"#e6e6e6","selected_variant_background_color":"#000000","selected_variant_text_color":"#ffffff","selected_variant_border_color":"#000000","selected_variant_hover_background_color":"#1a1a1a","selected_variant_hover_text_color":"#ffffff","selected_variant_hover_border_color":"#1a1a1a"}},"scheme-3":{"settings":{"background":"#e8d5c7","foreground_heading":"#000000","foreground":"#000000","primary":"#780406e8","primary_hover":"#000000","border":"#d0d0d0","shadow":"#000000","primary_button_background":"#780406e8","primary_button_text":"#ffffff","primary_button_border":"#780406e8","primary_button_hover_background":"#000000","primary_button_hover_text":"#ffffff","primary_button_hover_border":"#000000","secondary_button_background":"#e8d5c7","secondary_button_text":"#000000","secondary_button_border":"#333232","secondary_button_hover_background":"#f1e3d9c4","secondary_button_hover_text":"#000000","secondary_button_hover_border":"#000000","input_background":"#e8d5c7","input_text_color":"#000000","input_border_color":"#000000","input_hover_background":"#f1e3d9c4","variant_background_color":"#e8d5c7","variant_text_color":"#000000","variant_border_color":"#585858","variant_hover_background_color":"#f1e3d9c4","variant_hover_text_color":"#000000","variant_hover_border_color":"#000000","selected_variant_background_color":"#000000","selected_variant_text_color":"#ffffff","selected_variant_border_color":"#000000","selected_variant_hover_background_color":"#1a1a1a","selected_variant_hover_text_color":"#ffffff","selected_variant_hover_border_color":"#1a1a1a"}},"scheme-4":{"settings":{"background":"#a42325","foreground_heading":"#ffffff","foreground":"#ffffff","primary":"#a42325","primary_hover":"#a42325","border":"#000000","shadow":"#000000","primary_button_background":"#ffffff","primary_button_text":"#a42325","primary_button_border":"#ffffff","primary_button_hover_background":"#d76668","primary_button_hover_text":"#ffffff","primary_button_hover_border":"#d76668","secondary_button_background":"#a42325","secondary_button_text":"#ffffff","secondary_button_border":"#ffffff","secondary_button_hover_background":"#d76668","secondary_button_hover_text":"#ffffff","secondary_button_hover_border":"#d76668","input_background":"#a42325","input_text_color":"#ffffff","input_border_color":"#ffffffe3","input_hover_background":"#780406e8","variant_background_color":"#a42325","variant_text_color":"#ffffff","variant_border_color":"#e6e6e6","variant_hover_background_color":"#f5f5f5","variant_hover_text_color":"#000000","variant_hover_border_color":"#e6e6e6","selected_variant_background_color":"#000000","selected_variant_text_color":"#ffffff","selected_variant_border_color":"#000000","selected_variant_hover_background_color":"#1a1a1a","selected_variant_hover_text_color":"#ffffff","selected_variant_hover_border_color":"#1a1a1a"}},"scheme-5":{"settings":{"background":"#150404","foreground_heading":"{{ shop.brand.colors.secondary[1].background }}","foreground":"{{ shop.brand.colors.secondary[1].background }}","primary":"{{ shop.brand.colors.primary[0].background }}","primary_hover":"{{ shop.brand.colors.primary[0].foreground }}","border":"{{ shop.brand.colors.primary[0].background }}","shadow":"{{ shop.brand.colors.secondary[0].background }}","primary_button_background":"{{ shop.brand.colors.primary[0].background }}","primary_button_text":"{{ shop.brand.colors.secondary[1].background }}","primary_button_border":"{{ shop.brand.colors.primary[0].background }}","primary_button_hover_background":"{{ shop.brand.colors.primary[0].foreground }}","primary_button_hover_text":"{{ shop.brand.colors.secondary[1].background }}","primary_button_hover_border":"{{ shop.brand.colors.secondary[0].background }}","secondary_button_background":"{{ shop.brand.colors.secondary[0].background }}","secondary_button_text":"{{ shop.brand.colors.secondary[1].background }}","secondary_button_border":"{{ shop.brand.colors.primary[0].background }}","secondary_button_hover_background":"{{ shop.brand.colors.primary[0].background }}","secondary_button_hover_text":"{{ shop.brand.colors.secondary[1].background }}","secondary_button_hover_border":"{{ shop.brand.colors.primary[0].foreground }}","input_background":"#28090a","input_text_color":"{{ shop.brand.colors.secondary[1].background }}","input_border_color":"rgba(0,0,0,0)","input_hover_background":"#540c15","variant_background_color":"{{ shop.brand.colors.secondary[0].background }}","variant_text_color":"{{ shop.brand.colors.secondary[1].background }}","variant_border_color":"#ece0cd","variant_hover_background_color":"{{ shop.brand.colors.secondary[1].background }}","variant_hover_text_color":"{{ shop.brand.colors.secondary[0].background }}","variant_hover_border_color":"{{ shop.brand.colors.secondary[1].background }}","selected_variant_background_color":"{{ shop.brand.colors.secondary[1].background }}","selected_variant_text_color":"{{ shop.brand.colors.secondary[0].background }}","selected_variant_border_color":"{{ shop.brand.colors.secondary[1].background }}","selected_variant_hover_background_color":"{{ shop.brand.colors.secondary[1].background }}","selected_variant_hover_text_color":"{{ shop.brand.colors.secondary[0].background }}","selected_variant_hover_border_color":"{{ shop.brand.colors.secondary[1].background }}"}},"scheme-6":{"settings":{"background":"rgba(0,0,0,0)","foreground_heading":"#000000","foreground":"#ffffff","primary":"#ffffff","primary_hover":"#ffffff","border":"rgba(0,0,0,0)","shadow":"rgba(0,0,0,0)","primary_button_background":"#ffffff","primary_button_text":"#000000","primary_button_border":"#ffffff","primary_button_hover_background":"#dedede","primary_button_hover_text":"#000000","primary_button_hover_border":"#dedede","secondary_button_background":"rgba(0,0,0,0)","secondary_button_text":"#ffffff","secondary_button_border":"#ffffff","secondary_button_hover_background":"rgba(0,0,0,0)","secondary_button_hover_text":"#acacac","secondary_button_hover_border":"#acacac","input_background":"#ffffff","input_text_color":"#000000","input_border_color":"#000000","input_hover_background":"#f5f5f5","variant_background_color":"#ffffff","variant_text_color":"#000000","variant_border_color":"#e6e6e6","variant_hover_background_color":"#f5f5f5","variant_hover_text_color":"#000000","variant_hover_border_color":"#e6e6e6","selected_variant_background_color":"#000000","selected_variant_text_color":"#ffffff","selected_variant_border_color":"#000000","selected_variant_hover_background_color":"#1a1a1a","selected_variant_hover_text_color":"#ffffff","selected_variant_hover_border_color":"#1a1a1a"}},"scheme-7":{"settings":{"background":"rgba(0,0,0,0)","foreground_heading":"#a42325","foreground":"#000000","primary":"#000000","primary_hover":"#00000087","border":"#e6e6e6","shadow":"#000000","primary_button_background":"#000000","primary_button_text":"#ffffff","primary_button_border":"#000000","primary_button_hover_background":"#333333","primary_button_hover_text":"#ffffff","primary_button_hover_border":"#333333","secondary_button_background":"#0000000f","secondary_button_text":"#000000","secondary_button_border":"#000000","secondary_button_hover_background":"#ffffff","secondary_button_hover_text":"#000000","secondary_button_hover_border":"#ffffff","input_background":"#ffffff","input_text_color":"#00000087","input_border_color":"#00000021","input_hover_background":"#f5f5f5","variant_background_color":"#ffffff","variant_text_color":"#000000","variant_border_color":"#e6e6e6","variant_hover_background_color":"#f5f5f5","variant_hover_text_color":"#000000","variant_hover_border_color":"#e6e6e6","selected_variant_background_color":"#000000","selected_variant_text_color":"#ffffff","selected_variant_border_color":"#000000","selected_variant_hover_background_color":"#1a1a1a","selected_variant_hover_text_color":"#ffffff","selected_variant_hover_border_color":"#1a1a1a"}}}},"presets":{"Savor":{"color_schemes":{"scheme-1":{"settings":{"background":"#ffffff","foreground_heading":"#a42325","foreground":"#000000","primary":"#a42325","primary_hover":"#000000","border":"#e6e6e6","shadow":"#000000","primary_button_background":"#a42325","primary_button_text":"#ffffff","primary_button_border":"#a42325","primary_button_hover_background":"#780406e8","primary_button_hover_text":"#ffffff","primary_button_hover_border":"#000000","secondary_button_background":"#0000000f","secondary_button_text":"#000000","secondary_button_border":"#a42325","secondary_button_hover_background":"#dedede","secondary_button_hover_text":"#000000","secondary_button_hover_border":"#000000","input_background":"#ffffff","input_text_color":"#000000","input_border_color":"#e6e6e6","input_hover_background":"#f5f5f5","variant_background_color":"#ffffff","variant_text_color":"#000000","variant_border_color":"#e6e6e6","variant_hover_background_color":"#f5f5f5","variant_hover_text_color":"#000000","variant_hover_border_color":"#e6e6e6","selected_variant_background_color":"#000000","selected_variant_text_color":"#ffffff","selected_variant_border_color":"#000000","selected_variant_hover_background_color":"#1a1a1a","selected_variant_hover_text_color":"#ffffff","selected_variant_hover_border_color":"#1a1a1a"}},"scheme-2":{"settings":{"background":"#f1f1f1","foreground_heading":"#000000","foreground":"#000000","primary":"#000000","primary_hover":"#000000","border":"#e6e6e6","shadow":"#000000","primary_button_background":"#a42325","primary_button_text":"#f2f2f2","primary_button_border":"#a42325","primary_button_hover_background":"#a42325","primary_button_hover_text":"#f2f2f2","primary_button_hover_border":"#a42325","secondary_button_background":"#ffffff","secondary_button_text":"#000000","secondary_button_border":"#000000","secondary_button_hover_background":"#ffffff","secondary_button_hover_text":"#a42325","secondary_button_hover_border":"#a42325","input_background":"#f2f2f2","input_text_color":"#000000","input_border_color":"#000000","input_hover_background":"#e4e4e4","variant_background_color":"#ffffff","variant_text_color":"#000000","variant_border_color":"#e6e6e6","variant_hover_background_color":"#f5f5f5","variant_hover_text_color":"#000000","variant_hover_border_color":"#e6e6e6","selected_variant_background_color":"#000000","selected_variant_text_color":"#ffffff","selected_variant_border_color":"#000000","selected_variant_hover_background_color":"#1a1a1a","selected_variant_hover_text_color":"#ffffff","selected_variant_hover_border_color":"#1a1a1a"}},"scheme-3":{"settings":{"background":"#e8d5c7","foreground_heading":"#000000","foreground":"#000000","primary":"#780406e8","primary_hover":"#000000","border":"#d0d0d0","shadow":"#000000","primary_button_background":"#780406e8","primary_button_text":"#ffffff","primary_button_border":"#780406e8","primary_button_hover_background":"#000000","primary_button_hover_text":"#ffffff","primary_button_hover_border":"#000000","secondary_button_background":"#e8d5c7","secondary_button_text":"#000000","secondary_button_border":"#333232","secondary_button_hover_background":"#f1e3d9c4","secondary_button_hover_text":"#000000","secondary_button_hover_border":"#000000","input_background":"#e8d5c7","input_text_color":"#000000","input_border_color":"#000000","input_hover_background":"#f1e3d9c4","variant_background_color":"#e8d5c7","variant_text_color":"#000000","variant_border_color":"#585858","variant_hover_background_color":"#f1e3d9c4","variant_hover_text_color":"#000000","variant_hover_border_color":"#000000","selected_variant_background_color":"#000000","selected_variant_text_color":"#ffffff","selected_variant_border_color":"#000000","selected_variant_hover_background_color":"#1a1a1a","selected_variant_hover_text_color":"#ffffff","selected_variant_hover_border_color":"#1a1a1a"}},"scheme-4":{"settings":{"background":"#a42325","foreground_heading":"#ffffff","foreground":"#ffffff","primary":"#a42325","primary_hover":"#a42325","border":"#000000","shadow":"#000000","primary_button_background":"#ffffff","primary_button_text":"#a42325","primary_button_border":"#ffffff","primary_button_hover_background":"#d76668","primary_button_hover_text":"#ffffff","primary_button_hover_border":"#d76668","secondary_button_background":"#a42325","secondary_button_text":"#ffffff","secondary_button_border":"#ffffff","secondary_button_hover_background":"#d76668","secondary_button_hover_text":"#ffffff","secondary_button_hover_border":"#d76668","input_background":"#a42325","input_text_color":"#ffffff","input_border_color":"#ffffffe3","input_hover_background":"#780406e8","variant_background_color":"#a42325","variant_text_color":"#ffffff","variant_border_color":"#e6e6e6","variant_hover_background_color":"#f5f5f5","variant_hover_text_color":"#000000","variant_hover_border_color":"#e6e6e6","selected_variant_background_color":"#000000","selected_variant_text_color":"#ffffff","selected_variant_border_color":"#000000","selected_variant_hover_background_color":"#1a1a1a","selected_variant_hover_text_color":"#ffffff","selected_variant_hover_border_color":"#1a1a1a"}},"scheme-5":{"settings":{"background":"#000000","foreground_heading":"#ffffff","foreground":"#ffffff","primary":"#000000","primary_hover":"#000000","border":"#666666","shadow":"#000000","primary_button_background":"#ffffff","primary_button_text":"#000000","primary_button_border":"#ffffff","primary_button_hover_background":"#dedede","primary_button_hover_text":"#000000","primary_button_hover_border":"#dedede","secondary_button_background":"#000000","secondary_button_text":"#ffffff","secondary_button_border":"#ffffff","secondary_button_hover_background":"#000000","secondary_button_hover_text":"#acacac","secondary_button_hover_border":"#acacac","input_background":"#000000","input_text_color":"#ffffff","input_border_color":"#ffffff","input_hover_background":"#333232","variant_background_color":"#000000","variant_text_color":"#ffffff","variant_border_color":"#ffffff","variant_hover_background_color":"#f5f5f5","variant_hover_text_color":"#000000","variant_hover_border_color":"#e6e6e6","selected_variant_background_color":"#ffffff","selected_variant_text_color":"#000000","selected_variant_border_color":"#ffffff","selected_variant_hover_background_color":"#ffffff30","selected_variant_hover_text_color":"#ffffff","selected_variant_hover_border_color":"#000000"}},"scheme-6":{"settings":{"background":"rgba(0,0,0,0)","foreground_heading":"#000000","foreground":"#ffffff","primary":"#ffffff","primary_hover":"#ffffff","border":"rgba(0,0,0,0)","shadow":"rgba(0,0,0,0)","primary_button_background":"#ffffff","primary_button_text":"#000000","primary_button_border":"#ffffff","primary_button_hover_background":"#dedede","primary_button_hover_text":"#000000","primary_button_hover_border":"#dedede","secondary_button_background":"rgba(0,0,0,0)","secondary_button_text":"#ffffff","secondary_button_border":"#ffffff","secondary_button_hover_background":"rgba(0,0,0,0)","secondary_button_hover_text":"#acacac","secondary_button_hover_border":"#acacac","input_background":"#ffffff","input_text_color":"#000000","input_border_color":"#000000","input_hover_background":"#f5f5f5","variant_background_color":"#ffffff","variant_text_color":"#000000","variant_border_color":"#e6e6e6","variant_hover_background_color":"#f5f5f5","variant_hover_text_color":"#000000","variant_hover_border_color":"#e6e6e6","selected_variant_background_color":"#000000","selected_variant_text_color":"#ffffff","selected_variant_border_color":"#000000","selected_variant_hover_background_color":"#1a1a1a","selected_variant_hover_text_color":"#ffffff","selected_variant_hover_border_color":"#1a1a1a"}},"scheme-7":{"settings":{"background":"rgba(0,0,0,0)","foreground_heading":"#a42325","foreground":"#000000","primary":"#000000","primary_hover":"#00000087","border":"#e6e6e6","shadow":"#000000","primary_button_background":"#000000","primary_button_text":"#ffffff","primary_button_border":"#000000","primary_button_hover_background":"#333333","primary_button_hover_text":"#ffffff","primary_button_hover_border":"#333333","secondary_button_background":"#0000000f","secondary_button_text":"#000000","secondary_button_border":"#000000","secondary_button_hover_background":"#ffffff","secondary_button_hover_text":"#000000","secondary_button_hover_border":"#ffffff","input_background":"#ffffff","input_text_color":"#00000087","input_border_color":"#00000021","input_hover_background":"#f5f5f5","variant_background_color":"#ffffff","variant_text_color":"#000000","variant_border_color":"#e6e6e6","variant_hover_background_color":"#f5f5f5","variant_hover_text_color":"#000000","variant_hover_border_color":"#e6e6e6","selected_variant_background_color":"#000000","selected_variant_text_color":"#ffffff","selected_variant_border_color":"#000000","selected_variant_hover_background_color":"#1a1a1a","selected_variant_hover_text_color":"#ffffff","selected_variant_hover_border_color":"#1a1a1a"}}}}},"platform_customizations":{"custom_css":["body {background-color: rgba(21, 4, 4, 1);}"]}}
+{
+  "current": {
+    "logo": "shopify://shop_images/Untitled_Artwork_28.png",
+    "logo_height": 67,
+    "logo_height_mobile": 90,
+    "favicon": "shopify://shop_images/IMG_9096.png",
+    "type_body_font": "mono",
+    "type_subheading_font": "mono",
+    "type_heading_font": "mono",
+    "type_accent_font": "mono",
+    "type_size_paragraph": "16",
+    "type_line_height_paragraph": "body-normal",
+    "type_size_h1": "56",
+    "type_line_height_h1": "display-normal",
+    "type_case_h1": "none",
+    "type_size_h2": "48",
+    "type_line_height_h2": "display-tight",
+    "type_case_h2": "none",
+    "type_case_h3": "none",
+    "type_case_h4": "none",
+    "type_case_h5": "none",
+    "type_case_h6": "none",
+    "page_width": "narrow",
+    "page_transition_enabled": false,
+    "transition_to_main_product": false,
+    "card_hover_effect": "subtle-zoom",
+    "button_border_radius_primary": 999,
+    "type_font_button_primary": "accent",
+    "button_text_case_primary": "uppercase",
+    "secondary_button_border_width": 0,
+    "button_border_radius_secondary": 999,
+    "cart_type": "drawer",
+    "auto_open_cart_drawer": true,
+    "show_cart_note": true,
+    "cart_note_open_by_default": true,
+    "show_installments": false,
+    "show_accelerated_checkout_buttons": false,
+    "cart_thumbnail_border_radius": 0,
+    "drawer_color_scheme": "scheme-5",
+    "drawer_drop_shadow": true,
+    "inputs_border_radius": 16,
+    "popover_color_scheme": "scheme-5",
+    "popover_border_radius": 0,
+    "popover_border": "none",
+    "quick_add_color_scheme": "scheme-5",
+    "variant_swatch_radius": 0,
+    "variant_button_radius": 0,
+    "variant_button_width": "equal-width-buttons",
+    "sections": {
+      "page-transitions-config": {
+        "type": "page-transitions-config",
+        "blocks": {
+          "transition_P7WJfk": {
+            "type": "transition",
+            "settings": {
+              "from_page": "contact",
+              "to_page": "product",
+              "transition_video": "shopify://files/videos/contact_catalogue.mp4",
+              "playback_speed": 1
+            }
+          },
+          "transition_UDyHDe": {
+            "type": "transition",
+            "settings": {
+              "from_page": "product",
+              "to_page": "contact",
+              "transition_video": "shopify://files/videos/catalogue_contact.mp4",
+              "playback_speed": 1
+            }
+          },
+          "transition_6fTCwT": {
+            "type": "transition",
+            "settings": {
+              "from_page": "faq",
+              "to_page": "product",
+              "transition_video": "shopify://files/videos/contact_catalogue.mp4",
+              "playback_speed": 1
+            }
+          },
+          "transition_N9hdRp": {
+            "type": "transition",
+            "settings": {
+              "from_page": "product",
+              "to_page": "faq",
+              "transition_video": "shopify://files/videos/catalogue_contact.mp4",
+              "playback_speed": 1
+            }
+          },
+          "transition_xJKXEd": {
+            "type": "transition",
+            "settings": {
+              "from_page": "about",
+              "to_page": "product",
+              "transition_video": "shopify://files/videos/contact_catalogue.mp4",
+              "playback_speed": 1
+            }
+          },
+          "transition_m6fEKn": {
+            "type": "transition",
+            "settings": {
+              "from_page": "product",
+              "to_page": "about",
+              "transition_video": "shopify://files/videos/catalogue_contact.mp4",
+              "playback_speed": 1
+            }
+          },
+          "transition_TwqGXE": {
+            "type": "transition",
+            "settings": {
+              "from_page": "product",
+              "to_page": "collections",
+              "transition_video": "shopify://files/videos/catalogue_collections.mp4",
+              "playback_speed": 1
+            }
+          },
+          "transition_3B7EVy": {
+            "type": "transition",
+            "settings": {
+              "from_page": "collections",
+              "to_page": "product",
+              "transition_video": "shopify://files/videos/collections_catalogue.mp4",
+              "playback_speed": 1
+            }
+          },
+          "transition_g9dxi4": {
+            "type": "transition",
+            "settings": {
+              "from_page": "product",
+              "to_page": "homepage",
+              "transition_video": "shopify://files/videos/catalogue_homepage.mp4",
+              "playback_speed": 1
+            }
+          },
+          "transition_CWhxyi": {
+            "type": "transition",
+            "settings": {
+              "from_page": "homepage",
+              "to_page": "product",
+              "transition_video": "shopify://files/videos/homepage_catalogue.mp4",
+              "playback_speed": 1
+            }
+          },
+          "transition_hkH7Ew": {
+            "type": "transition",
+            "settings": {
+              "from_page": "faq",
+              "to_page": "catalogue",
+              "transition_video": "shopify://files/videos/contact_catalogue.mp4",
+              "playback_speed": 1.5
+            }
+          },
+          "transition_bkmrtj": {
+            "type": "transition",
+            "settings": {
+              "from_page": "catalogue",
+              "to_page": "faq",
+              "transition_video": "shopify://files/videos/catalogue_contact.mp4",
+              "playback_speed": 1.5
+            }
+          },
+          "transition_GwT9MQ": {
+            "type": "transition",
+            "settings": {
+              "from_page": "about",
+              "to_page": "catalogue",
+              "transition_video": "shopify://files/videos/contact_catalogue.mp4",
+              "playback_speed": 1.5
+            }
+          },
+          "transition_z7QfPF": {
+            "type": "transition",
+            "settings": {
+              "from_page": "catalogue",
+              "to_page": "about",
+              "transition_video": "shopify://files/videos/catalogue_contact.mp4",
+              "playback_speed": 1.5
+            }
+          },
+          "transition_nrzFHX": {
+            "type": "transition",
+            "settings": {
+              "from_page": "contact",
+              "to_page": "catalogue",
+              "transition_video": "shopify://files/videos/contact_catalogue.mp4",
+              "playback_speed": 1.5
+            }
+          },
+          "transition_nmN48X": {
+            "type": "transition",
+            "settings": {
+              "from_page": "catalogue",
+              "to_page": "contact",
+              "transition_video": "shopify://files/videos/catalogue_contact.mp4",
+              "playback_speed": 1.5
+            }
+          },
+          "transition_pitDMe": {
+            "type": "transition",
+            "settings": {
+              "from_page": "faq",
+              "to_page": "collections",
+              "transition_video": "shopify://files/videos/contact_collections.mp4",
+              "playback_speed": 2
+            }
+          },
+          "transition_ceWdq8": {
+            "type": "transition",
+            "settings": {
+              "from_page": "collections",
+              "to_page": "faq",
+              "transition_video": "shopify://files/videos/collections_contact.mp4",
+              "playback_speed": 2
+            }
+          },
+          "transition_hDXCLA": {
+            "type": "transition",
+            "settings": {
+              "from_page": "about",
+              "to_page": "collections",
+              "transition_video": "shopify://files/videos/contact_collections.mp4",
+              "playback_speed": 2
+            }
+          },
+          "transition_ebBFxj": {
+            "type": "transition",
+            "settings": {
+              "from_page": "collections",
+              "to_page": "about",
+              "transition_video": "shopify://files/videos/collections_contact.mp4",
+              "playback_speed": 2
+            }
+          },
+          "transition_cdkrDm": {
+            "type": "transition",
+            "settings": {
+              "from_page": "collections",
+              "to_page": "contact",
+              "transition_video": "shopify://files/videos/collections_contact.mp4",
+              "playback_speed": 2
+            }
+          },
+          "transition_EEqCRp": {
+            "type": "transition",
+            "settings": {
+              "from_page": "contact",
+              "to_page": "collections",
+              "transition_video": "shopify://files/videos/contact_collections.mp4",
+              "playback_speed": 2
+            }
+          },
+          "transition_Nheq3W": {
+            "type": "transition",
+            "settings": {
+              "from_page": "catalogue",
+              "to_page": "collections",
+              "transition_video": "shopify://files/videos/catalogue_collections.mp4",
+              "playback_speed": 1
+            }
+          },
+          "transition_KJRMxC": {
+            "type": "transition",
+            "settings": {
+              "from_page": "collections",
+              "to_page": "catalogue",
+              "transition_video": "shopify://files/videos/collections_catalogue.mp4",
+              "playback_speed": 1
+            }
+          },
+          "transition_34mTfr": {
+            "type": "transition",
+            "settings": {
+              "from_page": "faq",
+              "to_page": "homepage",
+              "transition_video": "shopify://files/videos/contact_homepage.mp4",
+              "playback_speed": 3
+            }
+          },
+          "transition_4LTjir": {
+            "type": "transition",
+            "settings": {
+              "from_page": "homepage",
+              "to_page": "faq",
+              "transition_video": "shopify://files/videos/homepage_contact.mp4",
+              "playback_speed": 3
+            }
+          },
+          "transition_6Wj6bm": {
+            "type": "transition",
+            "settings": {
+              "from_page": "about",
+              "to_page": "homepage",
+              "transition_video": "shopify://files/videos/contact_homepage.mp4",
+              "playback_speed": 3
+            }
+          },
+          "transition_aBPiyr": {
+            "type": "transition",
+            "settings": {
+              "from_page": "homepage",
+              "to_page": "about",
+              "transition_video": "shopify://files/videos/homepage_contact.mp4",
+              "playback_speed": 3
+            }
+          },
+          "transition_mMnLYM": {
+            "type": "transition",
+            "settings": {
+              "from_page": "contact",
+              "to_page": "homepage",
+              "transition_video": "shopify://files/videos/contact_homepage.mp4",
+              "playback_speed": 3
+            }
+          },
+          "transition_yUa37E": {
+            "type": "transition",
+            "settings": {
+              "from_page": "homepage",
+              "to_page": "contact",
+              "transition_video": "shopify://files/videos/homepage_contact.mp4",
+              "playback_speed": 3
+            }
+          },
+          "transition_Q6Rd4G": {
+            "type": "transition",
+            "settings": {
+              "from_page": "catalogue",
+              "to_page": "homepage",
+              "transition_video": "shopify://files/videos/catalogue_homepage.mp4",
+              "playback_speed": 3
+            }
+          },
+          "transition_m9ikdM": {
+            "type": "transition",
+            "settings": {
+              "from_page": "homepage",
+              "to_page": "catalogue",
+              "transition_video": "shopify://files/videos/homepage_catalogue.mp4",
+              "playback_speed": 3
+            }
+          },
+          "transition_xnVdWw": {
+            "type": "transition",
+            "settings": {
+              "from_page": "collections",
+              "to_page": "homepage",
+              "transition_video": "shopify://files/videos/collections_homepage.mp4",
+              "playback_speed": 3
+            }
+          },
+          "transition_FdeEjA": {
+            "type": "transition",
+            "settings": {
+              "from_page": "homepage",
+              "to_page": "collections",
+              "transition_video": "shopify://files/videos/homepage_collections.mp4",
+              "playback_speed": 3
+            }
+          }
+        },
+        "block_order": [
+          "transition_P7WJfk",
+          "transition_UDyHDe",
+          "transition_6fTCwT",
+          "transition_N9hdRp",
+          "transition_xJKXEd",
+          "transition_m6fEKn",
+          "transition_TwqGXE",
+          "transition_3B7EVy",
+          "transition_g9dxi4",
+          "transition_CWhxyi",
+          "transition_hkH7Ew",
+          "transition_bkmrtj",
+          "transition_GwT9MQ",
+          "transition_z7QfPF",
+          "transition_nrzFHX",
+          "transition_nmN48X",
+          "transition_pitDMe",
+          "transition_ceWdq8",
+          "transition_hDXCLA",
+          "transition_ebBFxj",
+          "transition_cdkrDm",
+          "transition_EEqCRp",
+          "transition_Nheq3W",
+          "transition_KJRMxC",
+          "transition_34mTfr",
+          "transition_4LTjir",
+          "transition_6Wj6bm",
+          "transition_aBPiyr",
+          "transition_mMnLYM",
+          "transition_yUa37E",
+          "transition_Q6Rd4G",
+          "transition_m9ikdM",
+          "transition_xnVdWw",
+          "transition_FdeEjA"
+        ],
+        "settings": {}
+      },
+      "custom-font": {
+        "type": "custom-font",
+        "blocks": {
+          "image_cdgJ4a": {
+            "type": "image",
+            "settings": {
+              "name": "customfont",
+              "custom_font_weight": "bold",
+              "custom_font_url": "https://cdn.shopify.com/s/files/1/0737/3081/8227/files/Sinistre-Regular.otf?v=1774145975",
+              "apply_h1": true,
+              "apply_h2": true,
+              "apply_h3": true,
+              "apply_h4": true,
+              "apply_h5": true,
+              "apply_h6": true,
+              "apply_span": true,
+              "apply_p": true,
+              "apply_a": true,
+              "apply_input": true,
+              "apply_label": true,
+              "apply_legend": true,
+              "apply_button": true,
+              "apply_summary": true,
+              "apply_select": true,
+              "apply_option": true,
+              "apply_small": true,
+              "apply_custom": ""
+            }
+          },
+          "image_dwxPDa": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "name": "customfont",
+              "custom_font_weight": "none",
+              "custom_font_url": "https://cdn.shopify.com/s/files/1/0737/3081/8227/files/CsAmapolaRegularDemo-0v0Dv.otf?v=1773713471",
+              "apply_h1": true,
+              "apply_h2": true,
+              "apply_h3": true,
+              "apply_h4": true,
+              "apply_h5": true,
+              "apply_h6": true,
+              "apply_span": true,
+              "apply_p": true,
+              "apply_a": true,
+              "apply_input": true,
+              "apply_label": true,
+              "apply_legend": true,
+              "apply_button": true,
+              "apply_summary": true,
+              "apply_select": true,
+              "apply_option": true,
+              "apply_small": true,
+              "apply_custom": ""
+            }
+          },
+          "image_CHbPm8": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "name": "customfont",
+              "custom_font_weight": "none",
+              "custom_font_url": "https://cdn.shopify.com/s/files/1/0737/3081/8227/files/CSAmapolaStitched-Regular_demo-BF69b0f568a888f.otf?v=1773710336",
+              "apply_h1": true,
+              "apply_h2": true,
+              "apply_h3": true,
+              "apply_h4": true,
+              "apply_h5": true,
+              "apply_h6": true,
+              "apply_span": true,
+              "apply_p": true,
+              "apply_a": true,
+              "apply_input": true,
+              "apply_label": true,
+              "apply_legend": true,
+              "apply_button": true,
+              "apply_summary": true,
+              "apply_select": true,
+              "apply_option": true,
+              "apply_small": true,
+              "apply_custom": ""
+            }
+          },
+          "image_BFYCLX": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "name": "customfont",
+              "custom_font_weight": "none",
+              "custom_font_url": "https://cdn.shopify.com/s/files/1/0737/3081/8227/files/OlytheaRegular-e9dG6.ttf?v=1773709885",
+              "apply_h1": true,
+              "apply_h2": true,
+              "apply_h3": true,
+              "apply_h4": true,
+              "apply_h5": true,
+              "apply_h6": true,
+              "apply_span": true,
+              "apply_p": true,
+              "apply_a": true,
+              "apply_input": true,
+              "apply_label": true,
+              "apply_legend": true,
+              "apply_button": true,
+              "apply_summary": true,
+              "apply_select": true,
+              "apply_option": true,
+              "apply_small": true,
+              "apply_custom": ""
+            }
+          },
+          "image_RANJ4e": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "name": "customfont",
+              "custom_font_weight": "none",
+              "custom_font_url": "https://cdn.shopify.com/s/files/1/0737/3081/8227/files/Telma-Regular.woff2?v=1770001385",
+              "apply_h1": true,
+              "apply_h2": true,
+              "apply_h3": true,
+              "apply_h4": true,
+              "apply_h5": true,
+              "apply_h6": true,
+              "apply_span": true,
+              "apply_p": false,
+              "apply_a": true,
+              "apply_input": true,
+              "apply_label": true,
+              "apply_legend": true,
+              "apply_button": true,
+              "apply_summary": true,
+              "apply_select": true,
+              "apply_option": true,
+              "apply_small": true,
+              "apply_custom": ""
+            }
+          }
+        },
+        "block_order": [
+          "image_cdgJ4a",
+          "image_dwxPDa",
+          "image_CHbPm8",
+          "image_BFYCLX",
+          "image_RANJ4e"
+        ],
+        "settings": {
+          "enable": true
+        }
+      },
+      "password-footer": {
+        "type": "password-footer",
+        "settings": {
+          "color_scheme": "scheme-5"
+        }
+      }
+    },
+    "content_for_index": [],
+    "blocks": {
+      "8764476057892802672": {
+        "type": "shopify://apps/stoq/blocks/main/4bb73be2-b7c2-4870-949f-c528145452a3",
+        "disabled": false,
+        "settings": {}
+      },
+      "15683396631634586217": {
+        "type": "shopify://apps/inbox/blocks/chat/841fc607-4181-4ad1-842d-e24d7f8bad6b",
+        "disabled": false,
+        "settings": {
+          "greeting_message": "Hi, message me with any questions. I am happy to help!",
+          "background_color": "#E8D6C8",
+          "font_color": "#28090A",
+          "button_color": "#28090a",
+          "secondary_color": "#e8d6c8",
+          "ternary_color": "#828872",
+          "button_icon": "chat_bubble",
+          "button_text": "no_text",
+          "button_horizontal_position": "bottom_right",
+          "button_vertical_position": "lowest",
+          "agent_inherit_fonts": true,
+          "agent_font": "system_ui_n4",
+          "agent_border_radius": 16
+        }
+      }
+    },
+    "color_schemes": {
+      "scheme-1": {
+        "settings": {
+          "background": "#fff5f8",
+          "foreground_heading": "#3b1f3a",
+          "foreground": "#3b1f3a",
+          "primary": "#5e7f4a",
+          "primary_hover": "#a95d7f",
+          "border": "#ecc8d6",
+          "shadow": "#3b1f3a",
+          "primary_button_background": "#e8588f",
+          "primary_button_text": "#3b1f3a",
+          "primary_button_border": "#e8588f",
+          "primary_button_hover_background": "#a95d7f",
+          "primary_button_hover_text": "#ffffff",
+          "primary_button_hover_border": "#a95d7f",
+          "secondary_button_background": "rgba(244,182,203,.35)",
+          "secondary_button_text": "#3b1f3a",
+          "secondary_button_border": "#e8588f",
+          "secondary_button_hover_background": "#f4b6cb",
+          "secondary_button_hover_text": "#3b1f3a",
+          "secondary_button_hover_border": "#e8588f",
+          "input_background": "#ffffff",
+          "input_text_color": "#3b1f3a",
+          "input_border_color": "#ecc8d6",
+          "input_hover_background": "#fde6ee",
+          "variant_background_color": "#ffffff",
+          "variant_text_color": "#3b1f3a",
+          "variant_border_color": "#ecc8d6",
+          "variant_hover_background_color": "#fde6ee",
+          "variant_hover_text_color": "#3b1f3a",
+          "variant_hover_border_color": "#ecc8d6",
+          "selected_variant_background_color": "#3b1f3a",
+          "selected_variant_text_color": "#f5e6c8",
+          "selected_variant_border_color": "#3b1f3a",
+          "selected_variant_hover_background_color": "#3b1f3a",
+          "selected_variant_hover_text_color": "#f5e6c8",
+          "selected_variant_hover_border_color": "#3b1f3a"
+        }
+      },
+      "scheme-2": {
+        "settings": {
+          "background": "#f5e6c8",
+          "foreground_heading": "#3b1f3a",
+          "foreground": "#3b1f3a",
+          "primary": "#5e7f4a",
+          "primary_hover": "#a95d7f",
+          "border": "#e3d2ae",
+          "shadow": "#3b1f3a",
+          "primary_button_background": "#e8588f",
+          "primary_button_text": "#3b1f3a",
+          "primary_button_border": "#e8588f",
+          "primary_button_hover_background": "#a95d7f",
+          "primary_button_hover_text": "#ffffff",
+          "primary_button_hover_border": "#a95d7f",
+          "secondary_button_background": "rgba(255,255,255,.55)",
+          "secondary_button_text": "#3b1f3a",
+          "secondary_button_border": "#3b1f3a",
+          "secondary_button_hover_background": "#ffffff",
+          "secondary_button_hover_text": "#3b1f3a",
+          "secondary_button_hover_border": "#3b1f3a",
+          "input_background": "#fffaf0",
+          "input_text_color": "#3b1f3a",
+          "input_border_color": "#e3d2ae",
+          "input_hover_background": "#fbf0d8",
+          "variant_background_color": "#fffaf0",
+          "variant_text_color": "#3b1f3a",
+          "variant_border_color": "#e3d2ae",
+          "variant_hover_background_color": "#fbf0d8",
+          "variant_hover_text_color": "#3b1f3a",
+          "variant_hover_border_color": "#e3d2ae",
+          "selected_variant_background_color": "#3b1f3a",
+          "selected_variant_text_color": "#f5e6c8",
+          "selected_variant_border_color": "#3b1f3a",
+          "selected_variant_hover_background_color": "#3b1f3a",
+          "selected_variant_hover_text_color": "#f5e6c8",
+          "selected_variant_hover_border_color": "#3b1f3a"
+        }
+      },
+      "scheme-3": {
+        "settings": {
+          "background": "#f4b6cb",
+          "foreground_heading": "#3b1f3a",
+          "foreground": "#3b1f3a",
+          "primary": "#3b1f3a",
+          "primary_hover": "#a95d7f",
+          "border": "#e79ab5",
+          "shadow": "#3b1f3a",
+          "primary_button_background": "#e8588f",
+          "primary_button_text": "#3b1f3a",
+          "primary_button_border": "#e8588f",
+          "primary_button_hover_background": "#a95d7f",
+          "primary_button_hover_text": "#ffffff",
+          "primary_button_hover_border": "#a95d7f",
+          "secondary_button_background": "rgba(255,255,255,.4)",
+          "secondary_button_text": "#3b1f3a",
+          "secondary_button_border": "#3b1f3a",
+          "secondary_button_hover_background": "rgba(255,255,255,.7)",
+          "secondary_button_hover_text": "#3b1f3a",
+          "secondary_button_hover_border": "#3b1f3a",
+          "input_background": "#fff5f8",
+          "input_text_color": "#3b1f3a",
+          "input_border_color": "#e79ab5",
+          "input_hover_background": "#fde6ee",
+          "variant_background_color": "#fff5f8",
+          "variant_text_color": "#3b1f3a",
+          "variant_border_color": "#e79ab5",
+          "variant_hover_background_color": "#fde6ee",
+          "variant_hover_text_color": "#3b1f3a",
+          "variant_hover_border_color": "#e79ab5",
+          "selected_variant_background_color": "#3b1f3a",
+          "selected_variant_text_color": "#f4b6cb",
+          "selected_variant_border_color": "#3b1f3a",
+          "selected_variant_hover_background_color": "#3b1f3a",
+          "selected_variant_hover_text_color": "#f4b6cb",
+          "selected_variant_hover_border_color": "#3b1f3a"
+        }
+      },
+      "scheme-4": {
+        "settings": {
+          "background": "#a95d7f",
+          "foreground_heading": "#ffffff",
+          "foreground": "#ffffff",
+          "primary": "#ffffff",
+          "primary_hover": "#a95d7f",
+          "border": "rgba(255,255,255,.4)",
+          "shadow": "#3b1f3a",
+          "primary_button_background": "#ffffff",
+          "primary_button_text": "#3b1f3a",
+          "primary_button_border": "#ffffff",
+          "primary_button_hover_background": "#f4b6cb",
+          "primary_button_hover_text": "#3b1f3a",
+          "primary_button_hover_border": "#f4b6cb",
+          "secondary_button_background": "#a95d7f",
+          "secondary_button_text": "#ffffff",
+          "secondary_button_border": "#ffffff",
+          "secondary_button_hover_background": "#f4b6cb",
+          "secondary_button_hover_text": "#ffffff",
+          "secondary_button_hover_border": "#ffffff",
+          "input_background": "rgba(255,255,255,.18)",
+          "input_text_color": "#ffffff",
+          "input_border_color": "rgba(255,255,255,.4)",
+          "input_hover_background": "rgba(255,255,255,.28)",
+          "variant_background_color": "rgba(255,255,255,.18)",
+          "variant_text_color": "#ffffff",
+          "variant_border_color": "rgba(255,255,255,.4)",
+          "variant_hover_background_color": "rgba(255,255,255,.28)",
+          "variant_hover_text_color": "#ffffff",
+          "variant_hover_border_color": "rgba(255,255,255,.4)",
+          "selected_variant_background_color": "#ffffff",
+          "selected_variant_text_color": "#a95d7f",
+          "selected_variant_border_color": "#ffffff",
+          "selected_variant_hover_background_color": "#ffffff",
+          "selected_variant_hover_text_color": "#a95d7f",
+          "selected_variant_hover_border_color": "#ffffff"
+        }
+      },
+      "scheme-5": {
+        "settings": {
+          "background": "#3b1f3a",
+          "foreground_heading": "#f5e6c8",
+          "foreground": "#f5e6c8",
+          "primary": "#e8588f",
+          "primary_hover": "#a95d7f",
+          "border": "rgba(244,182,203,.35)",
+          "shadow": "#3b1f3a",
+          "primary_button_background": "#e8588f",
+          "primary_button_text": "#3b1f3a",
+          "primary_button_border": "#e8588f",
+          "primary_button_hover_background": "#f4b6cb",
+          "primary_button_hover_text": "#3b1f3a",
+          "primary_button_hover_border": "#f4b6cb",
+          "secondary_button_background": "#3b1f3a",
+          "secondary_button_text": "#f5e6c8",
+          "secondary_button_border": "#f5e6c8",
+          "secondary_button_hover_background": "#4d2a4b",
+          "secondary_button_hover_text": "#f5e6c8",
+          "secondary_button_hover_border": "#f5e6c8",
+          "input_background": "#4d2a4b",
+          "input_text_color": "#f5e6c8",
+          "input_border_color": "rgba(244,182,203,.35)",
+          "input_hover_background": "#5a3458",
+          "variant_background_color": "#4d2a4b",
+          "variant_text_color": "#f5e6c8",
+          "variant_border_color": "rgba(244,182,203,.35)",
+          "variant_hover_background_color": "#5a3458",
+          "variant_hover_text_color": "#f5e6c8",
+          "variant_hover_border_color": "rgba(244,182,203,.35)",
+          "selected_variant_background_color": "#f5e6c8",
+          "selected_variant_text_color": "#3b1f3a",
+          "selected_variant_border_color": "#f5e6c8",
+          "selected_variant_hover_background_color": "#f5e6c8",
+          "selected_variant_hover_text_color": "#3b1f3a",
+          "selected_variant_hover_border_color": "#f5e6c8"
+        }
+      },
+      "scheme-6": {
+        "settings": {
+          "background": "rgba(0,0,0,0)",
+          "foreground_heading": "#ffffff",
+          "foreground": "#ffffff",
+          "primary": "#ffffff",
+          "primary_hover": "#ffffff",
+          "border": "rgba(0,0,0,0)",
+          "shadow": "rgba(0,0,0,0)",
+          "primary_button_background": "#f5e6c8",
+          "primary_button_text": "#3b1f3a",
+          "primary_button_border": "#f5e6c8",
+          "primary_button_hover_background": "#f4b6cb",
+          "primary_button_hover_text": "#000000",
+          "primary_button_hover_border": "#f4b6cb",
+          "secondary_button_background": "rgba(0,0,0,0)",
+          "secondary_button_text": "#ffffff",
+          "secondary_button_border": "#ffffff",
+          "secondary_button_hover_background": "rgba(0,0,0,0)",
+          "secondary_button_hover_text": "#acacac",
+          "secondary_button_hover_border": "#acacac",
+          "input_background": "#ffffff",
+          "input_text_color": "#000000",
+          "input_border_color": "#000000",
+          "input_hover_background": "#f5f5f5",
+          "variant_background_color": "#ffffff",
+          "variant_text_color": "#000000",
+          "variant_border_color": "#e6e6e6",
+          "variant_hover_background_color": "#f5f5f5",
+          "variant_hover_text_color": "#000000",
+          "variant_hover_border_color": "#e6e6e6",
+          "selected_variant_background_color": "#000000",
+          "selected_variant_text_color": "#ffffff",
+          "selected_variant_border_color": "#000000",
+          "selected_variant_hover_background_color": "#1a1a1a",
+          "selected_variant_hover_text_color": "#ffffff",
+          "selected_variant_hover_border_color": "#1a1a1a"
+        }
+      },
+      "scheme-7": {
+        "settings": {
+          "background": "rgba(0,0,0,0)",
+          "foreground_heading": "#3b1f3a",
+          "foreground": "#3b1f3a",
+          "primary": "#3b1f3a",
+          "primary_hover": "#a95d7f",
+          "border": "#ecc8d6",
+          "shadow": "#3b1f3a",
+          "primary_button_background": "#e8588f",
+          "primary_button_text": "#3b1f3a",
+          "primary_button_border": "#e8588f",
+          "primary_button_hover_background": "#a95d7f",
+          "primary_button_hover_text": "#ffffff",
+          "primary_button_hover_border": "#a95d7f",
+          "secondary_button_background": "rgba(244,182,203,.35)",
+          "secondary_button_text": "#3b1f3a",
+          "secondary_button_border": "#3b1f3a",
+          "secondary_button_hover_background": "#f4b6cb",
+          "secondary_button_hover_text": "#3b1f3a",
+          "secondary_button_hover_border": "#3b1f3a",
+          "input_background": "rgba(255,255,255,.7)",
+          "input_text_color": "#3b1f3a",
+          "input_border_color": "#ecc8d6",
+          "input_hover_background": "#ffffff",
+          "variant_background_color": "#ffffff",
+          "variant_text_color": "#3b1f3a",
+          "variant_border_color": "#ecc8d6",
+          "variant_hover_background_color": "#ffffff",
+          "variant_hover_text_color": "#3b1f3a",
+          "variant_hover_border_color": "#ecc8d6",
+          "selected_variant_background_color": "#3b1f3a",
+          "selected_variant_text_color": "#f5e6c8",
+          "selected_variant_border_color": "#3b1f3a",
+          "selected_variant_hover_background_color": "#3b1f3a",
+          "selected_variant_hover_text_color": "#f5e6c8",
+          "selected_variant_hover_border_color": "#3b1f3a"
+        }
+      }
+    }
+  },
+  "presets": {
+    "Savor": {
+      "color_schemes": {
+        "scheme-1": {
+          "settings": {
+            "background": "#ffffff",
+            "foreground_heading": "#a42325",
+            "foreground": "#000000",
+            "primary": "#a42325",
+            "primary_hover": "#000000",
+            "border": "#e6e6e6",
+            "shadow": "#000000",
+            "primary_button_background": "#a42325",
+            "primary_button_text": "#ffffff",
+            "primary_button_border": "#a42325",
+            "primary_button_hover_background": "#780406e8",
+            "primary_button_hover_text": "#ffffff",
+            "primary_button_hover_border": "#000000",
+            "secondary_button_background": "#0000000f",
+            "secondary_button_text": "#000000",
+            "secondary_button_border": "#a42325",
+            "secondary_button_hover_background": "#dedede",
+            "secondary_button_hover_text": "#000000",
+            "secondary_button_hover_border": "#000000",
+            "input_background": "#ffffff",
+            "input_text_color": "#000000",
+            "input_border_color": "#e6e6e6",
+            "input_hover_background": "#f5f5f5",
+            "variant_background_color": "#ffffff",
+            "variant_text_color": "#000000",
+            "variant_border_color": "#e6e6e6",
+            "variant_hover_background_color": "#f5f5f5",
+            "variant_hover_text_color": "#000000",
+            "variant_hover_border_color": "#e6e6e6",
+            "selected_variant_background_color": "#000000",
+            "selected_variant_text_color": "#ffffff",
+            "selected_variant_border_color": "#000000",
+            "selected_variant_hover_background_color": "#1a1a1a",
+            "selected_variant_hover_text_color": "#ffffff",
+            "selected_variant_hover_border_color": "#1a1a1a"
+          }
+        },
+        "scheme-2": {
+          "settings": {
+            "background": "#f1f1f1",
+            "foreground_heading": "#000000",
+            "foreground": "#000000",
+            "primary": "#000000",
+            "primary_hover": "#000000",
+            "border": "#e6e6e6",
+            "shadow": "#000000",
+            "primary_button_background": "#a42325",
+            "primary_button_text": "#f2f2f2",
+            "primary_button_border": "#a42325",
+            "primary_button_hover_background": "#a42325",
+            "primary_button_hover_text": "#f2f2f2",
+            "primary_button_hover_border": "#a42325",
+            "secondary_button_background": "#ffffff",
+            "secondary_button_text": "#000000",
+            "secondary_button_border": "#000000",
+            "secondary_button_hover_background": "#ffffff",
+            "secondary_button_hover_text": "#a42325",
+            "secondary_button_hover_border": "#a42325",
+            "input_background": "#f2f2f2",
+            "input_text_color": "#000000",
+            "input_border_color": "#000000",
+            "input_hover_background": "#e4e4e4",
+            "variant_background_color": "#ffffff",
+            "variant_text_color": "#000000",
+            "variant_border_color": "#e6e6e6",
+            "variant_hover_background_color": "#f5f5f5",
+            "variant_hover_text_color": "#000000",
+            "variant_hover_border_color": "#e6e6e6",
+            "selected_variant_background_color": "#000000",
+            "selected_variant_text_color": "#ffffff",
+            "selected_variant_border_color": "#000000",
+            "selected_variant_hover_background_color": "#1a1a1a",
+            "selected_variant_hover_text_color": "#ffffff",
+            "selected_variant_hover_border_color": "#1a1a1a"
+          }
+        },
+        "scheme-3": {
+          "settings": {
+            "background": "#e8d5c7",
+            "foreground_heading": "#000000",
+            "foreground": "#000000",
+            "primary": "#780406e8",
+            "primary_hover": "#000000",
+            "border": "#d0d0d0",
+            "shadow": "#000000",
+            "primary_button_background": "#780406e8",
+            "primary_button_text": "#ffffff",
+            "primary_button_border": "#780406e8",
+            "primary_button_hover_background": "#000000",
+            "primary_button_hover_text": "#ffffff",
+            "primary_button_hover_border": "#000000",
+            "secondary_button_background": "#e8d5c7",
+            "secondary_button_text": "#000000",
+            "secondary_button_border": "#333232",
+            "secondary_button_hover_background": "#f1e3d9c4",
+            "secondary_button_hover_text": "#000000",
+            "secondary_button_hover_border": "#000000",
+            "input_background": "#e8d5c7",
+            "input_text_color": "#000000",
+            "input_border_color": "#000000",
+            "input_hover_background": "#f1e3d9c4",
+            "variant_background_color": "#e8d5c7",
+            "variant_text_color": "#000000",
+            "variant_border_color": "#585858",
+            "variant_hover_background_color": "#f1e3d9c4",
+            "variant_hover_text_color": "#000000",
+            "variant_hover_border_color": "#000000",
+            "selected_variant_background_color": "#000000",
+            "selected_variant_text_color": "#ffffff",
+            "selected_variant_border_color": "#000000",
+            "selected_variant_hover_background_color": "#1a1a1a",
+            "selected_variant_hover_text_color": "#ffffff",
+            "selected_variant_hover_border_color": "#1a1a1a"
+          }
+        },
+        "scheme-4": {
+          "settings": {
+            "background": "#a42325",
+            "foreground_heading": "#ffffff",
+            "foreground": "#ffffff",
+            "primary": "#a42325",
+            "primary_hover": "#a42325",
+            "border": "#000000",
+            "shadow": "#000000",
+            "primary_button_background": "#ffffff",
+            "primary_button_text": "#a42325",
+            "primary_button_border": "#ffffff",
+            "primary_button_hover_background": "#d76668",
+            "primary_button_hover_text": "#ffffff",
+            "primary_button_hover_border": "#d76668",
+            "secondary_button_background": "#a42325",
+            "secondary_button_text": "#ffffff",
+            "secondary_button_border": "#ffffff",
+            "secondary_button_hover_background": "#d76668",
+            "secondary_button_hover_text": "#ffffff",
+            "secondary_button_hover_border": "#d76668",
+            "input_background": "#a42325",
+            "input_text_color": "#ffffff",
+            "input_border_color": "#ffffffe3",
+            "input_hover_background": "#780406e8",
+            "variant_background_color": "#a42325",
+            "variant_text_color": "#ffffff",
+            "variant_border_color": "#e6e6e6",
+            "variant_hover_background_color": "#f5f5f5",
+            "variant_hover_text_color": "#000000",
+            "variant_hover_border_color": "#e6e6e6",
+            "selected_variant_background_color": "#000000",
+            "selected_variant_text_color": "#ffffff",
+            "selected_variant_border_color": "#000000",
+            "selected_variant_hover_background_color": "#1a1a1a",
+            "selected_variant_hover_text_color": "#ffffff",
+            "selected_variant_hover_border_color": "#1a1a1a"
+          }
+        },
+        "scheme-5": {
+          "settings": {
+            "background": "#000000",
+            "foreground_heading": "#ffffff",
+            "foreground": "#ffffff",
+            "primary": "#000000",
+            "primary_hover": "#000000",
+            "border": "#666666",
+            "shadow": "#000000",
+            "primary_button_background": "#ffffff",
+            "primary_button_text": "#000000",
+            "primary_button_border": "#ffffff",
+            "primary_button_hover_background": "#dedede",
+            "primary_button_hover_text": "#000000",
+            "primary_button_hover_border": "#dedede",
+            "secondary_button_background": "#000000",
+            "secondary_button_text": "#ffffff",
+            "secondary_button_border": "#ffffff",
+            "secondary_button_hover_background": "#000000",
+            "secondary_button_hover_text": "#acacac",
+            "secondary_button_hover_border": "#acacac",
+            "input_background": "#000000",
+            "input_text_color": "#ffffff",
+            "input_border_color": "#ffffff",
+            "input_hover_background": "#333232",
+            "variant_background_color": "#000000",
+            "variant_text_color": "#ffffff",
+            "variant_border_color": "#ffffff",
+            "variant_hover_background_color": "#f5f5f5",
+            "variant_hover_text_color": "#000000",
+            "variant_hover_border_color": "#e6e6e6",
+            "selected_variant_background_color": "#ffffff",
+            "selected_variant_text_color": "#000000",
+            "selected_variant_border_color": "#ffffff",
+            "selected_variant_hover_background_color": "#ffffff30",
+            "selected_variant_hover_text_color": "#ffffff",
+            "selected_variant_hover_border_color": "#000000"
+          }
+        },
+        "scheme-6": {
+          "settings": {
+            "background": "rgba(0,0,0,0)",
+            "foreground_heading": "#000000",
+            "foreground": "#ffffff",
+            "primary": "#ffffff",
+            "primary_hover": "#ffffff",
+            "border": "rgba(0,0,0,0)",
+            "shadow": "rgba(0,0,0,0)",
+            "primary_button_background": "#ffffff",
+            "primary_button_text": "#000000",
+            "primary_button_border": "#ffffff",
+            "primary_button_hover_background": "#dedede",
+            "primary_button_hover_text": "#000000",
+            "primary_button_hover_border": "#dedede",
+            "secondary_button_background": "rgba(0,0,0,0)",
+            "secondary_button_text": "#ffffff",
+            "secondary_button_border": "#ffffff",
+            "secondary_button_hover_background": "rgba(0,0,0,0)",
+            "secondary_button_hover_text": "#acacac",
+            "secondary_button_hover_border": "#acacac",
+            "input_background": "#ffffff",
+            "input_text_color": "#000000",
+            "input_border_color": "#000000",
+            "input_hover_background": "#f5f5f5",
+            "variant_background_color": "#ffffff",
+            "variant_text_color": "#000000",
+            "variant_border_color": "#e6e6e6",
+            "variant_hover_background_color": "#f5f5f5",
+            "variant_hover_text_color": "#000000",
+            "variant_hover_border_color": "#e6e6e6",
+            "selected_variant_background_color": "#000000",
+            "selected_variant_text_color": "#ffffff",
+            "selected_variant_border_color": "#000000",
+            "selected_variant_hover_background_color": "#1a1a1a",
+            "selected_variant_hover_text_color": "#ffffff",
+            "selected_variant_hover_border_color": "#1a1a1a"
+          }
+        },
+        "scheme-7": {
+          "settings": {
+            "background": "rgba(0,0,0,0)",
+            "foreground_heading": "#a42325",
+            "foreground": "#000000",
+            "primary": "#000000",
+            "primary_hover": "#00000087",
+            "border": "#e6e6e6",
+            "shadow": "#000000",
+            "primary_button_background": "#000000",
+            "primary_button_text": "#ffffff",
+            "primary_button_border": "#000000",
+            "primary_button_hover_background": "#333333",
+            "primary_button_hover_text": "#ffffff",
+            "primary_button_hover_border": "#333333",
+            "secondary_button_background": "#0000000f",
+            "secondary_button_text": "#000000",
+            "secondary_button_border": "#000000",
+            "secondary_button_hover_background": "#ffffff",
+            "secondary_button_hover_text": "#000000",
+            "secondary_button_hover_border": "#ffffff",
+            "input_background": "#ffffff",
+            "input_text_color": "#00000087",
+            "input_border_color": "#00000021",
+            "input_hover_background": "#f5f5f5",
+            "variant_background_color": "#ffffff",
+            "variant_text_color": "#000000",
+            "variant_border_color": "#e6e6e6",
+            "variant_hover_background_color": "#f5f5f5",
+            "variant_hover_text_color": "#000000",
+            "variant_hover_border_color": "#e6e6e6",
+            "selected_variant_background_color": "#000000",
+            "selected_variant_text_color": "#ffffff",
+            "selected_variant_border_color": "#000000",
+            "selected_variant_hover_background_color": "#1a1a1a",
+            "selected_variant_hover_text_color": "#ffffff",
+            "selected_variant_hover_border_color": "#1a1a1a"
+          }
+        }
+      }
+    }
+  },
+  "platform_customizations": {
+    "custom_css": [
+      "body {background-color: rgba(21, 4, 4, 1);}"
+    ]
+  }
+}

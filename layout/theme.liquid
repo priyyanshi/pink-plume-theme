@@ -189,6 +189,16 @@
       {%- render 'theme-editor' -%}
     {% endif %}
 
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Sacramento&display=swap" rel="stylesheet">
+    <style>
+      /* Pink Plume: soft DM Sans for reading, Sacramento script for headings, blush page edge */
+      :root{--font-body--family:'DM Sans',system-ui,sans-serif;--font-subheading--family:'DM Sans',system-ui,sans-serif;--font-heading--family:'Sacramento',cursive;--font-accent--family:'Sacramento',cursive}
+      h1,h2,h3,.h1,.h2,.h3{font-family:'Sacramento',cursive!important;font-weight:400!important;letter-spacing:0!important;text-transform:none!important;line-height:1.05}
+      h1,.h1{font-size:clamp(44px,7vw,72px)}h2,.h2{font-size:clamp(38px,5.4vw,60px)}h3,.h3{font-size:clamp(30px,3.6vw,40px)}
+      body,button,input,textarea,select{font-family:'DM Sans',system-ui,sans-serif}
+      .button,button[type=submit]{font-family:'DM Sans',system-ui,sans-serif;font-weight:600;letter-spacing:.01em;text-transform:none}
+      ::selection{background:#f4b6cb;color:#3b1f3a}
+    </style>
     {{ content_for_header }}
 
     {% if template == 'index' and settings.homepage_video_url != blank %}
