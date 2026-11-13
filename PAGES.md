@@ -7,11 +7,11 @@ Status key: **final** = you're happy, leave alone. **v1** = first pass to match 
 |---|---|
 | Cloud homepage | `templates/index.json` → `sections/pp-cloud.liquid` |
 | Lakes view (top-down floor menu) | built into `assets/pp-cloud.js` |
-| Shop gallery room | built into `assets/pp-cloud.js` |
 
 ## v1: matches the theme, to be improved
 | Page | URL | File |
 |---|---|---|
+| Shop gallery room (you want to improve this one) | /#shop | built into `assets/pp-cloud.js` (`gal/gallery.js`, `gallery.css`) |
 | About (lake page) | /pages/about | `templates/page.about.liquid` |
 | FAQ (lake page) | /pages/faq | `templates/page.faq.liquid` |
 | Contact (lake page) | /pages/contact | `templates/page.contact.liquid` |
