@@ -2491,6 +2491,11 @@ pads();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(pads);a
 setup();if(calm){draw(performance.now());}else requestAnimationFrame(draw);
 return{arrive:arrive,leave:leave,pads:pads,stop:function(){dead=true;removeEventListener('pointerdown',onDown);removeEventListener('pointermove',onMove);removeEventListener('resize',onSize);removeEventListener('resize',pads);if(ro)ro.disconnect();}};}
 
+/* swipe up (or keep scrolling down) past the end of a lake page to rise back to the lakes */
+function ppSwipeOut(target,atEnd,out){var y0=null,end0=false,acc=0,tm=0;
+  target.addEventListener('touchstart',function(e){y0=e.touches[0].clientY;end0=atEnd();},{passive:true});
+  target.addEventListener('touchend',function(e){if(y0===null)return;var dy=(e.changedTouches[0]||{clientY:y0}).clientY-y0;y0=null;if(end0&&dy<-70)out();},{passive:true});
+  target.addEventListener('wheel',function(e){if(e.deltaY>0&&atEnd()){acc+=e.deltaY;clearTimeout(tm);tm=setTimeout(function(){acc=0;},450);if(acc>320){acc=0;out();}}else acc=0;},{passive:true});}
 
 /* ---------- the lakes inside the home page: about / faq / contact open in place, no page load ---------- */
 const LAKE={on:false,eng:null,key:'',url:'',inner:'',veil:null,busy:false};
@@ -2500,6 +2505,7 @@ function lakeMount(key,url,inner,veil,fresh){
   const tone=document.body.dataset.tone||'day',old=document.getElementById('lake');let top=0;if(old){top=old.scrollTop;if(LAKE.eng)LAKE.eng.stop();old.remove();}
   const el=document.createElement('div');el.id='lake';el.innerHTML='<canvas id="lakeCv" aria-hidden="true"></canvas><main class="pp-wrap" id="lakeWrap" data-t="'+tone+'">'+inner+'</main>';document.body.appendChild(el);
   ['pointerdown','pointermove','pointerup','touchstart','touchmove','touchend','wheel','mousedown'].forEach(t=>el.addEventListener(t,e=>e.stopPropagation(),{passive:true}));
+  ppSwipeOut(el,()=>el.scrollTop+el.clientHeight>=el.scrollHeight-4,()=>lakeUiClose());
   const wrap=el.querySelector('#lakeWrap');LAKE.eng=ppLakeMake({cv:el.querySelector('#lakeCv'),veil:veil,root:wrap,wrap:wrap,tone:tone});
   LAKE.on=true;LAKE.key=key;LAKE.url=url;LAKE.inner=inner;LAKE.veil=veil;document.body.classList.remove('floor');document.body.classList.add('lake');el.scrollTop=top;
   if(fresh){const f=document.getElementById('floor'),box=f.querySelector('.fimg');f.style.visibility='hidden';box.style.transform='';box.style.transformOrigin='';box.querySelector('.fnav').style.opacity=1;FLOOR.anim=0;

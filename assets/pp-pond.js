@@ -131,6 +131,11 @@ pads();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(pads);a
 setup();if(calm){draw(performance.now());}else requestAnimationFrame(draw);
 return{arrive:arrive,leave:leave,pads:pads,stop:function(){dead=true;removeEventListener('pointerdown',onDown);removeEventListener('pointermove',onMove);removeEventListener('resize',onSize);removeEventListener('resize',pads);if(ro)ro.disconnect();}};}
 
+/* swipe up (or keep scrolling down) past the end of a lake page to rise back to the lakes */
+function ppSwipeOut(target,atEnd,out){var y0=null,end0=false,acc=0,tm=0;
+  target.addEventListener('touchstart',function(e){y0=e.touches[0].clientY;end0=atEnd();},{passive:true});
+  target.addEventListener('touchend',function(e){if(y0===null)return;var dy=(e.changedTouches[0]||{clientY:y0}).clientY-y0;y0=null;if(end0&&dy<-70)out();},{passive:true});
+  target.addEventListener('wheel',function(e){if(e.deltaY>0&&atEnd()){acc+=e.deltaY;clearTimeout(tm);tm=setTimeout(function(){acc=0;},450);if(acc>320){acc=0;out();}}else acc=0;},{passive:true});}
 
 /* ---- the standalone lake page (opened directly, or after a reload) ---- */
 (function(){var doc=document.documentElement,tone=doc.dataset.tone||'day',wrap=document.getElementById('MainContent'),home=document.querySelector('.pp-logo').href;wrap.dataset.t=tone;
@@ -138,6 +143,7 @@ return{arrive:arrive,leave:leave,pads:pads,stop:function(){dead=true;removeEvent
   if(doc.classList.contains('zin'))L.arrive();
   var going=0;function leave(){if(going)return;going=1;try{sessionStorage.setItem('pp-out',document.body.dataset.page||'about');}catch(e){}doc.classList.add('pp-leaving');L.leave(function(){location.href=home;});}
   document.getElementById('ppMenu').addEventListener('click',leave);
+  ppSwipeOut(window,function(){var d=document.documentElement;return d.scrollTop+innerHeight>=d.scrollHeight-4;},leave);
   document.querySelector('.pp-logo').addEventListener('click',function(e){if(e.metaKey||e.ctrlKey||e.shiftKey)return;e.preventDefault();leave();});
   /* the clock button cycles: time of day, then day, sunset, night */
   document.getElementById('ppTheme').addEventListener('click',function(){var sky='auto',th='';try{sky=localStorage.getItem('pp-sky')||'auto';th=localStorage.getItem('pp-theme')||'';}catch(e){}
