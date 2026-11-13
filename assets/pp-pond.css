@@ -20,7 +20,6 @@ html[data-tone=sunset] .td{display:none}html[data-tone=sunset] .ts{display:block
 @media (hover:hover){.icon-btn:hover{transform:scale(1.06)}}
 .icon-btn:focus-visible,.pp-logo:focus-visible,.pp-foot a:focus-visible{outline:2px dashed #fff;outline-offset:3px;border-radius:6px}
 .pp-foot{position:fixed;left:0;right:0;bottom:0;z-index:4;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:4px 72px;padding:0 20px 10px;pointer-events:none}
-.pp-foot::before{content:'';position:absolute;left:0;right:0;bottom:0;height:64px;z-index:-1;background:linear-gradient(to bottom,rgba(4,12,14,0),rgba(4,12,14,.55) 55%,rgba(4,12,14,.75))}
 .pp-foot>*{pointer-events:auto}.pp-foot p{margin:0}
 .pp-foot .social{display:flex;gap:16px;align-items:center}
 .pp-foot a{display:block;transition:transform .2s}.pp-foot a:hover{transform:translateY(-2px) rotate(-1.5deg)}

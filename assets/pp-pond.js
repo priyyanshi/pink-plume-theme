@@ -35,6 +35,7 @@ function ppCloudPad(card,tone){var CT=PPCT[tone||'day'],CL=PPCL[tone||'day'],bil
   g.filter='none';g.globalAlpha=1;g.save();g.translate(cx,cy);g.scale(ax+20,ay+20);var wg=g.createRadialGradient(0,0,0,0,0,1.1);wg.addColorStop(0,'rgba('+CL+',.62)');wg.addColorStop(.6,'rgba('+CL+',.5)');wg.addColorStop(1,'rgba('+CL+',0)');g.fillStyle=wg;g.fillRect(-1.2,-1.2,2.4,2.4);g.restore();}
 var PPW=null;function ppWaterImg(){if(!PPW){var u=(window.PP_DATA&&window.PP_DATA.water)||window.PP_WATER;if(!u)return null;PPW={im:new Image(),ok:false};PPW.im.onload=function(){PPW.ok=true;};PPW.im.src=u;}return PPW.ok?PPW.im:null;}
 try{ppWaterImg();}catch(e){}
+function ppWaterBg(tone){var u=(window.PP_DATA&&window.PP_DATA.water)||window.PP_WATER||'',c={day:'#f7e9ef',sunset:'rgb(236,170,170)',night:'rgb(60,68,138)'}[tone]||'#f7e9ef';return 'background-color:'+c+';background-image:url('+u+');background-size:cover;background-position:center;background-blend-mode:multiply;';}
 function ppLakeMake(o){var doc=document.documentElement,tone=o.tone||'day',calm=matchMedia('(prefers-reduced-motion: reduce)').matches,dead=false;
 var WI=ppWaterImg(),cv=o.cv,veil=o.veil;if(!cv||!cv.getContext)return null;var x=cv.getContext('2d');
 /* the same light as the floor menu: the lake's own dark teal, warmed at sunset, deep blue at night */
@@ -90,10 +91,10 @@ function draw(ts){if(dead)return;now=ts/1000;var dt=Math.min(.05,last?now-last:.
   if(cam){var u=Math.min(1,(now*1000-cam.t0)/cam.dur);Z=Math.exp(Math.log(cam.from)+(Math.log(cam.to)-Math.log(cam.from))*ease(u));if(u>=1){var cb=cam.cb;cam=null;if(cb)cb();}}
   x.setTransform(D,0,0,D,0,0);var g=x.createRadialGradient(W/2,H*.45,Math.min(W,H)*.08,W/2,H/2,Math.max(W,H)*.8);g.addColorStop(0,T.a);g.addColorStop(.55,T.b);g.addColorStop(1,T.c);x.fillStyle=g;x.fillRect(0,0,W,H);
   x.save();x.translate(W/2,H/2);x.scale(Z,Z);x.translate(-W/2,-H/2);
-  WI=ppWaterImg();if(WI){var ws=Math.max(W/WI.width,H/WI.height)*1.14,ww=WI.width*ws,wh=WI.height*ws,wx=(W-ww)/2+Math.sin(now*.025)*W*.025,wy=(H-wh)/2+Math.cos(now*.02)*H*.02;x.drawImage(WI,wx,wy,ww,wh);
-    if(tone==='day'){x.fillStyle='rgba(255,214,232,.10)';x.fillRect(0,0,W,H);}
-    else if(tone==='sunset'){x.globalCompositeOperation='multiply';x.fillStyle='rgb(236,170,170)';x.fillRect(0,0,W,H);x.globalCompositeOperation='source-over';x.fillStyle='rgba(240,120,110,.22)';x.fillRect(0,0,W,H);}
-    else{x.globalCompositeOperation='multiply';x.fillStyle='rgb(72,82,160)';x.fillRect(0,0,W,H);x.globalCompositeOperation='source-over';x.fillStyle='rgba(6,10,40,.3)';x.fillRect(0,0,W,H);}}
+  WI=ppWaterImg();if(WI){var ke=Math.max(1.0,1.14*(.82+.18*Math.min(1,Z))),ws=Math.max(W/WI.width,H/WI.height)*ke/Z,ww=WI.width*ws,wh=WI.height*ws,am=(ke-1)*.45*Math.min(1,.9/Z),wx=(W-ww)/2+Math.sin(now*.025)*W*am/Z*.9,wy=(H-wh)/2+Math.cos(now*.02)*H*am/Z*.9;x.drawImage(WI,wx,wy,ww,wh);
+    if(tone==='day'){x.fillStyle='rgba(255,214,232,.10)';x.fillRect(-W,-H,3*W,3*H);}
+    else if(tone==='sunset'){x.globalCompositeOperation='multiply';x.fillStyle='rgb(236,170,170)';x.fillRect(-W,-H,3*W,3*H);x.globalCompositeOperation='source-over';x.fillStyle='rgba(240,120,110,.22)';x.fillRect(-W,-H,3*W,3*H);}
+    else{x.globalCompositeOperation='multiply';x.fillStyle='rgb(72,82,160)';x.fillRect(-W,-H,3*W,3*H);x.globalCompositeOperation='source-over';x.fillStyle='rgba(6,10,40,.3)';x.fillRect(-W,-H,3*W,3*H);}}
   drawShadows(now);
   /* long swells drifting across the lake, then sun (or moon) sparkling on the crests */
   x.globalCompositeOperation='lighter';[[1,.6,620,0,1],[-.7,.4,380,1,.6]].forEach(function(l){var TZ=l[2],ox=((now*13*l[0])%TZ+TZ)%TZ,oy=((now*7*l[1]+l[3]*90)%TZ+TZ)%TZ,x0=-(W/Z-W)/2-TZ,y0=-(H/Z-H)/2-TZ;x.globalAlpha=T.ga*l[4]*(WI?.55:1);
