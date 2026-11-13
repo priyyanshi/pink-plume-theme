@@ -11,6 +11,7 @@
       null
     ],
     floor: {{ 'pp-floor.jpg' | asset_url | json }},
+    water: {{ 'pp-water.jpg' | asset_url | json }},
     pages: { about: {{ pages.about.url | default: '/pages/about' | json }}, faq: {{ pages.faq.url | default: '/pages/faq' | json }}, contact: {{ pages.contact.url | default: '/pages/contact' | json }} },
     terms: {{ shop.privacy_policy.url | default: '/policies/terms-of-service' | json }},
     social: { tiktok: {{ section.settings.tiktok_url | default: 'https://www.tiktok.com/@pinkplumestudio' | json }}, instagram: {{ section.settings.instagram_url | default: 'https://www.instagram.com/pinkplumestudio/' | json }}, youtube: {{ section.settings.youtube_url | default: 'https://www.youtube.com/@PinkPlumeStudio' | json }}, pinterest: {{ section.settings.pinterest_url | default: 'https://ca.pinterest.com/pinkplumestudio/' | json }} }

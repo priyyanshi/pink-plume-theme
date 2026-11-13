@@ -10,6 +10,7 @@
     {%- if settings.favicon != blank -%}<link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">{%- endif -%}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Sacramento&display=swap" rel="stylesheet">
+    <script>window.PP_WATER={{ 'pp-water.jpg' | asset_url | json }};</script>
     <script>
       /* same light as the home page: night 10pm-4am, sunset 4-10 (am and pm), otherwise day, unless a sky was chosen there */
       (function(){var d=document.documentElement,t='day',sky='auto',th='';try{sky=localStorage.getItem('pp-sky')||'auto';th=localStorage.getItem('pp-theme')||'';}catch(e){}
