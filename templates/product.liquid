@@ -1,0 +1,32 @@
+{% layout 'pond' %}
+{%- assign cur = product.selected_or_first_available_variant -%}
+<article class="pp-card">
+  <div class="pp-pgrid">
+    <div>
+      <div class="pp-pmain">{%- if product.featured_image -%}{{ product.featured_image | image_url: width: 1000 | image_tag: id: 'ppMainImg', alt: product.title }}{%- endif -%}</div>
+      {%- if product.images.size > 1 -%}
+      <div class="pp-thumbs">{%- for im in product.images -%}<button type="button" data-src="{{ im | image_url: width: 1000 }}" class="{% if forloop.first %}on{% endif %}" aria-label="Photo {{ forloop.index }}">{{ im | image_url: width: 160 | image_tag: loading: 'lazy', alt: '' }}</button>{%- endfor -%}</div>
+      {%- endif -%}
+    </div>
+    <div>
+      <h1 class="pp-h pp-ph">{{ product.title }}</h1>
+      <p class="pp-price" id="ppPrice">{{ cur.price | money }}{%- if cur.compare_at_price > cur.price -%}<s>{{ cur.compare_at_price | money }}</s>{%- endif -%}</p>
+      <div class="pp-rte pp-desc">{{ product.description }}</div>
+      {%- form 'product', product, class: 'pp-buy' -%}
+        {%- unless product.has_only_default_variant -%}
+          <label class="pp-opt">Choose one
+            <select name="id" id="ppVar">{%- for v in product.variants -%}<option value="{{ v.id }}" data-price="{{ v.price | money }}" {% if v == cur %}selected{% endif %}{% unless v.available %} disabled{% endunless %}>{{ v.title }}{% unless v.available %} - sold out{% endunless %}</option>{%- endfor -%}</select>
+          </label>
+        {%- else -%}<input type="hidden" name="id" value="{{ cur.id }}">{%- endunless -%}
+        <div class="pp-buyrow">
+          <input class="pp-qin" type="number" name="quantity" value="1" min="1" aria-label="Quantity">
+          <button type="submit" class="pp-btn" {% unless cur.available %}disabled{% endunless %}>{% if cur.available %}add to basket{% else %}sold out{% endif %}</button>
+        </div>
+      {%- endform -%}
+    </div>
+  </div>
+</article>
+<script>
+  (function(){var m=document.getElementById('ppMainImg');document.querySelectorAll('.pp-thumbs button').forEach(function(b){b.addEventListener('click',function(){if(m)m.src=b.dataset.src;m&&m.removeAttribute('srcset');document.querySelectorAll('.pp-thumbs button').forEach(function(x){x.classList.toggle('on',x===b);});});});
+    var v=document.getElementById('ppVar'),p=document.getElementById('ppPrice');if(v&&p)v.addEventListener('change',function(){p.textContent=v.options[v.selectedIndex].dataset.price;});})();
+</script>

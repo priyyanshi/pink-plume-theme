@@ -1,0 +1,9 @@
+{%- comment -%} one product on the cloud: photo, name in script, price {%- endcomment -%}
+<a class="pp-pc" href="{{ product.url }}">
+  <span class="pp-pcimg">
+    {%- if product.featured_image -%}{{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', widths: '300,450,600', alt: product.title }}{%- endif -%}
+    {%- unless product.available -%}<span class="pp-tag">sold out</span>{%- endunless -%}
+  </span>
+  <span class="pp-pct">{{ product.title }}</span>
+  <span class="pp-pcp">{%- if product.price_varies -%}from {% endif -%}{{ product.price | money }}{%- if product.compare_at_price > product.price -%}<s>{{ product.compare_at_price | money }}</s>{%- endif -%}</span>
+</a>

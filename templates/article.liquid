@@ -1,0 +1,7 @@
+{% layout 'pond' %}
+<article class="pp-card pp-rte">
+  <p class="pp-pcp"><a href="{{ blog.url }}">&larr; {{ blog.title }}</a> &middot; {{ article.published_at | date: '%B %-d, %Y' }}</p>
+  <h1 class="pp-h">{{ article.title }}</h1>
+  {%- if article.image -%}<p>{{ article.image | image_url: width: 1000 | image_tag: alt: article.title }}</p>{%- endif -%}
+  {{ article.content }}
+</article>

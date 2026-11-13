@@ -1,0 +1,32 @@
+{% layout 'pond' %}
+<article class="pp-card">
+  <h1 class="pp-h">your basket</h1>
+  {%- if cart.item_count == 0 -%}
+    <div class="pp-center"><p>Your basket is empty for now.</p><p><a class="pp-btn" href="{{ routes.root_url }}#shop">go find something pretty</a></p></div>
+  {%- else -%}
+    <form action="{{ routes.cart_url }}" method="post" class="pp-cart">
+      {%- for item in cart.items -%}
+        <div class="pp-line">
+          <a class="pp-limg" href="{{ item.url }}">{%- if item.image -%}{{ item.image | image_url: width: 240 | image_tag: alt: item.product.title }}{%- endif -%}</a>
+          <div class="pp-linfo">
+            <a class="pp-pct" href="{{ item.url }}">{{ item.product.title }}</a>
+            {%- unless item.product.has_only_default_variant -%}<span class="pp-pcp">{{ item.variant.title }}</span>{%- endunless -%}
+            <span class="pp-pcp">{{ item.final_price | money }}</span>
+          </div>
+          <div class="pp-lqty">
+            <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="Quantity for {{ item.product.title | escape }}">
+            <a class="pp-rm" href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0">remove</a>
+          </div>
+          <div class="pp-ltot">{{ item.final_line_price | money }}</div>
+        </div>
+      {%- endfor -%}
+      <label class="pp-note">A note for me<textarea name="note" rows="2">{{ cart.note }}</textarea></label>
+      <div class="pp-sum">
+        <p class="pp-total">subtotal <strong>{{ cart.total_price | money }}</strong></p>
+        <p class="pp-pcp">Shipping and taxes are worked out at checkout.</p>
+        <button type="submit" name="update" class="pp-btn ghost">update basket</button>
+        <button type="submit" name="checkout" class="pp-btn">checkout</button>
+      </div>
+    </form>
+  {%- endif -%}
+</article>

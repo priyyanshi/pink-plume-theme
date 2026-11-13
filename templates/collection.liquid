@@ -1,0 +1,10 @@
+{% layout 'pond' %}
+<article class="pp-card">
+  <h1 class="pp-h">{{ collection.title }}</h1>
+  {%- if collection.description != blank -%}<div class="pp-rte pp-sub">{{ collection.description }}</div>{%- endif -%}
+  {%- paginate collection.products by 24 -%}
+    {%- if collection.products.size == 0 -%}<p class="pp-center">Nothing here yet, check back soon.</p>{%- endif -%}
+    <div class="pp-grid">{%- for product in collection.products -%}{% render 'pp-product-card', product: product %}{%- endfor -%}</div>
+    {% render 'pp-pager', paginate: paginate %}
+  {%- endpaginate -%}
+</article>

@@ -1,0 +1,20 @@
+{% layout 'pond' %}
+<article class="pp-card">
+  <h1 class="pp-h">search</h1>
+  <form class="pp-search" action="{{ routes.search_url }}" method="get" role="search">
+    <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="what are you looking for?" aria-label="Search" autofocus>
+    <button type="submit" class="pp-btn">search</button>
+  </form>
+  {%- if search.performed -%}
+    {%- paginate search.results by 24 -%}
+      <p class="pp-count">{{ search.results_count }} result{% if search.results_count != 1 %}s{% endif %} for &ldquo;{{ search.terms | escape }}&rdquo;</p>
+      <div class="pp-grid">
+        {%- for item in search.results -%}
+          {%- if item.object_type == 'product' -%}{% render 'pp-product-card', product: item %}
+          {%- else -%}<a class="pp-pc pp-txt" href="{{ item.url }}"><span class="pp-pct">{{ item.title }}</span><span class="pp-pcp">{{ item.content | strip_html | truncate: 90 }}</span></a>{%- endif -%}
+        {%- endfor -%}
+      </div>
+      {% render 'pp-pager', paginate: paginate %}
+    {%- endpaginate -%}
+  {%- endif -%}
+</article>

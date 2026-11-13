@@ -1,0 +1,15 @@
+{% layout 'pond' %}
+<article class="pp-card">
+  <h1 class="pp-h">{{ blog.title }}</h1>
+  {%- paginate blog.articles by 12 -%}
+    <div class="pp-list">
+      {%- for a in blog.articles -%}
+        <a class="pp-row" href="{{ a.url }}">
+          {%- if a.image -%}<span class="pp-rimg">{{ a.image | image_url: width: 400 | image_tag: loading: 'lazy', alt: a.title }}</span>{%- endif -%}
+          <span class="pp-rtx"><span class="pp-pct">{{ a.title }}</span><span class="pp-pcp">{{ a.published_at | date: '%B %-d, %Y' }}</span><span class="pp-ex">{{ a.excerpt_or_content | strip_html | truncate: 140 }}</span></span>
+        </a>
+      {%- endfor -%}
+    </div>
+    {% render 'pp-pager', paginate: paginate %}
+  {%- endpaginate -%}
+</article>

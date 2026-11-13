@@ -26,12 +26,17 @@
     <header class="pp-top">
       <a class="pp-logo" href="{{ routes.root_url }}" aria-label="Pink Plume home"><img class="td" src="{{ 'pp-logo-day.png' | asset_url }}" alt=""><img class="ts" src="{{ 'pp-logo-sunset.png' | asset_url }}" alt=""></a>
       <div class="pp-btns">
+        <a class="icon-btn" id="ppSearch" href="{{ routes.search_url }}" aria-label="Search"><img class="td" src="{{ 'pp-search-day.png' | asset_url }}" alt=""><img class="ts" src="{{ 'pp-search-sunset.png' | asset_url }}" alt=""></a>
         <button class="icon-btn" id="ppTheme" type="button" aria-label="Time of day"><img class="td" src="{{ 'pp-theme-day.png' | asset_url }}" alt=""><img class="ts" src="{{ 'pp-theme-sunset.png' | asset_url }}" alt=""></button>
         <button class="icon-btn" id="ppMenu" type="button" aria-label="Open menu"><img class="td" src="{{ 'pp-menu-day.png' | asset_url }}" alt=""><img class="ts" src="{{ 'pp-menu-sunset.png' | asset_url }}" alt=""></button>
       </div>
     </header>
-    <main class="pp-wrap" id="MainContent">
-      {{ content_for_layout }}
+    <main class="pp-wrap{% if template.name == 'collection' or template.name == 'list-collections' or template.name == 'search' or template.name == 'blog' or template.name == 'product' or template.name == 'cart' %} wide{% endif %}" id="MainContent">
+      {%- if request.page_type == 'policy' -%}
+        <article class="pp-card pp-rte pp-policy">{{ content_for_layout }}</article>
+      {%- else -%}
+        {{ content_for_layout }}
+      {%- endif -%}
     </main>
     <footer class="pp-foot">
       <a class="ft" href="{{ shop.terms_of_service.url | default: '/policies/terms-of-service' }}" aria-label="Terms and policies"><img class="td" src="{{ 'pp-f-terms-day.png' | asset_url }}" alt=""><img class="ts" src="{{ 'pp-f-terms-sunset.png' | asset_url }}" alt=""></a>

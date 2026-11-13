@@ -1,247 +1,53 @@
 <!doctype html>
-<html
-  class="no-js{% if request.design_mode %} shopify-design-mode{% endif %}"
-  lang="{{ request.locale.iso_code }}"
->
+<html lang="{{ request.locale.iso_code }}">
   <head>
-  <meta name="google-site-verification" content="m6xDqYvIIXt8gOWpsgDxRx-idg-DqqrTiyjvyy1Mf8E" />  
-  <style>
-    body {
-      background: #28090a;
-      opacity: 0;
-      animation: site-fade-in 0.4s ease 0.1s forwards;
-    }
-
-    @keyframes site-fade-in {
-      to { opacity: 1; }
-    }
-
-    #header-group {
-      position: relative;
-      z-index: 3000;
-      animation: header-drop-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
-    }
-
-    .header-section {
-      z-index: 3000 !important;
-    }
-
-    #top-gradient {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 250px;
-      background: linear-gradient(to bottom, rgba(21, 4, 4, 1) 0%, rgba(84,12,21,0.1) 40%, rgba(0,0,0,0) 100%);
-      z-index: 2999;
-      pointer-events: none;
-    }
-
-    @media screen and (max-width: 749px) {
-      #top-gradient {
-        position: absolute;
-      }
-
-      body {
-        animation: site-fade-in 0.2s ease 0s forwards;
-      }
-
-      #header-group {
-        animation: header-drop-in 0.2s ease 0s both;
-      }
-
-      #MainContent {
-        animation: content-fade-in 0.2s ease 0s both;
-      }
-    }
-
-    @keyframes header-drop-in {
-      from { opacity: 0; transform: translateY(-8px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    #MainContent {
-      min-height: 100svh;
-      animation: content-fade-in 0.4s ease 0.2s both;
-    }
-
-    @keyframes content-fade-in {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-
-    footer.section-wrapper {
-      position: relative;
-      z-index: 600;
-    }
-
-    @media screen and (orientation: landscape) and (max-height: 500px) {
-      #top-gradient {
-        position: absolute;
-      }
-
-      #MainContent {
-        position: relative;
-        z-index: 2;
-      }
-    }
-
-    footer.section-wrapper .section {
-      padding-block-start: 0 !important;
-      padding-block-end: 0 !important;
-    }
-
-    .footer-content {
-      display: flex !important;
-      flex-direction: row !important;
-      flex-wrap: wrap;
-      align-items: center !important;
-      justify-content: center !important;
-      gap: 6px 20px !important;
-      margin-left: 0 !important;
-      padding-inline: 10px !important;
-    }
-
-    footer.section-wrapper .footer-utilities__text,
-    footer.section-wrapper .footer-utilities__text a,
-    footer.section-wrapper .social-icons__wrapper a,
-    footer.section-wrapper .social-icons__icon,
-    footer.section-wrapper a,
-    footer.section-wrapper p,
-    footer.section-wrapper span,
-    footer.section-wrapper svg {
-      color: rgba(229, 214, 200, 0.4) !important;
-      fill: rgba(229, 214, 200, 0.4) !important;
-    }
-
-    footer.section-wrapper .footer-utilities__text,
-    footer.section-wrapper .policy-list-trigger {
-      font-size: 0.875rem !important;
-      text-transform: uppercase !important;
-      letter-spacing: 0.05em !important;
-    }
-
-    @media screen and (max-width: 749px),
-    screen and (orientation: landscape) and (max-height: 500px) {
-      footer.section-wrapper,
-      footer.section-wrapper .section,
-      footer.section-wrapper .spacing-style {
-        padding-block-start: 6px !important;
-        padding-block-end: 6px !important;
-        min-height: unset !important;
-      }
-
-      .footer-content {
-        flex-wrap: nowrap !important;
-        gap: 4px 18px !important;
-      }
-
-      footer.section-wrapper .layout-panel-flex {
-        flex-wrap: nowrap !important;
-        gap: 4px 16px !important;
-        padding: 0 !important;
-      }
-
-      footer.section-wrapper .footer-utilities__text,
-      footer.section-wrapper .footer-utilities__text a,
-      footer.section-wrapper .policy-list-trigger,
-      footer.section-wrapper a,
-      footer.section-wrapper p,
-      footer.section-wrapper span {
-        font-size: 0.6rem !important;
-        line-height: 1 !important;
-        color: rgba(229, 214, 200, 0.4) !important;
-        fill: rgba(229, 214, 200, 0.4) !important;
-      }
-
-      footer.section-wrapper .social-icons__wrapper {
-        flex-wrap: nowrap !important;
-        gap: 10px !important;
-      }
-
-      footer.section-wrapper .social-icons__icon,
-      footer.section-wrapper .social-icons__wrapper svg,
-      footer.section-wrapper .social-icons__wrapper a svg {
-        width: 22px !important;
-        height: 22px !important;
-        color: rgba(229, 214, 200, 0.4) !important;
-        fill: rgba(229, 214, 200, 0.4) !important;
-      }
-    }
-  </style>
-    {%- if settings.favicon != blank -%}
-      <link
-        rel="icon"
-        type="image/png"
-        href="{{ settings.favicon | image_url: width: 32, height: 32 }}"
-      >
-    {%- endif -%}
-
-
-    {%- render 'meta-tags' -%}
-    {%- render 'stylesheets' -%}
-    {%- render 'fonts' -%}
-    {%- render 'scripts' -%}
-    {%- render 'theme-styles-variables' -%}
-    {%- render 'color-schemes' -%}
-
-    {% if request.design_mode %}
-      {%- render 'theme-editor' -%}
-    {% endif %}
-
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Sacramento&display=swap" rel="stylesheet">
-    <style>
-      /* Pink Plume: soft DM Sans for reading, Sacramento script for headings, blush page edge */
-      :root{--font-body--family:'DM Sans',system-ui,sans-serif;--font-subheading--family:'DM Sans',system-ui,sans-serif;--font-heading--family:'Sacramento',cursive;--font-accent--family:'Sacramento',cursive}
-      h1,h2,h3,.h1,.h2,.h3{font-family:'Sacramento',cursive!important;font-weight:400!important;letter-spacing:0!important;text-transform:none!important;line-height:1.05}
-      h1,.h1{font-size:clamp(44px,7vw,72px)}h2,.h2{font-size:clamp(38px,5.4vw,60px)}h3,.h3{font-size:clamp(30px,3.6vw,40px)}
-      body,button,input,textarea,select{font-family:'DM Sans',system-ui,sans-serif}
-      .button,button[type=submit]{font-family:'DM Sans',system-ui,sans-serif;font-weight:600;letter-spacing:.01em;text-transform:none}
-      ::selection{background:#f4b6cb;color:#3b1f3a}
-    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="google-site-verification" content="m6xDqYvIIXt8gOWpsgDxRx-idg-DqqrTiyjvyy1Mf8E">
+    <title>{{ page_title }}{% unless page_title contains shop.name %} – {{ shop.name }}{% endunless %}</title>
+    {%- if page_description -%}<meta name="description" content="{{ page_description | escape }}">{%- endif -%}
+    <link rel="canonical" href="{{ canonical_url }}">
+    {%- if settings.favicon != blank -%}<link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">{%- endif -%}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Sacramento&display=swap" rel="stylesheet">
+    <script>window.PP_WATER={{ 'pp-water.jpg' | asset_url | json }};</script>
+    <script>
+      /* same light as the home page: night 10pm-4am, sunset 4-10 (am and pm), otherwise day, unless a sky was chosen there */
+      (function(){var d=document.documentElement,t='day',sky='auto',th='';try{sky=localStorage.getItem('pp-sky')||'auto';th=localStorage.getItem('pp-theme')||'';}catch(e){}
+        if(sky==='auto'){var h=new Date().getHours();t=(h>=22||h<4)?'night':(h<10||h>=16)?'sunset':'day';}else if(sky==='sunset')t='sunset';else if(th==='night')t='night';
+        d.dataset.tone=t;try{if(sessionStorage.getItem('pp-zoom')){d.classList.add('zin');sessionStorage.removeItem('pp-zoom');}}catch(e){}})();
+    </script>
+    {{ 'pp-pond.css' | asset_url | stylesheet_tag }}
     {{ content_for_header }}
-
-    {% if template == 'index' and settings.homepage_video_url != blank %}
-      <link rel="preload" as="video" href="{{ settings.homepage_video_url }}" type="video/mp4">
-    {% endif %}
   </head>
-
-  <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">
-    {% render 'skip-to-content-link', href: '#MainContent', text: 'accessibility.skip_to_text' %}
-    {% section 'custom-font' %}
-    <div id="header-group">
-      {% sections 'header-group' %}
-    </div>
-    <div id="top-gradient"></div>
-
-    <script
-      src="{{ 'critical.js' | asset_url }}"
-      type="module"
-      async
-      blocking="render"
-    ></script>
-
-    <script src="{{ 'page-transitions.js' | asset_url }}" type="module"></script>
-
-    <main
-      id="MainContent"
-      class="content-for-layout"
-      role="main"
-      data-page-transition-enabled="{{ settings.page_transition_enabled }}"
-      data-product-transition="{{ settings.transition_to_main_product }}"
-      data-template="{{ template }}"
-    >
-      {{ content_for_layout }}
+  <body data-page="{{ page.handle }}">
+    <canvas id="pond" aria-hidden="true"></canvas>
+    <div class="pp-veil" aria-hidden="true"></div>
+    <header class="pp-top">
+      <a class="pp-logo" href="{{ routes.root_url }}" aria-label="Pink Plume home"><img class="td" src="{{ 'pp-logo-day.png' | asset_url }}" alt=""><img class="ts" src="{{ 'pp-logo-sunset.png' | asset_url }}" alt=""></a>
+      <div class="pp-btns">
+        <a class="icon-btn" id="ppSearch" href="{{ routes.search_url }}" aria-label="Search"><img class="td" src="{{ 'pp-search-day.png' | asset_url }}" alt=""><img class="ts" src="{{ 'pp-search-sunset.png' | asset_url }}" alt=""></a>
+        <button class="icon-btn" id="ppTheme" type="button" aria-label="Time of day"><img class="td" src="{{ 'pp-theme-day.png' | asset_url }}" alt=""><img class="ts" src="{{ 'pp-theme-sunset.png' | asset_url }}" alt=""></button>
+        <button class="icon-btn" id="ppMenu" type="button" aria-label="Open menu"><img class="td" src="{{ 'pp-menu-day.png' | asset_url }}" alt=""><img class="ts" src="{{ 'pp-menu-sunset.png' | asset_url }}" alt=""></button>
+      </div>
+    </header>
+    <main class="pp-wrap{% if template.name == 'collection' or template.name == 'list-collections' or template.name == 'search' or template.name == 'blog' or template.name == 'product' or template.name == 'cart' %} wide{% endif %}" id="MainContent">
+      {%- if request.page_type == 'policy' -%}
+        <article class="pp-card pp-rte pp-policy">{{ content_for_layout }}</article>
+      {%- else -%}
+        {{ content_for_layout }}
+      {%- endif -%}
     </main>
-
-    {% sections 'footer-group' %}
-
-    {% render 'search-modal' %}
-
-    {% if settings.quick_add or settings.mobile_quick_add %}
-      {% render 'quick-add-modal' %}
-    {% endif %}
-
-    {% section 'page-transitions-config' %}
+    <footer class="pp-foot">
+      <a class="ft" href="{{ shop.terms_of_service.url | default: '/policies/terms-of-service' }}" aria-label="Terms and policies"><img class="td" src="{{ 'pp-f-terms-day.png' | asset_url }}" alt=""><img class="ts" src="{{ 'pp-f-terms-sunset.png' | asset_url }}" alt=""></a>
+      <nav class="social" aria-label="Social media">
+        <a href="https://www.instagram.com/pinkplumestudio/" target="_blank" rel="noopener" aria-label="Instagram"><img class="td" src="{{ 'pp-f-instagram-day.png' | asset_url }}" alt=""><img class="ts" src="{{ 'pp-f-instagram-sunset.png' | asset_url }}" alt=""></a>
+        <a href="https://www.youtube.com/@PinkPlumeStudio" target="_blank" rel="noopener" aria-label="YouTube"><img class="td" src="{{ 'pp-f-youtube-day.png' | asset_url }}" alt=""><img class="ts" src="{{ 'pp-f-youtube-sunset.png' | asset_url }}" alt=""></a>
+        <a href="https://www.tiktok.com/@pinkplumestudio" target="_blank" rel="noopener" aria-label="TikTok"><img class="td" src="{{ 'pp-f-tiktok-day.png' | asset_url }}" alt=""><img class="ts" src="{{ 'pp-f-tiktok-sunset.png' | asset_url }}" alt=""></a>
+        <a href="https://ca.pinterest.com/pinkplumestudio/" target="_blank" rel="noopener" aria-label="Pinterest"><img class="td" src="{{ 'pp-f-pinterest-day.png' | asset_url }}" alt=""><img class="ts" src="{{ 'pp-f-pinterest-sunset.png' | asset_url }}" alt=""></a>
+      </nav>
+      <p class="ft" aria-label="© {{ 'now' | date: '%Y' }} Pink Plume"><img class="td" src="{{ 'pp-f-copy-day.png' | asset_url }}" alt=""><img class="ts" src="{{ 'pp-f-copy-sunset.png' | asset_url }}" alt=""></p>
+    </footer>
+    <script src="{{ 'pp-pond.js' | asset_url }}" defer></script>
   </body>
 </html>

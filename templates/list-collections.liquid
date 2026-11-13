@@ -1,0 +1,12 @@
+{% layout 'pond' %}
+<article class="pp-card">
+  <h1 class="pp-h">collections</h1>
+  {%- paginate collections by 24 -%}
+    <div class="pp-grid">
+      {%- for c in collections -%}
+        <a class="pp-pc" href="{{ c.url }}"><span class="pp-pcimg">{%- assign im = c.featured_image | default: c.products.first.featured_image -%}{%- if im -%}{{ im | image_url: width: 600 | image_tag: loading: 'lazy', alt: c.title }}{%- endif -%}</span><span class="pp-pct">{{ c.title }}</span></a>
+      {%- endfor -%}
+    </div>
+    {% render 'pp-pager', paginate: paginate %}
+  {%- endpaginate -%}
+</article>
