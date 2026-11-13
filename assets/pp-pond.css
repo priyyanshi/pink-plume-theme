@@ -58,3 +58,4 @@ html.pp-leaving .pp-top,html.pp-leaving .pp-wrap,html.pp-leaving .pp-foot{opacit
 .pp-form button:hover{transform:translateY(-2px)}
 .pp-lead{margin:0 0 20px}.pp-ok{font:400 30px/1.3 Sacramento,cursive;margin:0}.pp-err{color:#c1304f}
 @media (max-width:760px){.pp-wrap{padding:112px 16px 110px}.pp-card{padding:54px 36px 50px}.pp-q summary{font-size:28px}}
+
