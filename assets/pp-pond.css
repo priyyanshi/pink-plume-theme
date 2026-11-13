@@ -41,7 +41,7 @@ html.pp-leaving .pp-top,html.pp-leaving .pp-wrap,html.pp-leaving .pp-foot{opacit
 .pp-wrap *{box-sizing:border-box}
 .pp-vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .pp-card{position:relative;isolation:isolate;padding:80px 84px 76px}
-.pp-pad{position:absolute;z-index:-1;pointer-events:none;filter:drop-shadow(0 14px 20px rgba(0,8,20,.28))}
+.pp-pad{position:absolute;z-index:-1;pointer-events:none;filter:drop-shadow(0 10px 22px rgba(40,50,80,.16))}
 .pp-rte p{margin:0 0 1em}.pp-rte a,.pp-card a{color:var(--link);text-underline-offset:3px}
 .pp-rte img{max-width:100%;height:auto}.pp-rte:after{content:"";display:block;clear:both}
 .pp-q{border-top:1.6px dashed rgba(190,90,140,.35);padding:6px 0}.pp-q:first-of-type{border-top:0}
