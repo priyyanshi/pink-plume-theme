@@ -883,7 +883,7 @@ function skyTones(){const tone=night?'night':skyName==='sunset'?'sunset':'day',s
 }
 const DAY_PINK=new THREE.Color('#FFA8C9'),CLOUD_PINK=new THREE.Color('#F9B6CE');
 function cloudTone(c){const tone=night?'night':skyName==='sunset'?'sunset':'day';c=c.clone();
-  return c.multiply(new THREE.Color(.74,.52,.66));}  // lifts the main cloud to a lighter, sunlit pink by day
+  if(tone==='day')return c.lerp(DAY_PINK,.4);return c.multiply(tone==='sunset'?new THREE.Color(1.04,.84,.8):new THREE.Color(.74,.52,.66));}  // lifts the main cloud to a lighter, sunlit pink by day
 let autoSky=false;
 const TIME_LABEL={auto:'Time of day: follows your clock',day:'Day',sunset:'Sunset',night:'Night'};
 function timeMode(){return autoSky?'auto':night?'night':skyName==='sunset'?'sunset':'day';}
@@ -924,6 +924,7 @@ function paintSky(){
     x.globalCompositeOperation='source-over';
     seed=11;for(let i=0;i<Math.round(W*H/7000);i++){const r=rng();x.fillStyle=`rgba(255,240,230,${.25+r*.55})`;x.beginPath();x.arc(rng()*W,rng()*H*.55,.4+r*1.2,0,Math.PI*2);x.fill();}
   }
+  if(!night){const wide=W>H,rx=wide?W*.36:W*.56,ry=wide?H*.43:H*.19,cy=H*.5;x.save();x.translate(W/2,cy);x.scale(rx,ry);const sg2=x.createRadialGradient(0,0,0,0,0,1.55);const c=skyName==='sunset'?'140,70,110':'118,84,140',k=skyName==='sunset'?.62:1;sg2.addColorStop(0,'rgba('+c+','+(.34*k)+')');sg2.addColorStop(.62,'rgba('+c+','+(.3*k)+')');sg2.addColorStop(1,'rgba('+c+',0)');x.globalCompositeOperation='multiply';x.fillStyle=sg2;x.fillRect(-2,-2,4,4);x.restore();x.globalCompositeOperation='source-over';}
   // a soft light behind the cloud so the blocks stay crisp against the brushwork
   if(mirror)setTimeout(refreshMirror,0);
   const glow=x.createRadialGradient(W/2,H*.45,0,W/2,H*.45,Math.min(W,H)*.55);
