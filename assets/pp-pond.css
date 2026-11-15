@@ -104,3 +104,6 @@ html.pp-leaving .pp-top,html.pp-leaving .pp-wrap,html.pp-leaving .pp-foot{opacit
 @media (max-width:760px){.pp-pgrid{grid-template-columns:1fr;gap:24px}.pp-line{grid-template-columns:72px 1fr auto;gap:12px}.pp-line .pp-ltot{grid-column:3;grid-row:1}.pp-line .pp-lqty{grid-column:2/4;grid-row:2;justify-items:start;grid-auto-flow:column;gap:14px;align-items:center}.pp-limg img{width:72px;height:90px}.pp-rimg{flex-basis:96px}.pp-grid{grid-template-columns:repeat(2,1fr);gap:12px}.pp-pct{font-size:24px}}
 @media (max-width:760px){.pp-wrap.wide .pp-card{padding:50px 20px 44px}.pp-h{font-size:clamp(46px,13vw,64px)}}
 @media (max-width:440px){.pp-logo{width:80px}.pp-btns{gap:4px}}
+
+/* a thin strip of the page's own colour along the bottom edge, so the phone's bottom bar takes that colour */
+#ppEdge{position:fixed;left:0;right:0;bottom:0;height:8px;z-index:1;pointer-events:none;background:var(--water)}
