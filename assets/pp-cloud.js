@@ -865,7 +865,7 @@ const pointer={x:-999,y:-999,in:false,trail:[]};
 const bg=document.getElementById('bg');
 let night=false;
 // background: a scanned painting (placeholder until your own painting is scanned)
-const SKIES={storm:{src:PP_BG,y:.55},blue:{src:PP_BG,y:.55},sunset:{src:PP_BG,y:.55}};let skyName='storm',BG_IMG=null,bgReady=false;
+const SKIES={storm:{src:PP_BG,y:1},blue:{src:PP_BG,y:1},sunset:{src:PP_BG,y:1}};let skyName='storm',BG_IMG=null,bgReady=false;
 Object.values(SKIES).forEach(k=>{k.img=new Image();if(/^(https?:)?\/\//.test(String(k.src)))k.img.crossOrigin='anonymous';k.img.onload=()=>{k.ok=true;if(BG_IMG===k.img){bgReady=true;paintSky();}};k.img.src=k.src;});
 // thread colour for the logo, buttons and footer: warmer coral-pink on the sunset sky
 const THREAD={c:'#e8578f',hi:'rgba(255,215,232,.85)'};
@@ -2261,6 +2261,8 @@ addEventListener('pageshow',e=>{if(e.persisted)location.reload();});
 function floorMarks(){document.querySelectorAll('#floor svg a').forEach(a=>{const k=a.dataset.k,cur=(k===''&&!ROOM.on)||(k==='shop'&&ROOM.on);if(cur)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');a.setAttribute('tabindex',FLOOR.on?0:-1);});}
 function floorLayout(){const f=document.getElementById('floor');if(!f)return;const W=innerWidth,H=innerHeight,tall=W<H*.82,A=tall?3/4:4/3,bw=Math.max(W,H*A),bh=bw/A,box=f.querySelector('.fimg'),img=box.querySelector('img'),cv=box.querySelector('canvas');
   box.style.width=bw+'px';box.style.height=bh+'px';
+  /* the painting's top edge meets the home page painting's bottom edge, so on wide screens any crop comes off the bottom */
+  if(tall){box.style.top='50%';box.style.transform='translate(-50%,-50%)';}else{box.style.top='0';box.style.transform='translateX(-50%)';}
   if(tall){img.style.width=bh+'px';img.style.height=bw+'px';img.style.transform='translate(-50%,-50%) rotate(90deg)';}else{img.style.width=bw+'px';img.style.height=bh+'px';img.style.transform='translate(-50%,-50%)';}
   const map=(x,y)=>tall?[1-y,x]:[x,y],VW=tall?600:800,VH=tall?800:600,svg=box.querySelector('svg'),NS='http://www.w3.org/2000/svg';
   svg.setAttribute('viewBox','0 0 '+VW+' '+VH);svg.innerHTML='';const defs=document.createElementNS(NS,'defs');defs.innerHTML='<filter id="ppWater" x="-10%" y="-30%" width="120%" height="170%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency=".03 .08" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="10" result="d"/><feGaussianBlur in="d" stdDeviation=".7" result="d2"/><feSpecularLighting in="n" surfaceScale="3" specularConstant="1" specularExponent="16" lighting-color="#ffe6f0" result="sp"><feDistantLight azimuth="225" elevation="55"/></feSpecularLighting><feComposite in="sp" in2="d2" operator="in" result="hl"/><feGaussianBlur in="d2" stdDeviation="6" result="g0"/><feComponentTransfer in="g0" result="g"><feFuncA type="linear" slope="1.7"/></feComponentTransfer><feMerge><feMergeNode in="g"/><feMergeNode in="d2"/><feMergeNode in="hl"/></feMerge></filter><filter id="ppGlow" x="-30%" y="-60%" width="160%" height="220%"><feGaussianBlur stdDeviation="8"/></filter>';svg.appendChild(defs);
