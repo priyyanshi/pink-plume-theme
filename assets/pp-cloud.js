@@ -903,18 +903,6 @@ function paintSky(){
   // cover the screen, keeping the grassy foreground along the bottom edge
   const k=Math.max(W/BG_IMG.width,H/BG_IMG.height),iw=BG_IMG.width*k,ih=BG_IMG.height*k;
   x.drawImage(BG_IMG,(W-iw)/2,(H-ih)*SKIES[skyName].y,iw,ih);   // balance sky and grass in the crop
-  if(!night&&skyName!=='sunset'){
-    // daytime: blush the painted clouds; multiply barely moves the blue but turns the whites a soft pink
-    x.globalCompositeOperation='multiply';const pg=x.createLinearGradient(0,0,0,H);
-    pg.addColorStop(0,'#FFE2EC');pg.addColorStop(.6,'#FFE6EE');pg.addColorStop(.82,'#FFFFFF');pg.addColorStop(1,'#FFFFFF');x.fillStyle=pg;x.fillRect(0,0,W,H);x.globalCompositeOperation='source-over';
-    // deeper pink in parts of the painted clouds: multiply turns their whites pink but barely touches the blue between them
-    {const og=x.createLinearGradient(0,0,0,H);og.addColorStop(0,'rgba(255,150,195,.2)');og.addColorStop(.6,'rgba(255,160,200,.16)');og.addColorStop(.85,'rgba(255,170,205,0)');x.fillStyle=og;x.fillRect(0,0,W,H);}   // a slight, even pink wash over the daytime painting (fades out above the grass)
-    // patches of pink light drifting through the sky: uneven, like the sunset wash but softer and only in places
-    x.globalCompositeOperation='screen';seed=71;
-    [[.12,.14,.42],[.78,.1,.36],[.5,.3,.28],[.95,.32,.3],[.28,.34,.24],[.62,.02,.22]].forEach(([fx,fy,fr])=>{const cx=W*(fx+(rng()-.5)*.06),cy=H*(fy+(rng()-.5)*.05),r=Math.max(W,H)*fr;
-      const g=x.createRadialGradient(cx,cy,0,cx,cy,r);g.addColorStop(0,'rgba(255,150,195,.2)');g.addColorStop(.5,'rgba(255,170,205,.09)');g.addColorStop(1,'rgba(255,190,215,0)');x.fillStyle=g;x.fillRect(0,0,W,H);});
-    x.globalCompositeOperation='source-over';
-  }
   if(skyName==='sunset'){
     // sunset wash over the painting: red-orange up high, pink in the middle, peach at the horizon
     x.globalCompositeOperation='multiply';const sg=x.createLinearGradient(0,0,0,H);
