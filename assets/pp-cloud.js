@@ -2467,8 +2467,10 @@ function skyStep(dt,t){const g=SKY.g,W=SKY.W,H=SKY.H,calm=matchMedia('(prefers-r
     if(g.left===0&&!g.stars.some(s=>!s.done)){g.level++;skyLevel(g);g.banner={t:'level '+g.level,u:performance.now()};g.pause=performance.now()+2200;}}
   if(g&&!g.over&&g.keys){g.s=skyWrap(g.s+g.keys*Math.min(W,H)*1.1*dt);}
   list.forEach(s=>{s.age+=dt;s.run+=s.v*dt;s.x+=s.ux*s.v*dt;s.y+=s.uy*s.v*dt;s.trail.push([s.x,s.y]);if(s.trail.length>26)s.trail.shift();
+    s.sp=s.sp||[];if(!s.done){s.em=(s.em||0)-dt;while(s.em<=0){s.em+=.024;const an=Math.random()*6.283,sd=8+Math.random()*26;s.sp.push({x:s.x-s.ux*Math.random()*10,y:s.y-s.uy*Math.random()*10,vx:Math.cos(an)*sd-s.ux*14,vy:Math.cos(an+1.3)*sd*.6+Math.sin(an)*sd*.4-s.uy*14+9,age:0,life:.7+Math.random()*.8,r:2.6+Math.random()*4.4,ph:Math.random()*6});}}
+    s.sp.forEach(q=>{q.age+=dt;q.x+=q.vx*dt;q.y+=q.vy*dt;q.vx*=.985;q.vy*=.985;});s.sp=s.sp.filter(q=>q.age<q.life);
     if(!s.done&&s.run>=s.L){s.done=1;if(g){if(skyDist(s.es,g.s)<g.len/2+16){g.score++;s.caught=1;g.fx.push({x:s.ex,y:s.ey,t:t,ok:1});}else{g.lives--;g.fx.push({x:s.ex,y:s.ey,t:t,ok:0});if(g.lives<=0)skyOver(g);}}}});
-  for(let i=list.length-1;i>=0;i--)if(list[i].run>list[i].L+260)list.splice(i,1);
+  for(let i=list.length-1;i>=0;i--)if(list[i].run>list[i].L+260&&!(list[i].sp&&list[i].sp.length))list.splice(i,1);
   if(g)g.fx=g.fx.filter(f=>t-f.t<.9);}
 function skyDraw(t,dt){const cv=SKY.cv;if(!cv)return;const x=cv.getContext('2d'),W=SKY.W,H=SKY.H,d=SKY.d,tone=skyTone(),g=SKY.g;x.setTransform(d,0,0,d,0,0);
   const c0=SKY_BG[tone]||SKY_BG.day,k=SKY.dark,c=[0,1,2].map(i=>Math.round(c0[i]+(SKY_GAME_BG[i]-c0[i])*k)),sp0=[10,8,30],mix=(a,b,u)=>'rgb('+[0,1,2].map(i=>Math.round(a[i]+(b[i]-a[i])*u))+')';
@@ -2479,8 +2481,10 @@ function skyDraw(t,dt){const cv=SKY.cv;if(!cv)return;const x=cv.getContext('2d')
   const WASH={day:[[255,196,170],[190,170,240],[255,150,200],[170,200,250]],sunset:[[255,150,90],[230,90,150],[255,190,120],[150,70,140]],night:[[90,70,180],[150,70,170],[60,90,190],[110,60,150]]}[tone]||[];
   WASH.forEach((w,i)=>{const px=(.5+.45*Math.sin(t*.02*(i+1)+i*2))*W,py=H*(.3+.15*i)+Math.sin(t*.03+i)*H*.04,r=Math.max(W,H)*(.38+.06*i),gr=x.createRadialGradient(px,py,0,px,py,r);gr.addColorStop(0,'rgba('+w+','+(.34*(1-k*.7))+')');gr.addColorStop(1,'rgba('+w+',0)');x.fillStyle=gr;x.fillRect(0,0,W,H);});
   /* a few faint stars where the sky thins out */
-  if(!SKY.tw){SKY.tw=[];for(let i=0;i<70;i++){const r=q=>{const v=Math.sin((i+1)*53.7+q*29.3)*9973.1;return v-Math.floor(v);};SKY.tw.push({x:r(1),y:Math.pow(r(2),1.6)*.55,s:.6+r(3)*1.3,ph:r(4)*6});}}
-  SKY.tw.forEach(q=>{const al=(.25+.25*Math.sin(t*1.3+q.ph))*(1-q.y/.6)*(tone==='night'||k>0?1:.8);x.globalAlpha=Math.max(0,al);x.fillStyle='#fff';x.beginPath();x.arc(q.x*W,q.y*H,q.s,0,6.283);x.fill();});x.globalAlpha=1;
+  if(!SKY.tw){SKY.tw=[];for(let i=0;i<190;i++){const r=q=>{const v=Math.sin((i+1)*53.7+q*29.3)*9973.1;return v-Math.floor(v);};SKY.tw.push({x:r(1),y:r(2),s:.5+Math.pow(r(3),3)*1.9,ph:r(4)*6,sp:.6+r(5)*1.8,b:.35+r(6)*.65});}}
+  SKY.tw.forEach(q=>{const top=1-q.y*.55,al=(.22+.3*Math.sin(t*q.sp+q.ph))*q.b*top*(tone==='day'&&k<.1?.8:1.1);if(al<=0)return;x.globalAlpha=Math.min(.85,al);x.fillStyle='#fff';x.beginPath();x.arc(q.x*W,q.y*H,q.s,0,6.283);x.fill();
+    if(q.s>1.7){x.strokeStyle='rgba(255,255,255,.7)';x.lineWidth=.6;x.beginPath();x.moveTo(q.x*W-q.s*3,q.y*H);x.lineTo(q.x*W+q.s*3,q.y*H);x.moveTo(q.x*W,q.y*H-q.s*3);x.lineTo(q.x*W,q.y*H+q.s*3);x.stroke();}});
+  x.globalAlpha=1;
   /* clouds drifting across */
   if(SKY.cT!==tone){SKY.cT=tone;SKY.spr=floorCloudSprites(tone);}
   if(!SKY.cl){SKY.cl=[];for(let i=0;i<18;i++){const r=q=>{const v=Math.sin((i+7)*71.3+q*37.1)*9973.1;return v-Math.floor(v);};SKY.cl.push({x:r(1),y:.05+r(2)*.95,s:.16+r(3)*.26,v:.004+r(4)*.007,i:i%6,ph:r(5)*6});}}
@@ -2488,12 +2492,18 @@ function skyDraw(t,dt){const cv=SKY.cv;if(!cv)return;const x=cv.getContext('2d')
   SKY.cl.forEach(cl=>{const sp=SKY.spr[cl.i],s=cl.s*base,hh=s*sp.h/sp.w,span=W+s,px=((cl.x*span+(calm?0:t*cl.v*base))%span)-s/2,py=cl.y*H+Math.sin(t*.05+cl.ph)*10;
     x.globalAlpha=(tone==='night'?.8:.92)*(1-k*.62);x.drawImage(sp.c,px-s/2,py-hh/2,s,hh);});
   x.globalAlpha=1;
-  const star=(s,al)=>{const tr=s.trail;if(tr.length>1){x.lineCap='round';for(let i=1;i<tr.length;i++){const u=i/tr.length;x.strokeStyle='rgba(255,'+(228-s.hue*30|0)+',240,'+(al*u*.8).toFixed(3)+')';x.lineWidth=1+u*5;x.beginPath();x.moveTo(tr[i-1][0],tr[i-1][1]);x.lineTo(tr[i][0],tr[i][1]);x.stroke();}}
-    const gr=x.createRadialGradient(s.x,s.y,0,s.x,s.y,26);gr.addColorStop(0,'rgba(255,255,255,'+al+')');gr.addColorStop(.3,'rgba(255,215,235,'+(al*.55)+')');gr.addColorStop(1,'rgba(255,190,225,0)');x.fillStyle=gr;x.beginPath();x.arc(s.x,s.y,26,0,6.283);x.fill();};
+  const spark=(px,py,r,al,rot)=>{x.globalAlpha=al;x.fillStyle='rgb(255,246,252)';x.beginPath();for(let i=0;i<8;i++){const rr=i%2?r*.28:r,an=rot+i*.7854;i?x.lineTo(px+Math.cos(an)*rr,py+Math.sin(an)*rr):x.moveTo(px+Math.cos(an)*rr,py+Math.sin(an)*rr);}x.closePath();x.fill();};
+  const sparks=s=>{(s.sp||[]).forEach(q=>{const u=q.age/q.life,tw=.65+.35*Math.sin(q.age*18+q.ph);x.shadowColor='rgba(255,170,215,.9)';x.shadowBlur=8;spark(q.x,q.y,q.r*(1-u*.5),(1-u)*tw*.95,q.ph);});x.shadowBlur=0;x.globalAlpha=1;};
+  const star=(s,al)=>{const tr=s.trail,n=tr.length;
+    if(n>1){x.lineCap='round';for(let i=1;i<n;i++){const u=i/n,uu=u*u;
+      x.strokeStyle='rgba(255,170,215,'+(al*uu*.28).toFixed(3)+')';x.lineWidth=2+uu*13;x.beginPath();x.moveTo(tr[i-1][0],tr[i-1][1]);x.lineTo(tr[i][0],tr[i][1]);x.stroke();
+      x.strokeStyle='rgba(255,'+(236-s.hue*28|0)+',246,'+(al*uu*.95).toFixed(3)+')';x.lineWidth=.8+uu*3.6;x.beginPath();x.moveTo(tr[i-1][0],tr[i-1][1]);x.lineTo(tr[i][0],tr[i][1]);x.stroke();}}
+    const gr=x.createRadialGradient(s.x,s.y,0,s.x,s.y,30);gr.addColorStop(0,'rgba(255,255,255,'+al+')');gr.addColorStop(.25,'rgba(255,220,238,'+(al*.6)+')');gr.addColorStop(1,'rgba(255,190,225,0)');x.fillStyle=gr;x.beginPath();x.arc(s.x,s.y,30,0,6.283);x.fill();
+    x.shadowColor='rgba(255,180,220,1)';x.shadowBlur=12;spark(s.x,s.y,15,al,.4+s.age*1.5);spark(s.x,s.y,9,al*.9,.4+s.age*1.5+.785);x.shadowBlur=0;x.globalAlpha=1;};
   const list=g?g.stars:SKY.amb;
-  list.forEach(s=>{const al=s.done?Math.max(0,1-(s.run-s.L)/220):Math.min(1,s.age*3);if(al<=0)return;
+  list.forEach(s=>{const al=s.done?Math.max(0,1-(s.run-s.L)/220):Math.min(1,s.age*3);if(al<=0){sparks(s);return;}
     if(g&&!s.done){const near=Math.min(1,Math.max(0,(s.run-s.L*.2)/(s.L*.8)));x.globalAlpha=.15+.5*near;x.strokeStyle='rgba(255,236,246,1)';x.lineWidth=2;x.beginPath();x.arc(s.ex,s.ey,10+(1-near)*14,0,6.283);x.stroke();x.globalAlpha=1;}
-    if(s.caught)return;star(s,al);});
+    sparks(s);if(s.caught)return;star(s,al);});
   if(g){
     g.fx.forEach(f=>{const u=(t-f.t)/.9;x.globalAlpha=1-u;x.strokeStyle=f.ok?'rgba(255,245,200,1)':'rgba(255,130,150,1)';x.lineWidth=3;x.beginPath();x.arc(f.x,f.y,10+u*60,0,6.283);x.stroke();x.globalAlpha=1;});
     /* the line on the edge of the sky */
