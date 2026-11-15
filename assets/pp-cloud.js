@@ -883,7 +883,7 @@ function skyTones(){const tone=night?'night':skyName==='sunset'?'sunset':'day',s
 }
 const DAY_PINK=new THREE.Color('#FFA8C9'),CLOUD_PINK=new THREE.Color('#F9B6CE');
 function cloudTone(c){const tone=night?'night':skyName==='sunset'?'sunset':'day';c=c.clone();
-  if(tone==='day')return c.lerp(DAY_PINK,.4);return c.multiply(tone==='sunset'?new THREE.Color(1.04,.84,.8):new THREE.Color(.74,.52,.66));}  // lifts the main cloud to a lighter, sunlit pink by day
+  return c.multiply(new THREE.Color(.74,.52,.66));}  // lifts the main cloud to a lighter, sunlit pink by day
 let autoSky=false;
 const TIME_LABEL={auto:'Time of day: follows your clock',day:'Day',sunset:'Sunset',night:'Night'};
 function timeMode(){return autoSky?'auto':night?'night':skyName==='sunset'?'sunset':'day';}
@@ -1384,7 +1384,7 @@ function buildBlocks(){
       const full=stickerTex(STK[img]),fs=new THREE.Sprite(new THREE.SpriteMaterial({map:full.t,transparent:true,depthWrite:false,depthTest:false,rotation:rot,opacity:0}));
       fs.position.copy(sp.position);fs.renderOrder=5001+i*2;fs.scale.copy(sp.scale);softCloud.add(fs);sp.userData.full=fs;});}
    {const sb=new THREE.Sprite(new THREE.SpriteMaterial({transparent:true,opacity:0,depthWrite:false,depthTest:false}));
-    sb.position.set(.1,1.45,fz(.1,1.45)+.3);sb.renderOrder=6000;sb.userData={c:{id:'shop',name:'Shop all'},size:1.9,aspect:900/470,near:0,rv:0,btn:true};sb.scale.set(1.9*900/470,1.9,1);softCloud.add(sb);stickers.push(sb);shopBtn=sb;}
+    sb.position.set(.1,1.45,fz(.1,1.45)+.3);sb.renderOrder=6000;sb.userData={c:{id:'shop',name:'Shop all'},size:1.45,aspect:900/470,near:0,rv:0,btn:true};sb.scale.set(1.45*900/470,1.45,1);softCloud.add(sb);stickers.push(sb);shopBtn=sb;}
    softCloud.scale.setScalar(.86);softCloud.position.y=.16;
    {// sky layers behind the main cloud: mid-distance cumulus and small far clouds near the horizon.
     // They sit in screen space (they don't tilt with the main cloud), drift on the wind and slowly change shape.
@@ -1518,7 +1518,7 @@ function buildBlocks(){
       const full=stickerTex(STK[img]),fs=new THREE.Sprite(new THREE.SpriteMaterial({map:full.t,transparent:true,depthWrite:false,depthTest:false,rotation:rot,opacity:0}));
       fs.position.copy(sp.position);fs.renderOrder=5001+i*2;fs.scale.copy(sp.scale);softCloud.add(fs);sp.userData.full=fs;});}
    {const sb=new THREE.Sprite(new THREE.SpriteMaterial({transparent:true,opacity:0,depthWrite:false,depthTest:false}));
-    sb.position.set(.1,1.45,fz(.1,1.45)+.3);sb.renderOrder=6000;sb.userData={c:{id:'shop',name:'Shop all'},size:1.9,aspect:900/470,near:0,rv:0,btn:true};sb.scale.set(1.9*900/470,1.9,1);softCloud.add(sb);stickers.push(sb);shopBtn=sb;}
+    sb.position.set(.1,1.45,fz(.1,1.45)+.3);sb.renderOrder=6000;sb.userData={c:{id:'shop',name:'Shop all'},size:1.45,aspect:900/470,near:0,rv:0,btn:true};sb.scale.set(1.45*900/470,1.45,1);softCloud.add(sb);stickers.push(sb);shopBtn=sb;}
    softCloud.scale.setScalar(.72);softCloud.position.y=.3;
    {// sky layers behind the main cloud: mid-distance cumulus and small far clouds near the horizon.
     // They sit in screen space (they don't tilt with the main cloud), drift on the wind and slowly change shape.
