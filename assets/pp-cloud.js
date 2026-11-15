@@ -2429,11 +2429,11 @@ function skyInit(){if(document.getElementById('sky'))return;const s=document.cre
   SKY.cv=s.firstElementChild;SKY.el=s;skySize();addEventListener('resize',skySize);
   let p0=null,last=null;
   s.addEventListener('pointerdown',e=>{p0={x:e.clientX,y:e.clientY,t:performance.now()};last={x:e.clientX,y:e.clientY};const g=SKY.g;
-    if(g&&!g.over){g.drag=true;g.s=skyProject(e.clientX,e.clientY);try{s.setPointerCapture(e.pointerId);}catch(_){}}   /* a tap on a side makes the line jump there */
+    if(g&&!g.over){g.drag=true;g.s=skyBar(skyProject(e.clientX,e.clientY),g.len);try{s.setPointerCapture(e.pointerId);}catch(_){}}   /* a tap on a side makes the line jump there */
     else if(g&&g.over){if(performance.now()-g.overT>700)skyStart();}
     else{const h=skyHit(e.clientX,e.clientY);if(h){h.hit=1;skyStart();}}});
   s.addEventListener('pointermove',e=>{const g=SKY.g;if(!g||g.over||!g.drag||!last)return;const dx=e.clientX-last.x,dy=e.clientY-last.y;last={x:e.clientX,y:e.clientY};
-    const t=skyTan(g.s);g.s=skyWrap(g.s+dx*t[0]+dy*t[1]);});   /* dragging slides it round the edge, corners and all */
+    const t=skyTan(g.s);g.s=skyBar(g.s+dx*t[0]+dy*t[1],g.len);});   /* dragging slides it round the edge, corners and all */
   const up=e=>{const g=SKY.g;if(g)g.drag=false;if(!p0)return;const dy=e.clientY-p0.y,dx=e.clientX-p0.x;p0=null;
     if((!g||g.over)&&dy<-60&&Math.abs(dy)>Math.abs(dx)*1.2)skyGo(false);};
   s.addEventListener('pointerup',up);s.addEventListener('pointercancel',up);}
@@ -2445,10 +2445,10 @@ function skyPt(s){const W=SKY.W,H=SKY.H;s=skyWrap(s);if(s<W)return[s,0];s-=W;if(
 function skyTan(s){const W=SKY.W,H=SKY.H;s=skyWrap(s);if(s<W)return[1,0];s-=W;if(s<H)return[0,1];s-=H;if(s<W)return[-1,0];return[0,-1];}
 function skyProject(x,y){const W=SKY.W,H=SKY.H,d=[y,W-x,H-y,x],m=Math.min(...d),i=d.indexOf(m);
   return i===0?skyWrap(Math.max(0,Math.min(W,x))):i===1?skyWrap(W+Math.max(0,Math.min(H,y))):i===2?skyWrap(W+H+Math.max(0,Math.min(W,W-x))):skyWrap(2*W+H+Math.max(0,Math.min(H,H-y)));}
+function skyBar(s,len){const W=SKY.W,P=skyPer();s=skyWrap(s);if(s<W)s=(s<W/2)?P:W;return Math.max(W+len/2,Math.min(P-len/2,s));}   /* the line runs down the right side, along the bottom and up the left, never across the top */
 function skyDist(a,b){const P=skyPer(),d=Math.abs(skyWrap(a)-skyWrap(b));return Math.min(d,P-d);}
 /* a shooting star: from a point on one side, across the sky, out through another */
-function skyStar(speed,amb){const W=SKY.W,H=SKY.H,sides=[0,1,2,3],a=sides[Math.floor(Math.random()*4)];let b;
-  if(Math.random()<.6)b=(a+2)%4;else{do{b=Math.floor(Math.random()*4);}while(b===a);}
+function skyStar(speed,amb){const W=SKY.W,H=SKY.H,a=Math.floor(Math.random()*4),ok=[0,1,2,3].filter(q=>q!==a&&(amb||q!==0));let b=(a+2)%4;if(!ok.includes(b)||Math.random()>.6)b=ok[Math.floor(Math.random()*ok.length)];   /* in the game nothing leaves through the top: the buttons live there */
   const at=(side,u)=>{u=.1+u*.8;return side===0?[u*W,0]:side===1?[W,u*H]:side===2?[(1-u)*W,H]:[0,(1-u)*H];};
   const A=at(a,Math.random()),B=at(b,Math.random()),L=Math.hypot(B[0]-A[0],B[1]-A[1]),ux=(B[0]-A[0])/L,uy=(B[1]-A[1])/L,pad=30;
   const s0=[A[0]-ux*pad,A[1]-uy*pad];
@@ -2465,7 +2465,7 @@ function skyStep(dt,t){const g=SKY.g,W=SKY.W,H=SKY.H,calm=matchMedia('(prefers-r
   const list=g?g.stars:SKY.amb;
   if(g&&!g.over&&performance.now()>g.pause){g.spawnT-=dt;if(g.left>0&&g.spawnT<=0){g.spawnT=g.gap*(.7+Math.random()*.6);g.left--;g.stars.push(skyStar(g.speed*(.85+Math.random()*.3)));}
     if(g.left===0&&!g.stars.some(s=>!s.done)){g.level++;skyLevel(g);g.banner={t:'level '+g.level,u:performance.now()};g.pause=performance.now()+2200;}}
-  if(g&&!g.over&&g.keys){g.s=skyWrap(g.s+g.keys*Math.min(W,H)*1.1*dt);}
+  if(g&&!g.over&&g.kv&&(g.kv[0]||g.kv[1])){const t=skyTan(g.s);g.s=skyBar(g.s+(g.kv[0]*t[0]+g.kv[1]*t[1])*Math.min(W,H)*1.1*dt,g.len);}
   list.forEach(s=>{s.age+=dt;s.run+=s.v*dt;s.x+=s.ux*s.v*dt;s.y+=s.uy*s.v*dt;s.trail.push([s.x,s.y]);if(s.trail.length>26)s.trail.shift();
     s.sp=s.sp||[];if(!s.done){s.em=(s.em||0)-dt;while(s.em<=0){s.em+=.024;const an=Math.random()*6.283,sd=8+Math.random()*26;s.sp.push({x:s.x-s.ux*Math.random()*10,y:s.y-s.uy*Math.random()*10,vx:Math.cos(an)*sd-s.ux*14,vy:Math.cos(an+1.3)*sd*.6+Math.sin(an)*sd*.4-s.uy*14+9,age:0,life:.7+Math.random()*.8,r:2.6+Math.random()*4.4,ph:Math.random()*6});}}
     s.sp.forEach(q=>{q.age+=dt;q.x+=q.vx*dt;q.y+=q.vy*dt;q.vx*=.985;q.vy*=.985;});s.sp=s.sp.filter(q=>q.age<q.life);
@@ -2499,7 +2499,7 @@ function skyDraw(t,dt){const cv=SKY.cv;if(!cv)return;const x=cv.getContext('2d')
       x.strokeStyle='rgba(255,170,215,'+(al*uu*.28).toFixed(3)+')';x.lineWidth=2+uu*13;x.beginPath();x.moveTo(tr[i-1][0],tr[i-1][1]);x.lineTo(tr[i][0],tr[i][1]);x.stroke();
       x.strokeStyle='rgba(255,'+(236-s.hue*28|0)+',246,'+(al*uu*.95).toFixed(3)+')';x.lineWidth=.8+uu*3.6;x.beginPath();x.moveTo(tr[i-1][0],tr[i-1][1]);x.lineTo(tr[i][0],tr[i][1]);x.stroke();}}
     const gr=x.createRadialGradient(s.x,s.y,0,s.x,s.y,30);gr.addColorStop(0,'rgba(255,255,255,'+al+')');gr.addColorStop(.25,'rgba(255,220,238,'+(al*.6)+')');gr.addColorStop(1,'rgba(255,190,225,0)');x.fillStyle=gr;x.beginPath();x.arc(s.x,s.y,30,0,6.283);x.fill();
-    x.shadowColor='rgba(255,180,220,1)';x.shadowBlur=12;spark(s.x,s.y,15,al,.4+s.age*1.5);spark(s.x,s.y,9,al*.9,.4+s.age*1.5+.785);x.shadowBlur=0;x.globalAlpha=1;};
+    x.shadowColor='rgba(255,180,220,1)';x.shadowBlur=12;{const pu=1+.12*Math.sin(s.age*14);spark(s.x,s.y,15*pu,al,0);spark(s.x,s.y,9*pu,al*.9,.785);}x.shadowBlur=0;x.globalAlpha=1;};
   const list=g?g.stars:SKY.amb;
   list.forEach(s=>{const al=s.done?Math.max(0,1-(s.run-s.L)/220):Math.min(1,s.age*3);if(al<=0){sparks(s);return;}
     if(g&&!s.done){const near=Math.min(1,Math.max(0,(s.run-s.L*.2)/(s.L*.8)));x.globalAlpha=.15+.5*near;x.strokeStyle='rgba(255,236,246,1)';x.lineWidth=2;x.beginPath();x.arc(s.ex,s.ey,10+(1-near)*14,0,6.283);x.stroke();x.globalAlpha=1;}
@@ -2522,10 +2522,10 @@ function skyGo(open,then){if(typeof LAKE!=='undefined'&&LAKE.on)return;if(SKY.an
   const calm=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const step=()=>{const u=calm?1:Math.min(1,(performance.now()-t0)/dur),e=u<.5?4*u*u*u:1-Math.pow(-2*u+2,3)/2;SKY.a=a0+(a1-a0)*e;skyApply();if(u<1)SKY.anim=requestAnimationFrame(step);else{SKY.anim=0;SKY.cool=performance.now();if(then)then();}};SKY.anim=requestAnimationFrame(step);}
 addEventListener('keydown',e=>{const g=SKY.g;if(!SKY.on)return;if(e.key==='Escape'){if(g&&!g.over)skyEnd();else skyGo(false);return;}
-  if(g&&!g.over&&(e.key==='ArrowLeft'||e.key==='ArrowRight')){g.keys=e.key==='ArrowRight'?1:-1;e.preventDefault();}
+  if(g&&!g.over&&['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)){g.kv=[e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0,e.key==='ArrowDown'?1:e.key==='ArrowUp'?-1:0];e.preventDefault();}
   else if(g&&g.over&&(e.key==='Enter'||e.key===' ')&&performance.now()-g.overT>700)skyStart();
   else if(!g&&(e.key==='ArrowDown'||e.key==='PageDown'))skyGo(false);});
-addEventListener('keyup',e=>{const g=SKY.g;if(g&&(e.key==='ArrowLeft'||e.key==='ArrowRight'))g.keys=0;});
+addEventListener('keyup',e=>{const g=SKY.g;if(g&&e.key.startsWith('Arrow'))g.kv=null;});
 addEventListener('wheel',e=>{if(!SKY.on||SKY.anim||performance.now()-SKY.cool<900)return;if(SKY.g&&!SKY.g.over)return;if(e.deltaY>4&&Math.abs(e.deltaY)>Math.abs(e.deltaX))skyGo(false);},{passive:true});
 /* inside the cloud: shade the top and bottom */
 setTimeout(()=>{if(!document.getElementById('roomShade')){const s=document.createElement('div');s.id='roomShade';document.body.appendChild(s);}},400);
