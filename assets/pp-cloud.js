@@ -1787,9 +1787,10 @@ function paintCloudRect(cv,W,H){if(!MENU_BILLOWS)MENU_BILLOWS=[0,1,2,3,4].map(i=
     const r=ins*(.42+rnd()*.3);ax.globalAlpha=.9;ax.drawImage(MENU_BILLOWS[Math.floor(rnd()*5)],x0-r+(rnd()-.5)*ins*.45,y0-r+(rnd()-.5)*ins*.45,r*2,r*2);}ax.globalAlpha=1;
   const x=cv.getContext('2d');x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,cv.width,cv.height);x.drawImage(a,0,0);
   x.globalCompositeOperation='multiply';x.fillStyle=tint;x.fillRect(0,0,cv.width,cv.height);x.globalCompositeOperation='destination-in';x.drawImage(a,0,0);x.globalCompositeOperation='source-over';}
-window.ppReel=function(r){const t=r.querySelector('.wtrack'),n=t.children.length/2;if(!t||n<2||matchMedia('(prefers-reduced-motion:reduce)').matches)return;let k=0,hold=false;r.onmouseenter=()=>hold=true;r.onmouseleave=()=>hold=false;
-  const id=setInterval(()=>{if(!t.isConnected){clearInterval(id);return;}if(hold)return;k++;t.style.transition='transform 1.2s cubic-bezier(.65,0,.35,1)';t.style.transform='translateX(-'+(k*100/(2*n))+'%)';
-    if(k>=n){setTimeout(()=>{if(!t.isConnected)return;t.style.transition='none';t.style.transform='none';k=0;},1250);}},3600);};
+window.ppReel=function(r){const t=r.querySelector('.wtrack');if(!t||matchMedia('(prefers-reduced-motion:reduce)').matches)return;let hold=false;r.onmouseenter=()=>hold=true;r.onmouseleave=()=>hold=false;
+  const id=setInterval(()=>{if(!t.isConnected){clearInterval(id);return;}if(hold)return;const w=t.firstElementChild.getBoundingClientRect().width;
+    t.style.transition='transform 1.4s cubic-bezier(.65,0,.35,1)';t.style.transform='translateX(-'+w+'px)';
+    setTimeout(()=>{if(!t.isConnected)return;t.style.transition='none';t.appendChild(t.firstElementChild);t.style.transform='none';},1450);},4200);};
 function wpics(){const all=((window.PP_DATA||{}).products||[]).filter(p=>p&&p.imgs&&p.imgs.length),seen=new Set(),pick=[];
   all.forEach(p=>{const k=(p.tags&&p.tags[0])||p.title;if(pick.length<6&&!seen.has(k)){seen.add(k);pick.push(p);}});all.forEach(p=>{if(pick.length<6&&!pick.includes(p))pick.push(p);});
   const mk=l=>'<div class="wreel" aria-hidden="false"><div class="wtrack">'+l+l+'</div><img class="wgo1" alt="" width="1" height="1" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" onload="ppReel(this.parentNode)"></div>';
