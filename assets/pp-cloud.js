@@ -2520,7 +2520,7 @@ function skyGo(open,then){if(typeof LAKE!=='undefined'&&LAKE.on)return;if(SKY.an
   SKY.on=open;const a0=SKY.a,a1=open?90:0,t0=performance.now(),dur=950,f=document.getElementById('sky');f.setAttribute('aria-hidden',open?'false':'true');document.body.classList.toggle('sky',open);
   if(open){SKY.last=0;SKY.next=2.2;SKY.amb=[];if(!SKY.loop)SKY.loop=requestAnimationFrame(skyLoop);}else skyEnd();
   const calm=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const step=()=>{const u=calm?1:Math.min(1,(performance.now()-t0)/dur),e=u<.5?4*u*u*u:1-Math.pow(-2*u+2,3)/2;SKY.a=a0+(a1-a0)*e;skyApply();if(u<1)SKY.anim=requestAnimationFrame(step);else{SKY.anim=0;SKY.cool=performance.now();if(then)then();}};SKY.anim=requestAnimationFrame(step);}
+  const step=()=>{const u=calm?1:Math.min(1,(performance.now()-t0)/dur),e=u<.5?4*u*u*u:1-Math.pow(-2*u+2,3)/2;SKY.a=a0+(a1-a0)*e;skyApply();if(u<1)SKY.anim=requestAnimationFrame(step);else{SKY.anim=0;SKY.cool=performance.now();if(open&&SKY.on&&!SKY.g)skyStart();if(then)then();}};SKY.anim=requestAnimationFrame(step);}
 addEventListener('keydown',e=>{const g=SKY.g;if(!SKY.on)return;if(e.key==='Escape'){if(g&&!g.over)skyEnd();else skyGo(false);return;}
   if(g&&!g.over&&['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)){g.kv=[e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0,e.key==='ArrowDown'?1:e.key==='ArrowUp'?-1:0];e.preventDefault();}
   else if(g&&g.over&&(e.key==='Enter'||e.key===' ')&&performance.now()-g.overT>700)skyStart();
