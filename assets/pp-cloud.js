@@ -911,7 +911,7 @@ function paintSky(){
   if(skyName==='sunset'){
     // sunset wash over the painting: red-orange up high, pink in the middle, peach at the horizon
     x.globalCompositeOperation='multiply';const sg=x.createLinearGradient(0,0,0,H);
-    sg.addColorStop(0,'#E9A3B0');sg.addColorStop(.35,'#EFAAAA');sg.addColorStop(.6,'#F6B79F');sg.addColorStop(.82,'#E3A894');sg.addColorStop(1,'#A88A9C');x.fillStyle=sg;x.fillRect(0,0,W,H);
+    sg.addColorStop(0,'#E9A3B0');sg.addColorStop(.35,'#EFAAAA');sg.addColorStop(.6,'#F6B79F');sg.addColorStop(.82,'#E3A894');sg.addColorStop(1,'#4b4b5c');x.fillStyle=sg;x.fillRect(0,0,W,H);
     x.globalCompositeOperation='screen';const sun=x.createRadialGradient(W*.5,H*.66,0,W*.5,H*.66,Math.max(W,H)*.55);
     sun.addColorStop(0,'rgba(255,196,140,.4)');sun.addColorStop(.4,'rgba(255,120,120,.22)');sun.addColorStop(1,'rgba(255,100,140,0)');x.fillStyle=sun;x.fillRect(0,0,W,H);
     x.globalCompositeOperation='soft-light';x.fillStyle='rgba(255,150,170,.18)';x.fillRect(0,0,W,H);x.globalCompositeOperation='source-over';
