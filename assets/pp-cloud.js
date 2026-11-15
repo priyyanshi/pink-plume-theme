@@ -906,17 +906,15 @@ function paintSky(){
   if(!night&&skyName!=='sunset'){
     // daytime: a slight blush over the painting (multiply keeps the shading and just warms the whites)
     x.globalCompositeOperation='multiply';const pg=x.createLinearGradient(0,0,0,H);
-    pg.addColorStop(0,'#FFEDF3');pg.addColorStop(.6,'#FFF0F5');pg.addColorStop(.85,'#FFFAFC');pg.addColorStop(1,'#FFFFFF');x.fillStyle=pg;x.fillRect(0,0,W,H);x.globalCompositeOperation='source-over';
-    {x.globalCompositeOperation='multiply';const vg=x.createRadialGradient(W/2,H*.45,Math.min(W,H)*.22,W/2,H*.45,Math.max(W,H)*.78);vg.addColorStop(0,'#fff');vg.addColorStop(1,'#cfc3e4');x.fillStyle=vg;x.fillRect(0,0,W,H);x.globalCompositeOperation='source-over';}
+    pg.addColorStop(0,'#F7C9DC');pg.addColorStop(.6,'#CFDAF3');pg.addColorStop(1,'#A9B3C9');x.fillStyle=pg;x.fillRect(0,0,W,H);x.globalCompositeOperation='source-over';
   }
   if(skyName==='sunset'){
     // sunset wash over the painting: red-orange up high, pink in the middle, peach at the horizon
     x.globalCompositeOperation='multiply';const sg=x.createLinearGradient(0,0,0,H);
-    sg.addColorStop(0,'#e3a09b');sg.addColorStop(.35,'#eba9a3');sg.addColorStop(.6,'#f6b3ae');sg.addColorStop(.82,'#f8b89f');sg.addColorStop(1,'#c28b6e');x.fillStyle=sg;x.fillRect(0,0,W,H);
+    sg.addColorStop(0,'#E9A3B0');sg.addColorStop(.35,'#EFAAAA');sg.addColorStop(.6,'#F6B79F');sg.addColorStop(.82,'#E3A894');sg.addColorStop(1,'#A88A9C');x.fillStyle=sg;x.fillRect(0,0,W,H);
     x.globalCompositeOperation='screen';const sun=x.createRadialGradient(W*.5,H*.66,0,W*.5,H*.66,Math.max(W,H)*.55);
     sun.addColorStop(0,'rgba(255,196,140,.4)');sun.addColorStop(.4,'rgba(255,120,120,.22)');sun.addColorStop(1,'rgba(255,100,140,0)');x.fillStyle=sun;x.fillRect(0,0,W,H);
     x.globalCompositeOperation='soft-light';x.fillStyle='rgba(255,150,170,.18)';x.fillRect(0,0,W,H);x.globalCompositeOperation='source-over';
-    {x.globalCompositeOperation='multiply';const vg=x.createRadialGradient(W/2,H*.5,Math.min(W,H)*.3,W/2,H*.5,Math.max(W,H)*.72);vg.addColorStop(0,'#fff');vg.addColorStop(.55,'#c98aa0');vg.addColorStop(1,'#6f4575');x.fillStyle=vg;x.fillRect(0,0,W,H);x.globalCompositeOperation='source-over';}
   }
   if(night){
     // dusk version of the same painting: deepen and cool it, then add a few stars
