@@ -14,9 +14,34 @@
     {%- endif -%}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Sacramento&display=swap" rel="stylesheet">
+    <link rel="preload" as="image" href="{{ 'pp-sky.jpg' | asset_url }}" fetchpriority="high">
+    <link rel="preload" as="script" href="{{ 'pp-three.min.js' | asset_url }}">
+    <link rel="preload" as="script" href="{{ 'pp-cloud.js' | asset_url }}">
+    <style>
+      /* shown the instant the page starts, until the sky has loaded and the cloud is ready to puff in */
+      #ppLoad{position:fixed;inset:0;z-index:99999;display:grid;place-items:center;overflow:hidden;background:linear-gradient(#c3b2e0,#f1bfd9 62%,#f8d6cf);transition:opacity 1s ease,visibility 1s}
+      #ppLoad[data-t=sunset]{background:linear-gradient(#6f3566,#d9606c 58%,#ffb08c)}
+      #ppLoad[data-t=night]{background:linear-gradient(#150f31,#2a1f55 62%,#4a3066)}
+      #ppLoad.gone{opacity:0;visibility:hidden;pointer-events:none}
+      #ppLoad i{position:absolute;border-radius:50%;background:rgba(255,255,255,.55);filter:blur(34px);animation:ppDrift 14s ease-in-out infinite alternate}
+      #ppLoad[data-t=sunset] i{background:rgba(255,205,180,.5)}#ppLoad[data-t=night] i{background:rgba(150,110,210,.28)}
+      #ppLoad i:nth-child(1){width:46vmax;height:16vmax;left:-8vmax;top:14%}
+      #ppLoad i:nth-child(2){width:40vmax;height:14vmax;right:-10vmax;top:50%;animation-delay:-5s;animation-duration:17s}
+      #ppLoad i:nth-child(3){width:34vmax;height:12vmax;left:18%;bottom:6%;animation-delay:-9s}
+      #ppLoad b{position:relative;font:400 clamp(54px,11vw,110px)/1 Sacramento,'Brush Script MT',cursive;color:#fff3f8;text-shadow:0 0 18px rgba(255,150,200,.9),0 0 46px rgba(255,150,200,.55);animation:ppPulse 2.4s ease-in-out infinite}
+      #ppLoad[data-t=night] b{color:#ffd9ec}
+      @keyframes ppDrift{to{transform:translateX(9vmax)}}
+      @keyframes ppPulse{50%{opacity:.62;transform:scale(.985)}}
+      @media (prefers-reduced-motion:reduce){#ppLoad i,#ppLoad b{animation:none}}
+    </style>
     {{ content_for_header }}
   </head>
   <body>
+    <div id="ppLoad" aria-hidden="true"><i></i><i></i><i></i><b>pink plume</b></div>
+    <script>
+      (function(){var v=document.getElementById('ppLoad'),h=new Date().getHours();v.setAttribute('data-t',(h>=19||h<7)?'night':(h<9||h>=17)?'sunset':'day');
+        setTimeout(function(){v.className='gone';},12000);})();   /* never leave the veil up if something goes wrong */
+    </script>
     {{ content_for_layout }}
   </body>
 </html>
