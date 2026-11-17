@@ -1803,14 +1803,14 @@ window.ppReel=function(r){const t=r.querySelector('.wtrack');if(!t||matchMedia('
 const WHEEL=[10,50,20,10,30,15];
 function ppWheelBuild(W){const cv=W.querySelector('.wwc'),S=Math.max(190,Math.min(300,innerWidth-124)),d=Math.max(2,DPR()),R=S/2-6;cv.width=S*d;cv.height=S*d;cv.style.width=cv.style.height=S+'px';
   const x=cv.getContext('2d');x.setTransform(d,0,0,d,0,0);x.translate(S/2,S/2);const A=Math.PI*2/WHEEL.length,top=-Math.PI/2;
-  WHEEL.forEach((n,i)=>{const c=top+i*A;x.beginPath();x.moveTo(0,0);x.arc(0,0,R,c-A/2,c+A/2);x.closePath();x.fillStyle=i%2?'rgba(240,150,190,.4)':'rgba(255,255,255,.62)';x.fill();});
+  WHEEL.forEach((n,i)=>{const c=top+i*A;x.beginPath();x.moveTo(0,0);x.arc(0,0,R,c-A/2,c+A/2);x.closePath();x.fillStyle=i%2?'rgba(240,150,190,.26)':'rgba(255,255,255,.34)';x.fill();});
   x.strokeStyle='#7a2b55';x.lineCap='round';x.lineWidth=1.6;x.setLineDash([6,5]);
   WHEEL.forEach((n,i)=>{const c=top+i*A-A/2;x.beginPath();x.moveTo(Math.cos(c)*R*.2,Math.sin(c)*R*.2);x.lineTo(Math.cos(c)*R,Math.sin(c)*R);x.stroke();});
   x.lineWidth=3;x.setLineDash([9,6]);x.beginPath();x.arc(0,0,R,0,7);x.stroke();x.lineWidth=1.4;x.setLineDash([4,5]);x.beginPath();x.arc(0,0,R-9,0,7);x.stroke();x.setLineDash([]);
   WHEEL.forEach((n,i)=>{const c=top+i*A,lc=document.createElement('canvas');stitchText(lc,n+'%',84,.36*S/300+.08,4.4,[9,4.5]);
     const g=lc.getContext('2d');g.globalCompositeOperation='source-atop';g.fillStyle='#7a2b55';g.fillRect(0,0,lc.width,lc.height);
     const w=parseFloat(lc.style.width),h=parseFloat(lc.style.height);x.save();x.rotate(c+Math.PI/2);x.translate(0,-R*.64);x.drawImage(lc,-w/2,-h/2,w,h);x.restore();});
-  x.fillStyle='#fbe3ee';x.beginPath();x.arc(0,0,R*.14,0,7);x.fill();x.strokeStyle='#7a2b55';x.lineWidth=2;x.setLineDash([4,4]);x.beginPath();x.arc(0,0,R*.14,0,7);x.stroke();
+  x.fillStyle='#7a2b55';x.beginPath();x.arc(0,0,R*.14,0,7);x.fill();x.strokeStyle='rgba(251,227,238,.85)';x.lineWidth=2;x.setLineDash([4,4]);x.beginPath();x.arc(0,0,R*.1,0,7);x.stroke();
   W.querySelector('.wwheel').style.width=W.querySelector('.wwheel').style.height=S+'px';}
 function ppWheelSpin(W,cur,dir,done){const cv=W.querySelector('.wwc'),ws=WHEEL.map((n,j)=>n===10?j:-1).filter(j=>j>=0),i=ws[Math.floor(Math.random()*ws.length)],jit=(Math.random()-.5)*34,A=360/WHEEL.length,t=-i*A+jit,fin=dir>0?Math.ceil((cur+1440)/360)*360+t:Math.floor((cur-1440)/360)*360+t;
   cv.style.transition='transform 4.8s cubic-bezier(.12,.62,.12,1)';requestAnimationFrame(()=>requestAnimationFrame(()=>{cv.style.transform='rotate('+fin+'deg)';}));
