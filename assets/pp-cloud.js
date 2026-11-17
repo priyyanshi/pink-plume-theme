@@ -2522,12 +2522,15 @@ function skyStar(speed,amb){const W=SKY.W,H=SKY.H,a=Math.floor(Math.random()*4),
   const A=at(a,Math.random()),B=at(b,Math.random()),L=Math.hypot(B[0]-A[0],B[1]-A[1]),ux=(B[0]-A[0])/L,uy=(B[1]-A[1])/L,pad=30;
   const s0=[A[0]-ux*pad,A[1]-uy*pad];
   return{x:s0[0],y:s0[1],ux:ux,uy:uy,v:speed,run:0,L:L+pad,pad:pad,ex:B[0],ey:B[1],es:skyProject(B[0],B[1]),trail:[],done:0,amb:!!amb,age:0,hue:Math.random()};}
-function skyStarG(speed){const G=SKY.geo,W=SKY.W,H=SKY.H,side=['l','r','b'][Math.floor(Math.random()*3)],R=Math.random;let ep,A;
-  if(side==='l'){ep=[G.x0,G.y0+G.r+R()*G.b];A=[-40,Math.max(40,Math.min(H-40,ep[1]+(R()-.5)*H*.5))];}
-  else if(side==='r'){ep=[G.x1,G.y0+G.r+R()*G.b];A=[W+40,Math.max(40,Math.min(H-40,ep[1]+(R()-.5)*H*.5))];}
-  else{ep=[G.x0+G.r+R()*G.a,G.y1];A=[Math.max(40,Math.min(W-40,ep[0]+(R()-.5)*W*.6)),H+40];}
-  const L=Math.hypot(ep[0]-A[0],ep[1]-A[1]),ux=(ep[0]-A[0])/L,uy=(ep[1]-A[1])/L,pad=30,s0=[A[0]-ux*pad,A[1]-uy*pad];
-  return{x:s0[0],y:s0[1],ux:ux,uy:uy,v:speed,run:0,L:L+pad,pad:pad,ex:ep[0],ey:ep[1],es:skyProject(ep[0],ep[1]),trail:[],done:0,amb:false,age:0,hue:R()};}
+function skyIn(x,y){const G=SKY.geo;if(x<G.x0||x>G.x1||y<G.y0||y>G.y1)return false;const dx=Math.max(G.x0+G.r-x,x-(G.x1-G.r),0),dy=Math.max(G.y0+G.r-y,y-(G.y1-G.r),0);return dx*dx+dy*dy<=G.r*G.r;}
+/* a game star flies straight across the screen: it meets the path coming in (a first chance to catch it) and again going out (a second chance) */
+function skyStarG(speed){const G=SKY.geo,W=SKY.W,H=SKY.H,R=Math.random,side=['l','r','b'][Math.floor(R()*3)];let A;
+  if(side==='l')A=[-40,H*(.2+.7*R())];else if(side==='r')A=[W+40,H*(.2+.7*R())];else A=[W*(.1+.8*R()),H+40];
+  const tx=G.x0+(G.x1-G.x0)*(.2+.6*R()),ty=G.y0+(G.y1-G.y0)*(.2+.6*R()),D=Math.hypot(tx-A[0],ty-A[1]),ux=(tx-A[0])/D,uy=(ty-A[1])/D;
+  let t=0;while(t<4000&&!skyIn(A[0]+ux*t,A[1]+uy*t))t+=3;let lo=t-3,hi=t;for(let i=0;i<12;i++){const m=(lo+hi)/2;skyIn(A[0]+ux*m,A[1]+uy*m)?hi=m:lo=m;}const t1=hi;
+  t=t1+6;while(t<4000&&skyIn(A[0]+ux*t,A[1]+uy*t))t+=3;lo=t-3;hi=t;for(let i=0;i<12;i++){const m=(lo+hi)/2;skyIn(A[0]+ux*m,A[1]+uy*m)?lo=m:hi=m;}const t2=lo,pad=30;
+  const e1=[A[0]+ux*t1,A[1]+uy*t1],e2=[A[0]+ux*t2,A[1]+uy*t2];
+  return{x:A[0]-ux*pad,y:A[1]-uy*pad,ux:ux,uy:uy,v:speed,run:0,L:t2+pad,pad:pad,t1:t1+pad,t2:t2+pad,e1:e1,e2:e2,s1:skyProject(e1[0],e1[1]),s2:skyProject(e2[0],e2[1]),ex:e1[0],ey:e1[1],es:skyProject(e1[0],e1[1]),phase:0,trail:[],done:0,amb:false,age:0,hue:R()};}
 function skyHit(x,y){return SKY.amb.find(a=>!a.done&&Math.hypot(a.x-x,a.y-y)<60);}
 function skyStart(){const best=(()=>{try{return +localStorage.getItem('ppSkyBest')||0;}catch(_){return 0;}})();
   skyGeo();SKY.g={lives:3,level:1,score:0,best:best,stars:[],need:0,left:0,spawnT:0,s:0,tg:null,len:0,drag:false,over:false,overT:0,banner:{t:'level 1',u:performance.now()},pause:performance.now()+1400,fx:[]};skyLevel(SKY.g);SKY.amb=[];}
@@ -2546,7 +2549,10 @@ function skyStep(dt,t){const g=SKY.g,W=SKY.W,H=SKY.H,calm=matchMedia('(prefers-r
   list.forEach(s=>{s.age+=dt;s.run+=s.v*dt;s.x+=s.ux*s.v*dt;s.y+=s.uy*s.v*dt;s.trail.push([s.x,s.y]);if(s.trail.length>26)s.trail.shift();
     s.sp=s.sp||[];if(!s.done){s.em=(s.em||0)-dt;while(s.em<=0){s.em+=.024;const an=Math.random()*6.283,sd=8+Math.random()*26;s.sp.push({x:s.x-s.ux*Math.random()*10,y:s.y-s.uy*Math.random()*10,vx:Math.cos(an)*sd-s.ux*14,vy:Math.cos(an+1.3)*sd*.6+Math.sin(an)*sd*.4-s.uy*14+9,age:0,life:.7+Math.random()*.8,r:2.6+Math.random()*4.4,ph:Math.random()*6});}}
     s.sp.forEach(q=>{q.age+=dt;q.x+=q.vx*dt;q.y+=q.vy*dt;q.vx*=.985;q.vy*=.985;});s.sp=s.sp.filter(q=>q.age<q.life);
-    if(!s.done&&s.run>=s.L){s.done=1;if(g){if(skyDist(s.es,g.s)<g.len/2+16){g.score++;s.caught=1;g.fx.push({x:s.ex,y:s.ey,t:t,ok:1});}else{g.lives--;g.fx.push({x:s.ex,y:s.ey,t:t,ok:0});if(g.lives<=0)skyOver(g);}}}});
+    if(g&&s.t1!==undefined){
+      if(s.phase===0&&s.run>=s.t1){if(skyDist(s.s1,g.s)<g.len/2+16){s.done=1;s.caught=1;g.streak=(g.streak||0)+1;const m=g.streak>=3?2:1;g.score+=m;g.fx.push({x:s.e1[0],y:s.e1[1],t:t,ok:1,txt:m>1?'x2':null});}else{s.phase=1;s.ex=s.e2[0];s.ey=s.e2[1];s.es=s.s2;}}
+      if(!s.done&&s.phase===1&&s.run>=s.t2){s.done=1;if(skyDist(s.s2,g.s)<g.len/2+16){s.caught=1;g.streak=0;g.score++;g.fx.push({x:s.e2[0],y:s.e2[1],t:t,ok:1});}else{g.streak=0;g.lives--;g.fx.push({x:s.e2[0],y:s.e2[1],t:t,ok:0});if(g.lives<=0)skyOver(g);}}}
+    else if(!s.done&&s.run>=s.L){s.done=1;}});
   for(let i=list.length-1;i>=0;i--)if(list[i].run>list[i].L+110&&!(list[i].sp&&list[i].sp.length))list.splice(i,1);
   if(g)g.fx=g.fx.filter(f=>t-f.t<.9);}
 function skyDraw(t,dt){const cv=SKY.cv;if(!cv)return;const x=cv.getContext('2d'),W=SKY.W,H=SKY.H,d=SKY.d,tone=skyTone(),g=SKY.g;x.setTransform(d,0,0,d,0,0);
@@ -2579,16 +2585,16 @@ function skyDraw(t,dt){const cv=SKY.cv;if(!cv)return;const x=cv.getContext('2d')
     x.shadowColor='rgba(255,180,220,1)';x.shadowBlur=12;{const pu=1+.12*Math.sin(s.age*14);spark(s.x,s.y,15*pu,al,0);spark(s.x,s.y,9*pu,al*.9,.785);}x.shadowBlur=0;x.globalAlpha=1;};
   const list=g?g.stars:SKY.amb;
   list.forEach(s=>{const al=s.done?Math.max(0,1-(s.run-s.L)/90):Math.min(1,s.age*3);if(al<=0){sparks(s);return;}
-    if(g&&!s.done){const near=Math.min(1,Math.max(0,(s.run-s.L*.2)/(s.L*.8)));x.globalAlpha=.15+.5*near;x.strokeStyle='rgba(255,236,246,1)';x.lineWidth=2;x.beginPath();x.arc(s.ex,s.ey,10+(1-near)*14,0,6.283);x.stroke();x.globalAlpha=1;}
+    if(g&&!s.done){const near=Math.min(1,Math.max(0,1-((s.phase?s.t2:s.t1)-s.run)/260));x.globalAlpha=.15+.5*near;x.strokeStyle='rgba(255,236,246,1)';x.lineWidth=2;x.beginPath();x.arc(s.ex,s.ey,10+(1-near)*14,0,6.283);x.stroke();x.globalAlpha=1;}
     sparks(s);if(s.caught)return;star(s,al);});
   if(g){
-    g.fx.forEach(f=>{const u=(t-f.t)/.9;x.globalAlpha=1-u;x.strokeStyle=f.ok?'rgba(255,245,200,1)':'rgba(255,130,150,1)';x.lineWidth=3;x.beginPath();x.arc(f.x,f.y,10+u*60,0,6.283);x.stroke();x.globalAlpha=1;});
+    g.fx.forEach(f=>{const u=(t-f.t)/.9;x.globalAlpha=1-u;x.strokeStyle=f.ok?'rgba(255,245,200,1)':'rgba(255,130,150,1)';x.lineWidth=3;x.beginPath();x.arc(f.x,f.y,10+u*60,0,6.283);x.stroke();if(f.txt){skyWord(x,f.txt,34,f.x,f.y-26-u*30,1-u);}x.globalAlpha=1;});
     /* the light dotted path the line follows */
     {const P=skyPer();x.save();x.lineCap='round';x.setLineDash([.1,11]);x.lineWidth=3.4;x.strokeStyle='rgba(255,240,248,'+(.5*Math.min(1,k*1.4)).toFixed(3)+')';x.beginPath();for(let q=0;q<=P+4;q+=4){const p=skyPt(q);q?x.lineTo(p[0],p[1]):x.moveTo(p[0],p[1]);}x.stroke();x.restore();}
     /* the line that catches the stars */
     const n=14,ins=0;x.lineCap='round';x.lineWidth=9;x.shadowColor='rgba(255,170,215,.95)';x.shadowBlur=18;x.strokeStyle='rgba(255,246,250,.97)';x.beginPath();
     for(let i=0;i<=n;i++){const q=g.s-g.len/2+g.len*i/n,p=skyPt(q),tn=skyTan(q),X=p[0]-tn[1]*ins,Y=p[1]+tn[0]*ins;i?x.lineTo(X,Y):x.moveTo(X,Y);}x.stroke();x.shadowBlur=0;
-    skyNumber(g.score);const bu=(performance.now()-g.banner.u)/2200;if(bu<1&&!g.over)skyWord(x,g.banner.t,Math.min(64,W/9),W/2,H*.4,Math.sin(Math.min(1,bu)*3.1416)**.5);
+    skyNumber(g.score);if((g.streak||0)>=3&&!g.over)skyWord(x,'x2',Math.min(40,W/11),W/2,H*.5+Math.min(W,H)*.2,.8+.2*Math.sin(t*6));const bu=(performance.now()-g.banner.u)/2200;if(bu<1&&!g.over)skyWord(x,g.banner.t,Math.min(64,W/9),W/2,H*.4,Math.sin(Math.min(1,bu)*3.1416)**.5);
     if(g.over){const k=Math.min(W/800,H/600),ou=Math.min(1,(performance.now()-g.overT)/600),y=H/2+130*k;skyWord(x,'best: '+g.best,Math.min(28,W/18),W/2,y+20,ou);skyWord(x,'tap to play again',Math.min(26,W/20),W/2,y+20+Math.min(40,W/14),ou*(.7+.3*Math.sin(t*3)));}}}
 function skyLoop(){if(SKY.a<=0&&!SKY.on){SKY.loop=0;return;}SKY.loop=requestAnimationFrame(skyLoop);const t=performance.now()/1000,dt=Math.min(.05,SKY.last?t-SKY.last:.016);SKY.last=t;skyStep(dt,t);skyDraw(t,dt);}
 function skyApply(){const f=document.getElementById('sky'),a=SKY.a,P=((f&&f.offsetHeight)||innerHeight)/2,sx=(1+.44*Math.sin(a*Math.PI/90))*1.05,sy=1.05,T=r=>'perspective('+P+'px) translateZ('+P+'px) rotateX('+r+'deg) translateZ('+(-P)+'px) scale('+sx+','+sy+')';
