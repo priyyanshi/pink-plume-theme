@@ -2490,23 +2490,31 @@ function skyInit(){if(document.getElementById('sky'))return;const s=document.cre
   SKY.cv=s.firstElementChild;SKY.el=s;skySize();addEventListener('resize',skySize);
   let p0=null,last=null;
   s.addEventListener('pointerdown',e=>{p0={x:e.clientX,y:e.clientY,t:performance.now()};last={x:e.clientX,y:e.clientY};const g=SKY.g;
-    if(g&&!g.over){g.drag=true;g.s=skyBar(skyProject(e.clientX,e.clientY),g.len);try{s.setPointerCapture(e.pointerId);}catch(_){}}   /* a tap on a side makes the line jump there */
+    if(g&&!g.over){g.drag=true;g.tg=skyProject(e.clientX,e.clientY);try{s.setPointerCapture(e.pointerId);}catch(_){}}   /* the line heads for where you touch, travelling along the path */
     else if(g&&g.over){if(performance.now()-g.overT>700)skyStart();}
     else{const h=skyHit(e.clientX,e.clientY);if(h){h.hit=1;skyStart();}}});
-  s.addEventListener('pointermove',e=>{const g=SKY.g;if(!g||g.over||!g.drag||!last)return;const dx=e.clientX-last.x,dy=e.clientY-last.y;last={x:e.clientX,y:e.clientY};
-    const t=skyTan(g.s);g.s=skyBar(g.s+dx*t[0]+dy*t[1],g.len);});   /* dragging slides it round the edge, corners and all */
+  s.addEventListener('pointermove',e=>{const g=SKY.g;if(!g||g.over||!g.drag)return;g.tg=skyProject(e.clientX,e.clientY);});
   const up=e=>{const g=SKY.g;if(g)g.drag=false;if(!p0)return;const dy=e.clientY-p0.y,dx=e.clientX-p0.x;p0=null;
     if((!g||g.over)&&dy<-60&&Math.abs(dy)>Math.abs(dx)*1.2)skyGo(false);};
   s.addEventListener('pointerup',up);s.addEventListener('pointercancel',up);}
-function skySize(){const cv=SKY.cv;if(!cv)return;const d=Math.min(2,window.devicePixelRatio||1);SKY.W=innerWidth;SKY.H=innerHeight;if(SKY.el){SKY.el.style.height=innerHeight+'px';SKY.el.style.bottom='auto';}SKY.d=d;cv.width=SKY.W*d;cv.height=SKY.H*d;}
-/* perimeter coordinate: clockwise from the top-left corner */
-function skyPer(){return 2*(SKY.W+SKY.H);}
+function skySize(){const cv=SKY.cv;if(!cv)return;const d=Math.min(2,window.devicePixelRatio||1);SKY.W=innerWidth;SKY.H=innerHeight;if(SKY.el){SKY.el.style.height=innerHeight+'px';SKY.el.style.bottom='auto';}SKY.d=d;cv.width=SKY.W*d;cv.height=SKY.H*d;skyGeo();}
+/* the path: a smaller rounded rectangle inside the screen, running round the score. s is the distance along it, clockwise from the top-left */
+function skyGeo(){const W=SKY.W,H=SKY.H,mx=Math.max(26,W*.09),top=Math.max(128,H*.17),bot=Math.max(84,H*.1),x0=mx,x1=W-mx,y0=top,y1=H-bot,r=Math.max(18,Math.min(48,(x1-x0)/6,(y1-y0)/6)),a=x1-x0-2*r,b=y1-y0-2*r,q=Math.PI*r/2;SKY.geo={x0,x1,y0,y1,r,a,b,q,P:2*a+2*b+4*q};}
+function skyPer(){return SKY.geo?SKY.geo.P:1;}
 function skyWrap(s){const P=skyPer();return((s%P)+P)%P;}
-function skyPt(s){const W=SKY.W,H=SKY.H;s=skyWrap(s);if(s<W)return[s,0];s-=W;if(s<H)return[W,s];s-=H;if(s<W)return[W-s,H];s-=W;return[0,H-s];}
-function skyTan(s){const W=SKY.W,H=SKY.H;s=skyWrap(s);if(s<W)return[1,0];s-=W;if(s<H)return[0,1];s-=H;if(s<W)return[-1,0];return[0,-1];}
-function skyProject(x,y){const W=SKY.W,H=SKY.H,d=[y,W-x,H-y,x],m=Math.min(...d),i=d.indexOf(m);
-  return i===0?skyWrap(Math.max(0,Math.min(W,x))):i===1?skyWrap(W+Math.max(0,Math.min(H,y))):i===2?skyWrap(W+H+Math.max(0,Math.min(W,W-x))):skyWrap(2*W+H+Math.max(0,Math.min(H,H-y)));}
-function skyBar(s,len){const W=SKY.W,P=skyPer();s=skyWrap(s);if(s<W)s=(s<W/2)?P:W;return Math.max(W+len/2,Math.min(P-len/2,s));}   /* the line runs down the right side, along the bottom and up the left, never across the top */
+function skyPtT(s){const G=SKY.geo,{x0,x1,y0,y1,r,a,b,q}=G;s=skyWrap(s);
+  if(s<a)return[x0+r+s,y0,1,0];s-=a;
+  if(s<q){const t=s/r-Math.PI/2;return[x1-r+Math.cos(t)*r,y0+r+Math.sin(t)*r,-Math.sin(t),Math.cos(t)];}s-=q;
+  if(s<b)return[x1,y0+r+s,0,1];s-=b;
+  if(s<q){const t=s/r;return[x1-r+Math.cos(t)*r,y1-r+Math.sin(t)*r,-Math.sin(t),Math.cos(t)];}s-=q;
+  if(s<a)return[x1-r-s,y1,-1,0];s-=a;
+  if(s<q){const t=s/r+Math.PI/2;return[x0+r+Math.cos(t)*r,y1-r+Math.sin(t)*r,-Math.sin(t),Math.cos(t)];}s-=q;
+  if(s<b)return[x0,y1-r-s,0,-1];s-=b;
+  const t=s/r+Math.PI;return[x0+r+Math.cos(t)*r,y0+r+Math.sin(t)*r,-Math.sin(t),Math.cos(t)];}
+function skyPt(s){const p=skyPtT(s);return[p[0],p[1]];}
+function skyTan(s){const p=skyPtT(s);return[p[2],p[3]];}
+function skyProject(x,y){const P=skyPer();let best=0,bd=1e18;for(let s=0;s<P;s+=5){const p=skyPtT(s),d=(p[0]-x)*(p[0]-x)+(p[1]-y)*(p[1]-y);if(d<bd){bd=d;best=s;}}return best;}
+function skyBar(s){return skyWrap(s);}
 function skyDist(a,b){const P=skyPer(),d=Math.abs(skyWrap(a)-skyWrap(b));return Math.min(d,P-d);}
 /* a shooting star: from a point on one side, across the sky, out through another */
 function skyStar(speed,amb){const W=SKY.W,H=SKY.H,a=Math.floor(Math.random()*4),ok=[0,1,2,3].filter(q=>q!==a&&(amb||q!==0));let b=(a+2)%4;if(!ok.includes(b)||Math.random()>.6)b=ok[Math.floor(Math.random()*ok.length)];   /* in the game nothing leaves through the top: the buttons live there */
@@ -2514,24 +2522,32 @@ function skyStar(speed,amb){const W=SKY.W,H=SKY.H,a=Math.floor(Math.random()*4),
   const A=at(a,Math.random()),B=at(b,Math.random()),L=Math.hypot(B[0]-A[0],B[1]-A[1]),ux=(B[0]-A[0])/L,uy=(B[1]-A[1])/L,pad=30;
   const s0=[A[0]-ux*pad,A[1]-uy*pad];
   return{x:s0[0],y:s0[1],ux:ux,uy:uy,v:speed,run:0,L:L+pad,pad:pad,ex:B[0],ey:B[1],es:skyProject(B[0],B[1]),trail:[],done:0,amb:!!amb,age:0,hue:Math.random()};}
+function skyStarG(speed){const G=SKY.geo,W=SKY.W,H=SKY.H,side=['l','r','b'][Math.floor(Math.random()*3)],R=Math.random;let ep,A;
+  if(side==='l'){ep=[G.x0,G.y0+G.r+R()*G.b];A=[-40,Math.max(40,Math.min(H-40,ep[1]+(R()-.5)*H*.5))];}
+  else if(side==='r'){ep=[G.x1,G.y0+G.r+R()*G.b];A=[W+40,Math.max(40,Math.min(H-40,ep[1]+(R()-.5)*H*.5))];}
+  else{ep=[G.x0+G.r+R()*G.a,G.y1];A=[Math.max(40,Math.min(W-40,ep[0]+(R()-.5)*W*.6)),H+40];}
+  const L=Math.hypot(ep[0]-A[0],ep[1]-A[1]),ux=(ep[0]-A[0])/L,uy=(ep[1]-A[1])/L,pad=30,s0=[A[0]-ux*pad,A[1]-uy*pad];
+  return{x:s0[0],y:s0[1],ux:ux,uy:uy,v:speed,run:0,L:L+pad,pad:pad,ex:ep[0],ey:ep[1],es:skyProject(ep[0],ep[1]),trail:[],done:0,amb:false,age:0,hue:R()};}
 function skyHit(x,y){return SKY.amb.find(a=>!a.done&&Math.hypot(a.x-x,a.y-y)<60);}
 function skyStart(){const best=(()=>{try{return +localStorage.getItem('ppSkyBest')||0;}catch(_){return 0;}})();
-  SKY.g={lives:3,level:1,score:0,best:best,stars:[],need:0,left:0,spawnT:0,s:skyPer()*.4,len:0,drag:false,over:false,overT:0,banner:{t:'level 1',u:performance.now()},pause:performance.now()+1400,fx:[]};skyLevel(SKY.g);SKY.amb=[];}
-function skyLevel(g){const mn=Math.min(SKY.W,SKY.H);g.need=g.left=6+3*(g.level-1);g.len=Math.max(84,mn*.3*Math.pow(.95,g.level-1));g.speed=Math.min(1100,Math.max(300,mn*.5)*(1+.12*(g.level-1)));g.gap=Math.max(.5,1.5-.12*(g.level-1));g.spawnT=0;}
+  skyGeo();SKY.g={lives:3,level:1,score:0,best:best,stars:[],need:0,left:0,spawnT:0,s:0,tg:null,len:0,drag:false,over:false,overT:0,banner:{t:'level 1',u:performance.now()},pause:performance.now()+1400,fx:[]};skyLevel(SKY.g);SKY.amb=[];}
+function skyLevel(g){const mn=Math.min(SKY.W,SKY.H);g.need=g.left=6+3*(g.level-1);g.len=Math.max(70,mn*.26*Math.pow(.95,g.level-1));g.speed=Math.min(1100,Math.max(300,mn*.5)*(1+.12*(g.level-1)));g.gap=Math.max(.5,1.5-.12*(g.level-1));g.spawnT=0;}
 function skyEnd(){SKY.g=null;SKY.amb=[];SKY.dark=0;}
 function skyOver(g){g.over=true;g.overT=performance.now();if(g.score>g.best){g.best=g.score;try{localStorage.setItem('ppSkyBest',g.score);}catch(_){}}}
 function skyStep(dt,t){const g=SKY.g,W=SKY.W,H=SKY.H,calm=matchMedia('(prefers-reduced-motion: reduce)').matches;
   SKY.dark+=((g?1:0)-SKY.dark)*Math.min(1,dt*2.2);
   if(!g){SKY.next-=dt;if(SKY.next<=0&&SKY.amb.length<2){SKY.next=3.5+Math.random()*4;if(!calm)SKY.amb.push(skyStar(Math.min(W,H)*.42,true));}}
   const list=g?g.stars:SKY.amb;
-  if(g&&!g.over&&performance.now()>g.pause){g.spawnT-=dt;if(g.left>0&&g.spawnT<=0){g.spawnT=g.gap*(.7+Math.random()*.6);g.left--;g.stars.push(skyStar(g.speed*(.85+Math.random()*.3)));}
+  if(g&&!g.over&&performance.now()>g.pause){g.spawnT-=dt;if(g.left>0&&g.spawnT<=0){g.spawnT=g.gap*(.7+Math.random()*.6);g.left--;g.stars.push(skyStarG(g.speed*(.85+Math.random()*.3)));}
     if(g.left===0&&!g.stars.some(s=>!s.done)){g.level++;skyLevel(g);g.banner={t:'level '+g.level,u:performance.now()};g.pause=performance.now()+2200;}}
-  if(g&&!g.over&&g.kv&&(g.kv[0]||g.kv[1])){const t=skyTan(g.s);g.s=skyBar(g.s+(g.kv[0]*t[0]+g.kv[1]*t[1])*Math.min(W,H)*1.1*dt,g.len);}
+  if(g&&g.s===0&&!g.init){g.init=1;const G=SKY.geo;g.s=G.a+2*G.q+G.b+G.a/2;g.tg=null;}
+  if(g&&!g.over&&g.kv&&(g.kv[0]||g.kv[1])){const t=skyTan(g.s);g.s=skyBar(g.s+(g.kv[0]*t[0]+g.kv[1]*t[1])*Math.min(W,H)*1.1*dt);g.tg=null;}
+  else if(g&&!g.over&&g.tg!=null){const P=skyPer();let d=g.tg-g.s;d=((d+P/2)%P+P)%P-P/2;const mv=Math.min(Math.abs(d),Math.min(W,H)*2.4*dt);g.s=skyBar(g.s+Math.sign(d)*mv);if(Math.abs(d)<1)g.tg=null;}
   list.forEach(s=>{s.age+=dt;s.run+=s.v*dt;s.x+=s.ux*s.v*dt;s.y+=s.uy*s.v*dt;s.trail.push([s.x,s.y]);if(s.trail.length>26)s.trail.shift();
     s.sp=s.sp||[];if(!s.done){s.em=(s.em||0)-dt;while(s.em<=0){s.em+=.024;const an=Math.random()*6.283,sd=8+Math.random()*26;s.sp.push({x:s.x-s.ux*Math.random()*10,y:s.y-s.uy*Math.random()*10,vx:Math.cos(an)*sd-s.ux*14,vy:Math.cos(an+1.3)*sd*.6+Math.sin(an)*sd*.4-s.uy*14+9,age:0,life:.7+Math.random()*.8,r:2.6+Math.random()*4.4,ph:Math.random()*6});}}
     s.sp.forEach(q=>{q.age+=dt;q.x+=q.vx*dt;q.y+=q.vy*dt;q.vx*=.985;q.vy*=.985;});s.sp=s.sp.filter(q=>q.age<q.life);
     if(!s.done&&s.run>=s.L){s.done=1;if(g){if(skyDist(s.es,g.s)<g.len/2+16){g.score++;s.caught=1;g.fx.push({x:s.ex,y:s.ey,t:t,ok:1});}else{g.lives--;g.fx.push({x:s.ex,y:s.ey,t:t,ok:0});if(g.lives<=0)skyOver(g);}}}});
-  for(let i=list.length-1;i>=0;i--)if(list[i].run>list[i].L+260&&!(list[i].sp&&list[i].sp.length))list.splice(i,1);
+  for(let i=list.length-1;i>=0;i--)if(list[i].run>list[i].L+110&&!(list[i].sp&&list[i].sp.length))list.splice(i,1);
   if(g)g.fx=g.fx.filter(f=>t-f.t<.9);}
 function skyDraw(t,dt){const cv=SKY.cv;if(!cv)return;const x=cv.getContext('2d'),W=SKY.W,H=SKY.H,d=SKY.d,tone=skyTone(),g=SKY.g;x.setTransform(d,0,0,d,0,0);
   const c0=SKY_BG[tone]||SKY_BG.day,k=SKY.dark,c=[0,1,2].map(i=>Math.round(c0[i]+(SKY_GAME_BG[i]-c0[i])*k)),sp0=[10,8,30],mix=(a,b,u)=>'rgb('+[0,1,2].map(i=>Math.round(a[i]+(b[i]-a[i])*u))+')';
@@ -2562,13 +2578,15 @@ function skyDraw(t,dt){const cv=SKY.cv;if(!cv)return;const x=cv.getContext('2d')
     const gr=x.createRadialGradient(s.x,s.y,0,s.x,s.y,30);gr.addColorStop(0,'rgba(255,255,255,'+al+')');gr.addColorStop(.25,'rgba(255,220,238,'+(al*.6)+')');gr.addColorStop(1,'rgba(255,190,225,0)');x.fillStyle=gr;x.beginPath();x.arc(s.x,s.y,30,0,6.283);x.fill();
     x.shadowColor='rgba(255,180,220,1)';x.shadowBlur=12;{const pu=1+.12*Math.sin(s.age*14);spark(s.x,s.y,15*pu,al,0);spark(s.x,s.y,9*pu,al*.9,.785);}x.shadowBlur=0;x.globalAlpha=1;};
   const list=g?g.stars:SKY.amb;
-  list.forEach(s=>{const al=s.done?Math.max(0,1-(s.run-s.L)/220):Math.min(1,s.age*3);if(al<=0){sparks(s);return;}
+  list.forEach(s=>{const al=s.done?Math.max(0,1-(s.run-s.L)/90):Math.min(1,s.age*3);if(al<=0){sparks(s);return;}
     if(g&&!s.done){const near=Math.min(1,Math.max(0,(s.run-s.L*.2)/(s.L*.8)));x.globalAlpha=.15+.5*near;x.strokeStyle='rgba(255,236,246,1)';x.lineWidth=2;x.beginPath();x.arc(s.ex,s.ey,10+(1-near)*14,0,6.283);x.stroke();x.globalAlpha=1;}
     sparks(s);if(s.caught)return;star(s,al);});
   if(g){
     g.fx.forEach(f=>{const u=(t-f.t)/.9;x.globalAlpha=1-u;x.strokeStyle=f.ok?'rgba(255,245,200,1)':'rgba(255,130,150,1)';x.lineWidth=3;x.beginPath();x.arc(f.x,f.y,10+u*60,0,6.283);x.stroke();x.globalAlpha=1;});
-    /* the line on the edge of the sky */
-    const n=14,ins=20;x.lineCap='round';x.lineWidth=9;x.shadowColor='rgba(255,170,215,.95)';x.shadowBlur=18;x.strokeStyle='rgba(255,246,250,.97)';x.beginPath();
+    /* the light dotted path the line follows */
+    {const P=skyPer();x.save();x.lineCap='round';x.setLineDash([.1,11]);x.lineWidth=3.4;x.strokeStyle='rgba(255,240,248,'+(.5*Math.min(1,k*1.4)).toFixed(3)+')';x.beginPath();for(let q=0;q<=P+4;q+=4){const p=skyPt(q);q?x.lineTo(p[0],p[1]):x.moveTo(p[0],p[1]);}x.stroke();x.restore();}
+    /* the line that catches the stars */
+    const n=14,ins=0;x.lineCap='round';x.lineWidth=9;x.shadowColor='rgba(255,170,215,.95)';x.shadowBlur=18;x.strokeStyle='rgba(255,246,250,.97)';x.beginPath();
     for(let i=0;i<=n;i++){const q=g.s-g.len/2+g.len*i/n,p=skyPt(q),tn=skyTan(q),X=p[0]-tn[1]*ins,Y=p[1]+tn[0]*ins;i?x.lineTo(X,Y):x.moveTo(X,Y);}x.stroke();x.shadowBlur=0;
     skyNumber(g.score);const bu=(performance.now()-g.banner.u)/2200;if(bu<1&&!g.over)skyWord(x,g.banner.t,Math.min(64,W/9),W/2,H*.4,Math.sin(Math.min(1,bu)*3.1416)**.5);
     if(g.over){const k=Math.min(W/800,H/600),ou=Math.min(1,(performance.now()-g.overT)/600),y=H/2+130*k;skyWord(x,'best: '+g.best,Math.min(28,W/18),W/2,y+20,ou);skyWord(x,'tap to play again',Math.min(26,W/20),W/2,y+20+Math.min(40,W/14),ou*(.7+.3*Math.sin(t*3)));}}}
