@@ -2833,12 +2833,12 @@ new MutationObserver(()=>{if(LAKE.on&&!LAKE.busy&&LAKE.inner)lakeMount(LAKE.key,
 ppSparkTrail(()=>(typeof LAKE!=='undefined'&&LAKE.on)||FLOOR.on||FLOOR.a>0||(typeof ROOM!=='undefined'&&ROOM.on));
 
 /* ---------- prototype-only tuner for the homepage colours (only exists when the page sets window.PP_TUNE) ---------- */
-const TN_DEF=()=>({ovTop:'#ff96c3',ovBot:'#ffd0e2',ovA:0,ovBlend:'soft-light',light:0,desat:0,cloud:'#ffb3d1',cloudMix:0,far:'#ffdcea',farMix:0});
+const TN_DEF=()=>({ovTop:'#ff96c3',ovMid:'#ffb3d6',ovBot:'#ffd0e2',ovA:0,ovBlend:'soft-light',light:0,desat:0,cloud:'#ffb3d1',cloudMix:0,far:'#ffdcea',farMix:0});
 const TN={day:TN_DEF(),sunset:TN_DEF(),night:TN_DEF()};
 const TN_ON=!!window.PP_TUNE;
 const tnTone=()=>night?'night':skyName==='sunset'?'sunset':'day';
 function ppTuneSky(x,W,H){if(!TN_ON)return;const T=TN[tnTone()];if(!T)return;
-  if(T.ovA>0){const g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,T.ovTop);g.addColorStop(1,T.ovBot);x.save();x.globalCompositeOperation=T.ovBlend;x.globalAlpha=T.ovA;x.fillStyle=g;x.fillRect(0,0,W,H);x.restore();}
+  if(T.ovA>0){const g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,T.ovTop);g.addColorStop(.5,T.ovMid);g.addColorStop(1,T.ovBot);x.save();x.globalCompositeOperation=T.ovBlend;x.globalAlpha=T.ovA;x.fillStyle=g;x.fillRect(0,0,W,H);x.restore();}
   if(T.light){x.save();x.globalCompositeOperation=T.light>0?'screen':'multiply';x.globalAlpha=Math.abs(T.light);x.fillStyle=T.light>0?'#ffffff':'#000000';x.fillRect(0,0,W,H);x.restore();}
   if(T.desat>0){x.save();x.globalCompositeOperation='saturation';x.globalAlpha=T.desat;x.fillStyle='#808080';x.fillRect(0,0,W,H);x.restore();}}
 function ppTuneCloud(c){if(!TN_ON)return c;const T=TN[tnTone()];return T&&T.cloudMix?c.lerp(new THREE.Color(T.cloud),T.cloudMix):c;}
@@ -2854,7 +2854,7 @@ function tnUI(){if(!TN_ON||document.getElementById('ppTuneBtn'))return;
   document.head.appendChild(st);
   const btn=document.createElement('button');btn.id='ppTuneBtn';btn.type='button';btn.textContent='tune colours';document.body.appendChild(btn);
   const p=document.createElement('div');p.id='ppTune';document.body.appendChild(p);['pointerdown','pointerup','touchstart','wheel','click','keydown'].forEach(ev=>{p.addEventListener(ev,e=>e.stopPropagation());btn.addEventListener(ev,e=>e.stopPropagation());});
-  const rows=[['h','sky overlay'],['ovTop','top colour','color'],['ovBot','bottom colour','color'],['ovA','overlay opacity','range',0,1,.01],['ovBlend','overlay blend','select',['soft-light','normal','multiply','screen','overlay','color','hue','saturation','luminosity','color-dodge']],
+  const rows=[['h','sky overlay'],['ovTop','top colour','color'],['ovMid','middle colour','color'],['ovBot','bottom colour','color'],['ovA','overlay opacity','range',0,1,.01],['ovBlend','overlay blend','select',['soft-light','normal','multiply','screen','overlay','color','hue','saturation','luminosity','color-dodge']],
     ['h','whole sky'],['light','darker  /  lighter','range',-.6,.6,.01],['desat','less colour','range',0,1,.01],
     ['h','clouds'],['cloud','main cloud colour','color'],['cloudMix','main cloud mix','range',0,1,.01],['far','far clouds colour','color'],['farMix','far clouds mix','range',0,1,.01]];
   function build(){p.innerHTML='';const T=TN[tnTone()],hd=document.createElement('div');hd.className='hd';const h=document.createElement('h4');h.textContent='tuning: '+tnTone()+' (clock button changes time of day)';const mn=document.createElement('button');mn.type='button';mn.className='mn';mn.textContent=p.classList.contains('min')?'show':'hide';mn.onclick=()=>{p.classList.toggle('min');mn.textContent=p.classList.contains('min')?'show':'hide';};hd.append(h,mn);p.appendChild(hd);
