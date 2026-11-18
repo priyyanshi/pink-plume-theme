@@ -884,14 +884,14 @@ function skyTones(){const tone=night?'night':skyName==='sunset'?'sunset':'day',s
   // background clouds follow the time of day: white by day, coral at sunset, dusky lilac at night
   const bgT={day:[new THREE.Color('#FFDCEA'),.62],sunset:[new THREE.Color('#FF8E8A'),.75],night:[new THREE.Color('#6A4060'),.88]}[tone];
   const WH=new THREE.Color('#ffffff'),wk={day:.6,sunset:.3,night:.22}[tone];
-  softCloud.userData.far.children.forEach(g=>g.children.forEach(sp=>{const v=sp.userData;if(!v.c0)v.c0=sp.material.color.clone();sp.material.color.copy(v.c0).lerp(bgT[0],bgT[1]);if(g.userData.white)sp.material.color.lerp(WH,wk);}));
+  softCloud.userData.far.children.forEach(g=>g.children.forEach(sp=>{const v=sp.userData;if(!v.c0)v.c0=sp.material.color.clone();sp.material.color.copy(v.c0).lerp(bgT[0],bgT[1]);if(g.userData.white)sp.material.color.lerp(WH,wk);ppTuneFar(sp.material.color);}));
   // the main cloud takes on the light of the hour but stays pink
   if(shopMesh&&shopMesh.userData.fluff)shopMesh.material.color.copy(cloudTone(CLOUD_PINK));
   softCloud.children.forEach(o=>{if(!o.isSprite||stickers.includes(o)||stickers.some(sp=>sp.userData.full===o))return;const v=o.userData;if(!v.c0)v.c0=o.material.color.clone();o.material.color.copy(cloudTone(v.c0));});
 }
 const DAY_PINK=new THREE.Color('#FFA8C9'),CLOUD_PINK=new THREE.Color('#F9B6CE');
 function cloudTone(c){const tone=night?'night':skyName==='sunset'?'sunset':'day';c=c.clone();
-  if(tone==='day')return c.lerp(DAY_PINK,.4);return c.multiply(tone==='sunset'?new THREE.Color(1.04,.84,.8):new THREE.Color(.74,.52,.66));}  // lifts the main cloud to a lighter, sunlit pink by day
+  if(tone==='day')return ppTuneCloud(c.lerp(DAY_PINK,.4));return ppTuneCloud(c.multiply(tone==='sunset'?new THREE.Color(1.04,.84,.8):new THREE.Color(.74,.52,.66)));}  // lifts the main cloud to a lighter, sunlit pink by day
 let autoSky=false;
 const TIME_LABEL={auto:'Time of day: follows your clock',day:'Day',sunset:'Sunset',night:'Night'};
 function timeMode(){return autoSky?'auto':night?'night':skyName==='sunset'?'sunset':'day';}
@@ -933,6 +933,7 @@ function paintSky0(){
     x.globalCompositeOperation='source-over';
     seed=11;for(let i=0;i<Math.round(W*H/7000);i++){const r=rng();x.fillStyle=`rgba(255,240,230,${.25+r*.55})`;x.beginPath();x.arc(rng()*W,rng()*H*.55,.4+r*1.2,0,Math.PI*2);x.fill();}
   }
+  ppTuneSky(x,W,H);
   if(!night){const wide=W>H,rx=wide?W*.36:W*.56,ry=wide?H*.43:H*.19,cy=H*.5;x.save();x.translate(W/2,cy);x.scale(rx,ry);const sg2=x.createRadialGradient(0,0,0,0,0,1.55);const c=skyName==='sunset'?'140,70,110':'118,84,140',k=skyName==='sunset'?.62:1;sg2.addColorStop(0,'rgba('+c+','+(.34*k)+')');sg2.addColorStop(.62,'rgba('+c+','+(.3*k)+')');sg2.addColorStop(1,'rgba('+c+',0)');x.globalCompositeOperation='multiply';x.fillStyle=sg2;x.fillRect(-2,-2,4,4);x.restore();x.globalCompositeOperation='source-over';}
   // a soft light behind the cloud so the blocks stay crisp against the brushwork
   if(mirror)setTimeout(refreshMirror,0);
@@ -2124,7 +2125,7 @@ function route(){const h=location.hash.slice(1);
   document.getElementById('pgrid').innerHTML=Array.from({length:6},(_,i)=>`<div class="card"><div class="img"></div><div class="t">${c.name.replace(/s$/,'')} piece ${i+1}<span>$—</span></div></div>`).join('');
   panel.classList.add('on');panel.scrollTop=0;}
 // ================= the cloud room: step inside the main cloud; the pieces hang in frames all round, salon style =================
-function roomTone(){const c=cloudTone(CLOUD_PINK);c.r=Math.min(1,c.r);c.g=Math.min(1,c.g);c.b=Math.min(1,c.b);return ppTuneBg(c);}   // clamped: an over-bright red channel used to wrap round into teal when written as a CSS colour
+function roomTone(){const c=cloudTone(CLOUD_PINK);c.r=Math.min(1,c.r);c.g=Math.min(1,c.g);c.b=Math.min(1,c.b);return c;}   // clamped: an over-bright red channel used to wrap round into teal when written as a CSS colour
 function frameCanvas(img,wU,shape,photo){const S=300,W=Math.round(wU*S),ar=photo?(shape==='oval'?1.2:.8):Math.min(1.3,Math.max(.8,img.naturalHeight/img.naturalWidth)),H=Math.round(W*ar),pad=26,B=Math.round(Math.max(22,W*.075));
   const c=document.createElement('canvas');c.width=W+pad*2;c.height=H+pad*2;const x=c.getContext('2d');x.translate(pad,pad);
   const path=k=>{x.beginPath();if(shape==='oval')x.ellipse(W/2,H/2,W/2-k,H/2-k,0,0,7);else{const r=Math.max(2,12-k*.3);x.moveTo(k+r,k);x.arcTo(W-k,k,W-k,H-k,r);x.arcTo(W-k,H-k,k,H-k,r);x.arcTo(k,H-k,k,k,r);x.arcTo(k,k,W-k,k,r);x.closePath();}};
@@ -2831,35 +2832,39 @@ new MutationObserver(()=>{if(LAKE.on&&!LAKE.busy&&LAKE.inner)lakeMount(LAKE.key,
 
 ppSparkTrail(()=>(typeof LAKE!=='undefined'&&LAKE.on)||FLOOR.on||FLOOR.a>0||(typeof ROOM!=='undefined'&&ROOM.on));
 
-/* ---------- prototype-only tuner for the shop's colours (only exists when the page sets window.PP_TUNE) ---------- */
-const TN_DEF=()=>({bg:'#ffd0e2',bgMix:0,sh:'#341a46',shA:.5,shR:34,wash:'#ff96c3',washA:.18,blend:'normal',tint:'#ffe2ec',tintA:1});
-const TN={day:TN_DEF(),sunset:TN_DEF(),night:Object.assign(TN_DEF(),{sh:'#08061a',shA:.55})};
+/* ---------- prototype-only tuner for the homepage colours (only exists when the page sets window.PP_TUNE) ---------- */
+const TN_DEF=()=>({ovTop:'#ff96c3',ovBot:'#ffd0e2',ovA:0,ovBlend:'soft-light',light:0,desat:0,cloud:'#ffb3d1',cloudMix:0,far:'#ffdcea',farMix:0});
+const TN={day:TN_DEF(),sunset:TN_DEF(),night:TN_DEF()};
 const TN_ON=!!window.PP_TUNE;
-const tnTone=()=>document.body.dataset.tone||'day';
-const tnRGB=h=>{h=String(h).replace('#','');if(h.length===3)h=h.split('').map(x=>x+x).join('');const n=parseInt(h,16)||0;return [n>>16&255,n>>8&255,n&255];};
-function ppTuneBg(c){if(!TN_ON)return c;const T=TN[tnTone()];if(!T||!T.bgMix)return c;return c.lerp(new THREE.Color(T.bg),T.bgMix);}
-function tnApply(){if(!TN_ON)return;const T=TN[tnTone()]||TN.day,sc=tnRGB(T.sh),wc=tnRGB(T.wash),tc=tnRGB(T.tint),a=T.shA,r=T.shR,rg=(al)=>'rgba('+sc.join(',')+','+al.toFixed(3)+')';
-  const sh=document.getElementById('roomShade');if(sh)sh.style.background='linear-gradient(to bottom,'+rg(a)+','+rg(a*.44)+' '+(r*.41).toFixed(1)+'%,'+rg(0)+' '+r+'%,'+rg(0)+' '+(100-r)+'%,'+rg(a*.44)+' '+(100-r*.41).toFixed(1)+'%,'+rg(a)+')';
-  const b=document.body.style,w='rgba('+wc.join(',')+','+T.washA+')';b.setProperty('--ovw','linear-gradient('+w+','+w+')');b.setProperty('--ovb',T.blend);
-  b.setProperty('--ovm','linear-gradient(rgb('+tc.join(',')+'),rgb('+tc.join(',')+'))');b.setProperty('--ovo',String(T.tintA));
-  if(typeof ROOM!=='undefined')ROOM.toneKey='';}
-function tnSave(){try{localStorage.setItem('pp-tune',JSON.stringify(TN));}catch(_){}}
+const tnTone=()=>night?'night':skyName==='sunset'?'sunset':'day';
+function ppTuneSky(x,W,H){if(!TN_ON)return;const T=TN[tnTone()];if(!T)return;
+  if(T.ovA>0){const g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,T.ovTop);g.addColorStop(1,T.ovBot);x.save();x.globalCompositeOperation=T.ovBlend;x.globalAlpha=T.ovA;x.fillStyle=g;x.fillRect(0,0,W,H);x.restore();}
+  if(T.light){x.save();x.globalCompositeOperation=T.light>0?'screen':'multiply';x.globalAlpha=Math.abs(T.light);x.fillStyle=T.light>0?'#ffffff':'#000000';x.fillRect(0,0,W,H);x.restore();}
+  if(T.desat>0){x.save();x.globalCompositeOperation='saturation';x.globalAlpha=T.desat;x.fillStyle='#808080';x.fillRect(0,0,W,H);x.restore();}}
+function ppTuneCloud(c){if(!TN_ON)return c;const T=TN[tnTone()];return T&&T.cloudMix?c.lerp(new THREE.Color(T.cloud),T.cloudMix):c;}
+function ppTuneFar(c){if(!TN_ON)return c;const T=TN[tnTone()];return T&&T.farMix?c.lerp(new THREE.Color(T.far),T.farMix):c;}
+let tnRaf=0;
+function tnApply(){if(!TN_ON||tnRaf)return;tnRaf=requestAnimationFrame(()=>{tnRaf=0;try{paintSky();skyTones();}catch(e){}if(typeof ROOM!=='undefined')ROOM.toneKey='';});}
+function tnSave(){try{localStorage.setItem('pp-tune-home',JSON.stringify(TN));}catch(_){}}
 function tnUI(){if(!TN_ON||document.getElementById('ppTuneBtn'))return;
-  try{const s=JSON.parse(localStorage.getItem('pp-tune')||'null');if(s)['day','sunset','night'].forEach(k=>{if(s[k])Object.assign(TN[k],s[k]);});}catch(_){}
-  const st=document.createElement('style');st.textContent='#ppTuneBtn{position:fixed;left:12px;bottom:58px;z-index:60;display:none;padding:8px 14px;border-radius:999px;border:1.5px dashed #7a2b55;background:rgba(255,246,250,.8);color:#7a2b55;font:600 12px system-ui,sans-serif;letter-spacing:.06em}body.inroom #ppTuneBtn{display:block}'+
-  '#ppTune{position:fixed;left:0;right:0;bottom:0;z-index:61;max-height:56vh;overflow:auto;background:rgba(255,248,252,.94);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-top:2px dashed #7a2b55;padding:12px 16px 20px;font:13px system-ui,sans-serif;color:#4a1634;display:none;touch-action:pan-y}#ppTune.on{display:block}'+
-  '#ppTune h4{margin:0 0 8px;font:700 13px system-ui,sans-serif}#ppTune .r{display:flex;align-items:center;gap:10px;margin:7px 0}#ppTune .r label{flex:0 0 118px}#ppTune .r input[type=range]{flex:1}#ppTune .r b{flex:0 0 40px;text-align:right;font-weight:600}#ppTune .r input[type=color]{width:44px;height:28px;padding:0;border:1px solid #c9a;background:none}#ppTune .r select{flex:1}#ppTune .bt{display:flex;gap:8px;margin-top:12px}#ppTune button{padding:8px 12px;border-radius:999px;border:1.5px dashed #7a2b55;background:#fff;color:#7a2b55;font:600 12px system-ui,sans-serif}';
+  try{const s=JSON.parse(localStorage.getItem('pp-tune-home')||'null');if(s)['day','sunset','night'].forEach(k=>{if(s[k])Object.assign(TN[k],s[k]);});}catch(_){}
+  const st=document.createElement('style');st.textContent='#ppTuneBtn{position:fixed;left:12px;bottom:58px;z-index:60;padding:8px 14px;border-radius:999px;border:1.5px dashed #7a2b55;background:rgba(255,246,250,.8);color:#7a2b55;font:600 12px system-ui,sans-serif;letter-spacing:.06em}body.floor #ppTuneBtn,body.sky #ppTuneBtn{display:none}'+
+  '#ppTune{position:fixed;left:0;right:0;bottom:0;z-index:61;max-height:46vh;overflow:auto;background:rgba(255,248,252,.92);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-top:2px dashed #7a2b55;padding:10px 16px 18px;font:13px system-ui,sans-serif;color:#4a1634;display:none;touch-action:pan-y}#ppTune.on{display:block}'+
+  '#ppTune h4{margin:0 0 6px;font:700 13px system-ui,sans-serif}#ppTune h5{margin:12px 0 2px;font:700 11px system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#a04a78}#ppTune .r{display:flex;align-items:center;gap:10px;margin:6px 0}#ppTune .r label{flex:0 0 112px}#ppTune .r input[type=range]{flex:1}#ppTune .r b{flex:0 0 40px;text-align:right;font-weight:600}#ppTune .r input[type=color]{width:44px;height:28px;padding:0;border:1px solid #c9a;background:none}#ppTune .r select{flex:1}#ppTune .bt{display:flex;gap:8px;margin-top:12px}#ppTune button{padding:8px 12px;border-radius:999px;border:1.5px dashed #7a2b55;background:#fff;color:#7a2b55;font:600 12px system-ui,sans-serif}';
   document.head.appendChild(st);
-  const btn=document.createElement('button');btn.id='ppTuneBtn';btn.type='button';btn.textContent='tune';document.body.appendChild(btn);
-  const p=document.createElement('div');p.id='ppTune';document.body.appendChild(p);['pointerdown','pointerup','touchstart','wheel','click'].forEach(ev=>{p.addEventListener(ev,e=>e.stopPropagation());btn.addEventListener(ev,e=>e.stopPropagation());});
-  const rows=[['bg','room colour','color'],['bgMix','room colour mix','range',0,1,.01],['sh','top/bottom shade','color'],['shA','shade strength','range',0,1,.01],['shR','shade reach %','range',0,60,1],['wash','picture wash','color'],['washA','wash strength','range',0,1,.01],['blend','wash blend','select',['normal','multiply','screen','overlay','soft-light','color','hue','luminosity']],['tint','picture tint (multiply)','color'],['tintA','tint strength','range',0,1,.01]];
-  function build(){p.innerHTML='';const T=TN[tnTone()],h=document.createElement('h4');h.textContent='tuning: '+tnTone()+'  (switch time of day with the clock button)';p.appendChild(h);
-    rows.forEach(([k,l,ty,a,b,s])=>{const r=document.createElement('div');r.className='r';const lb=document.createElement('label');lb.textContent=l;r.appendChild(lb);let i;
+  const btn=document.createElement('button');btn.id='ppTuneBtn';btn.type='button';btn.textContent='tune colours';document.body.appendChild(btn);
+  const p=document.createElement('div');p.id='ppTune';document.body.appendChild(p);['pointerdown','pointerup','touchstart','wheel','click','keydown'].forEach(ev=>{p.addEventListener(ev,e=>e.stopPropagation());btn.addEventListener(ev,e=>e.stopPropagation());});
+  const rows=[['h','sky overlay'],['ovTop','top colour','color'],['ovBot','bottom colour','color'],['ovA','overlay opacity','range',0,1,.01],['ovBlend','overlay blend','select',['soft-light','normal','multiply','screen','overlay','color','hue','saturation','luminosity','color-dodge']],
+    ['h','whole sky'],['light','darker  /  lighter','range',-.6,.6,.01],['desat','less colour','range',0,1,.01],
+    ['h','clouds'],['cloud','main cloud colour','color'],['cloudMix','main cloud mix','range',0,1,.01],['far','far clouds colour','color'],['farMix','far clouds mix','range',0,1,.01]];
+  function build(){p.innerHTML='';const T=TN[tnTone()],h=document.createElement('h4');h.textContent='tuning the homepage: '+tnTone()+'  (change time of day with the clock button)';p.appendChild(h);
+    rows.forEach(([k,l,ty,a,b,s])=>{if(k==='h'){const e=document.createElement('h5');e.textContent=l;p.appendChild(e);return;}
+      const r=document.createElement('div');r.className='r';const lb=document.createElement('label');lb.textContent=l;r.appendChild(lb);let i;
       if(ty==='select'){i=document.createElement('select');a.forEach(o=>{const op=document.createElement('option');op.value=o;op.textContent=o;i.appendChild(op);});i.value=T[k];}
       else{i=document.createElement('input');i.type=ty;if(ty==='range'){i.min=a;i.max=b;i.step=s;}i.value=T[k];}
       const v=document.createElement('b');v.textContent=ty==='range'?T[k]:'';
       const on=()=>{T[k]=ty==='range'?+i.value:i.value;if(ty==='range')v.textContent=T[k];tnApply();tnSave();};i.addEventListener('input',on);i.addEventListener('change',on);r.appendChild(i);r.appendChild(v);p.appendChild(r);});
-    const bt=document.createElement('div');bt.className='bt';const rs=document.createElement('button');rs.type='button';rs.textContent='reset '+tnTone();rs.onclick=()=>{TN[tnTone()]=Object.assign(TN_DEF(),tnTone()==='night'?{sh:'#08061a',shA:.55}:{});tnApply();tnSave();build();};
+    const bt=document.createElement('div');bt.className='bt';const rs=document.createElement('button');rs.type='button';rs.textContent='reset '+tnTone();rs.onclick=()=>{TN[tnTone()]=TN_DEF();tnApply();tnSave();build();};
     const cp=document.createElement('button');cp.type='button';cp.textContent='copy settings';cp.onclick=()=>{const t=JSON.stringify(TN);const fb=()=>{try{const x=document.createElement('textarea');x.value=t;document.body.appendChild(x);x.select();document.execCommand('copy');x.remove();}catch(_){}};try{navigator.clipboard.writeText(t).catch(fb);}catch(_){fb();}cp.textContent='copied!';setTimeout(()=>cp.textContent='copy settings',1400);};
     const cl=document.createElement('button');cl.type='button';cl.textContent='close';cl.onclick=()=>p.classList.remove('on');bt.append(rs,cp,cl);p.appendChild(bt);}
   btn.onclick=()=>{build();p.classList.toggle('on');};
