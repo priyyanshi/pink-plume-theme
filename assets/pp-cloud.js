@@ -2833,16 +2833,19 @@ new MutationObserver(()=>{if(LAKE.on&&!LAKE.busy&&LAKE.inner)lakeMount(LAKE.key,
 ppSparkTrail(()=>(typeof LAKE!=='undefined'&&LAKE.on)||FLOOR.on||FLOOR.a>0||(typeof ROOM!=='undefined'&&ROOM.on));
 
 /* ---------- prototype-only tuner for the homepage colours (only exists when the page sets window.PP_TUNE) ---------- */
-const TN_DEF=()=>({ovTop:'#ff96c3',ovMid:'#ffb3d6',ovBot:'#ffd0e2',ovA:0,ovBlend:'soft-light',light:0,desat:0,cloud:'#ffb3d1',cloudMix:0,far:'#ffdcea',farMix:0});
-const TN={day:TN_DEF(),sunset:TN_DEF(),night:TN_DEF()};
+const TN_BASE={day:{ovTop:'#ff96c3',ovMid:'#ffb3d6',ovBot:'#11310c',ovA:0,ovBlend:'soft-light',light:0.03,desat:0,cloud:'#ec8eb3',cloudMix:0.13,far:'#ffdcea',farMix:0},
+  sunset:{ovTop:'#ff96c3',ovMid:'#ffb3d6',ovBot:'#ffd0e2',ovA:0,ovBlend:'soft-light',light:0,desat:0,cloud:'#ffb3d1',cloudMix:0,far:'#ffdcea',farMix:0},
+  night:{ovTop:'#ff96c3',ovMid:'#ffb3d6',ovBot:'#ffd0e2',ovA:0,ovBlend:'soft-light',light:0,desat:0,cloud:'#ffb3d1',cloudMix:0,far:'#ffdcea',farMix:0}};   /* the chosen look; the tuner (prototype only) edits copies of these */
+const TN_DEF=k=>Object.assign({},TN_BASE[k]);
+const TN={day:TN_DEF('day'),sunset:TN_DEF('sunset'),night:TN_DEF('night')};
 const TN_ON=!!window.PP_TUNE;
 const tnTone=()=>night?'night':skyName==='sunset'?'sunset':'day';
-function ppTuneSky(x,W,H){if(!TN_ON)return;const T=TN[tnTone()];if(!T)return;
+function ppTuneSky(x,W,H){const T=TN[tnTone()];if(!T)return;
   if(T.ovA>0){const g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,T.ovTop);g.addColorStop(.5,T.ovMid);g.addColorStop(1,T.ovBot);x.save();x.globalCompositeOperation=T.ovBlend;x.globalAlpha=T.ovA;x.fillStyle=g;x.fillRect(0,0,W,H);x.restore();}
   if(T.light){x.save();x.globalCompositeOperation=T.light>0?'screen':'multiply';x.globalAlpha=Math.abs(T.light);x.fillStyle=T.light>0?'#ffffff':'#000000';x.fillRect(0,0,W,H);x.restore();}
   if(T.desat>0){x.save();x.globalCompositeOperation='saturation';x.globalAlpha=T.desat;x.fillStyle='#808080';x.fillRect(0,0,W,H);x.restore();}}
-function ppTuneCloud(c){if(!TN_ON)return c;const T=TN[tnTone()];return T&&T.cloudMix?c.lerp(new THREE.Color(T.cloud),T.cloudMix):c;}
-function ppTuneFar(c){if(!TN_ON)return c;const T=TN[tnTone()];return T&&T.farMix?c.lerp(new THREE.Color(T.far),T.farMix):c;}
+function ppTuneCloud(c){const T=TN[tnTone()];return T&&T.cloudMix?c.lerp(new THREE.Color(T.cloud),T.cloudMix):c;}
+function ppTuneFar(c){const T=TN[tnTone()];return T&&T.farMix?c.lerp(new THREE.Color(T.far),T.farMix):c;}
 let tnRaf=0;
 function tnApply(){if(!TN_ON||tnRaf)return;tnRaf=requestAnimationFrame(()=>{tnRaf=0;try{paintSky();skyTones();}catch(e){}if(typeof ROOM!=='undefined')ROOM.toneKey='';});}
 function tnSave(){try{localStorage.setItem('pp-tune-home',JSON.stringify(TN));}catch(_){}}
@@ -2864,7 +2867,7 @@ function tnUI(){if(!TN_ON||document.getElementById('ppTuneBtn'))return;
       else{i=document.createElement('input');i.type=ty;if(ty==='range'){i.min=a;i.max=b;i.step=s;}i.value=T[k];}
       const v=document.createElement('b');v.textContent=ty==='range'?T[k]:'';
       const on=()=>{T[k]=ty==='range'?+i.value:i.value;if(ty==='range')v.textContent=T[k];tnApply();tnSave();};i.addEventListener('input',on);i.addEventListener('change',on);r.appendChild(i);r.appendChild(v);p.appendChild(r);});
-    const bt=document.createElement('div');bt.className='bt';const rs=document.createElement('button');rs.type='button';rs.textContent='reset '+tnTone();rs.onclick=()=>{TN[tnTone()]=TN_DEF();tnApply();tnSave();build();};
+    const bt=document.createElement('div');bt.className='bt';const rs=document.createElement('button');rs.type='button';rs.textContent='reset '+tnTone();rs.onclick=()=>{TN[tnTone()]=TN_DEF(tnTone());tnApply();tnSave();build();};
     const cp=document.createElement('button');cp.type='button';cp.textContent='copy settings';cp.onclick=()=>{const t=JSON.stringify(TN);const fb=()=>{try{const x=document.createElement('textarea');x.value=t;document.body.appendChild(x);x.select();document.execCommand('copy');x.remove();}catch(_){}};try{navigator.clipboard.writeText(t).catch(fb);}catch(_){fb();}cp.textContent='copied!';setTimeout(()=>cp.textContent='copy settings',1400);};
     const cl=document.createElement('button');cl.type='button';cl.textContent='close';cl.onclick=()=>p.classList.remove('on');bt.append(rs,cp,cl);p.appendChild(bt);}
   p.addEventListener('pointerdown',e=>{if(e.target.matches&&e.target.matches('input[type=range]'))p.classList.add('ghost');});['pointerup','pointercancel','touchend'].forEach(ev=>addEventListener(ev,()=>p.classList.remove('ghost'),true));
